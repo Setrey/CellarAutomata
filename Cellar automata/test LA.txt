@@ -1,0 +1,604 @@
+Eksperyment nr 0
+# StanKomórki,ŒredniDochódZRozgrywek,DzielenieDochodow(Tak(1) czy Nie(0)),[Historia]
+------------------
+t=0
+------------------
+t=1
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=2
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=3
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=4
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=5
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=6
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=7
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=8
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=9
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=10
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=11
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=12
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=13
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=14
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=15
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=16
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=17
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=18
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=19
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=20
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=21
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=22
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=23
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=24
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=25
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=26
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=27
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=28
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=29
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=30
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=31
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=32
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=33
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=34
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=35
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=36
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=37
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=38
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=39
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=40
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=41
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=42
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=43
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=44
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=45
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=46
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=47
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=48
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=49
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=50
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=51
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=52
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=53
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=54
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=55
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=56
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=57
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=58
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=59
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=60
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=61
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=62
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=63
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=64
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=65
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=66
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=67
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=68
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=69
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=70
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=71
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=72
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=73
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=74
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=75
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=76
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=77
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=78
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=79
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=80
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=81
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=82
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=83
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=84
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=85
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=86
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=87
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=88
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=89
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=90
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=91
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=92
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=93
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=94
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=95
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=96
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=97
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=98
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=99
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii
+------------------
+t=100
+Stan na podstawie historii
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zapis do historii

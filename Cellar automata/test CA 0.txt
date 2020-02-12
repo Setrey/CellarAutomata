@@ -1,0 +1,604 @@
+Eksperyment nr 0
+# StanKomórki,StrategiaKomórki,DzielenieDochodow(Tak(1) czy Nie(0)),ŒredniDochódZRozgrywek
+------------------
+t=0
+------------------
+t=1
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=2
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=3
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=4
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=5
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=6
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=7
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=8
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=9
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=10
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=11
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=12
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=13
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=14
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=15
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=16
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=17
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=18
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=19
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=20
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=21
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=22
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=23
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=24
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=25
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=26
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=27
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=28
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=29
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=30
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=31
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=32
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=33
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=34
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=35
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=36
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=37
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=38
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=39
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=40
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=41
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=42
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=43
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=44
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=45
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=46
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=47
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=48
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=49
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=50
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=51
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=52
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=53
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=54
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=55
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=56
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=57
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=58
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=59
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=60
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=61
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=62
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=63
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=64
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=65
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=66
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=67
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=68
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=69
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=70
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=71
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=72
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=73
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=74
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=75
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=76
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=77
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=78
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=79
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=80
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=81
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=82
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=83
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=84
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=85
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=86
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=87
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=88
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=89
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=90
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=91
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=92
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=93
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=94
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=95
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=96
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=97
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=98
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=99
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
+------------------
+t=100
+Po rozgrywce i przed mutacja
+Stan po mutacji
+Zmiana Strategii
+Zmiana stanu
