@@ -5,6 +5,14 @@ public class PrisonerDilema {
 	double DC;
 	double DD;
 	
+	public PrisonerDilema()
+	{
+		this.CC=1;
+		this.CD=0;
+		this.DC=1.4;
+		this.DD=0;
+	}
+	
 	PrisonerDilema(double cc, double cd, double dc, double dd)
 	{
 		 CC=cc;//= 0.5;

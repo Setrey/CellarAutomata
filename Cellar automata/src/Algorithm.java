@@ -20,7 +20,8 @@ public class Algorithm {
 	double pTypAgentaCA;
 	int lengthOfHisotry;
 	
-	public Algorithm(int xRange1,int yRange1, int rSasiedztwa, int Q, int iloscKrokow
+	/*
+	  		int xRange1,int yRange1, int rSasiedztwa, int Q, int iloscKrokow
 			,double prawdopodbienstwoNiezamieszk, double pInitCState
 			, double gotWspoldzieleniaDochodow
 			,int ziarno, int iloscExperymentow1, double RR,double SS,double TT,double PP
@@ -30,50 +31,54 @@ public class Algorithm {
 			,double stratAllC, double stratAllD,double stratkD,boolean kConstt
 			,int kMaxx, double pPc, double mutStrateg, double mutParametr
 			,double mutC1, boolean Qselected, boolean debugSelected, double deltaPC
-			,boolean LA1, boolean LA2, boolean LA3) throws IOException 
+			,boolean LA1, boolean LA2, boolean LA3
+	 
+	 */
+	
+	public Algorithm(Settings settings) throws IOException 
 	{
 		
 		
 		Paint paint[][];
-		Algorithm.randomSeed= ziarno ;
+		Algorithm.randomSeed= settings.seed;
 		Algorithm.randomValue= new Random(Algorithm.randomSeed);
-		int xRange=xRange1;
-		int yRange=yRange1;
-		int m=iloscExperymentow1;
-		int r=rSasiedztwa;
+		int xRange=settings.numberOfRows;
+		int yRange=settings.numberOfColumns;
+		int m=settings.numberOfExperiments;
+		int r=settings.radiusOfNeighbor;
 		
-		int period=iloscKrokow;
-		int qRounds=Q;
+		int period=settings.numberOfFrames;
+		int qRounds=settings.qChanges;
 		
-		la1=LA1;
-		la2=LA2;
-		la3=LA3;
-		double pInitC=pInitCState;
-		pOCp=pPc;
+		la1=settings.isLA1;
+		la2=settings.isLA2;
+		la3=settings.isLA3;
+		double pInitC=settings.probOfInitCState;
+		pOCp=settings.valueOfPc;
 		
-		double pEmpty=prawdopodbienstwoNiezamieszk;
+		double pEmpty=settings.probOfPayoffSharing;
 		
-		double pPC=stratPc;
-		double pAllC=stratAllC;
-		double pAllD=stratAllD;
-		double pKD=stratkD;
+		double pPC=settings.probOfPcStrategy;
+		double pAllC=settings.probOfAllCStrategy;
+		double pAllD=settings.probOfAllDStrategy;
+		double pKD=settings.probOfKDStrategy;
 		
-		double pStrategy []= {pPC,pAllC+pPC,pAllC+pPC+pAllD,pKD};
-		/*int*/ this.lengthOfHisotry=historia;
+		//double pStrategy []= {pPC,pAllC+pPC,pAllC+pPC+pAllD,pKD};
+		/*int*/ this.lengthOfHisotry=settings.historyLength;
 		// jesli typAgenta0 to prawdop = 1 jesli typagenta 1 to prawdop 0
-		int typAgenta=typAgentaKomorki; // CA //i LA
-		/*double*/ this.pTypAgentaCA=prawdopAgentaCA;
+		
+		this.pTypAgentaCA=settings.probOfAgentCA;
 		
 		
-		double pPayoutSharing=gotWspoldzieleniaDochodow;
+		double pPayoutSharing=settings.probOfPayoffSharing;
 		//jesli kconst nieprawda to kMax*=-1;
-		boolean kConst=kConstt;
-		int kMax=kMaxx;
+		boolean kConst=settings.isKConst;
+		int kMax=settings.kMax;
 		
-		double pC=pPc;
-		double deltapC=deltaPC;
-		double epsilon=epsilonn;
-		
+		double pC=settings.valueOfPc;
+		double deltapC=settings.deltaPc;
+		double epsilon=settings.epsilon;
+		/*
 		double	pMutationChangeStrategy=mutStrateg;
 		double	pMutationChangePc=mutParametr;
 		double	pMutationHistory=mutHistoria;
@@ -81,36 +86,34 @@ public class Algorithm {
 		double	parameterIncMutation=mutC1;
 		int		parameterHisotryMutation=mutC2;
 		double	parameterEpsilonMutation=mutc3;
+		*/
 
-		//tablica p³atnoœci
-		double R=RR;	//=1.0;
-		double S=SS;		//=0.0;
-		double T=TT;	//=1.4;
-		double P=PP;		//=0.0;
 		
-		PrisonerDilema pd= new PrisonerDilema(R,S,T,P);
+		PrisonerDilema pd= settings.pDSettings;
 		
 		if (!kConst)
 			kMax*=-1;
 		
 		//jesli typ agenta CA (0) wtedy wartoœæ prawdopodobieñstwa 1 jak LA(1) to 0, a jak i to i to, wtedy <0:1]
-		if (typAgenta==0)
+		if (settings.agentType==typeOfAgent.CA)
 			pTypAgentaCA=1;
-		else if (typAgenta==1)
+		else if (settings.agentType==typeOfAgent.LA)
 			pTypAgentaCA=0;
-		Mutation mutation= new Mutation(pMutationChangeStrategy,pMutationChangePc,pMutationHistory,pMutationEpsilon
-				,parameterIncMutation,parameterHisotryMutation,parameterEpsilonMutation);
 		
-
+		Mutation mutation= settings.mutation;
+		
 		Initialization []init = new Initialization[m];
 		Run []run = new Run[m];
 		
 		for (int i=0 ; i<m;i++)
 		{
-		init[i]= new Initialization(xRange,yRange,period,pInitC,pStrategy,pEmpty,lengthOfHisotry,pTypAgentaCA,pPayoutSharing
-				,kMax,pC,epsilon, mutation,deltapC);
+		init[i]= new Initialization(settings);
+		/*(int rangeX, int rangeY, int period,double pInitC,double[] pStrategy
+		, double pEmpty, int lengthOfHistory, double p_typ_ag_ca,double pPayoutSharing,int kMax
+		, double pOfCoopMin, double epsilon, Mutation mutation, double deltapC)*/
 		//init.showMatrix();
-		run[i]= new Run(init[i].getMatrix(),pd,qRounds,kMax,r,((xRange==0||yRange==0)?true:false));
+		//run[i]= new Run(init[i].getMatrix(),pd,qRounds,kMax,r,((xRange==0||yRange==0)?true:false));
+		run[i]= new Run(init[i].getMatrix(),settings);
 		}
 		//paint = new Paint (run,kConst);
 		
@@ -119,7 +122,7 @@ public class Algorithm {
 		Statistics statistics[];
 		statistics=new Statistics[m];
 		for (int i=0 ; i<m;i++)
-			statistics[i]= new Statistics(run[i],r,period, qRounds,pEmpty,typAgenta,pTypAgentaCA, pInitC,kMax,kConst,pStrategy,lengthOfHisotry,mutation, pPayoutSharing);
+			statistics[i]= new Statistics(run[i],settings);
 		
 		List<String> testPlikLA = new ArrayList<>();
 		List<String> testPlikCA = new ArrayList<>();
@@ -127,8 +130,6 @@ public class Algorithm {
 		
 		for (int x=0 ;x<m ;x++)
 		{
-			
-			
 			testPlikLA.add("Eksperyment nr " + x);
 			testPlikCA.add("Eksperyment nr " + x);
 			testPlikMain.add("Eksperyment nr " + x);
@@ -150,7 +151,7 @@ public class Algorithm {
 			if(pTypAgentaCA<1)
 				for (int k=0; k<lengthOfHisotry; k++)
 				{
-					run[x].newValueForLA(pC);
+					run[x].newValueForLA(settings);
 					run[x].countSum();
 					run[x].updateCellHistory();
 					LASection(run,x,testPlikLA);
@@ -228,7 +229,7 @@ public class Algorithm {
 				//run[x].updateHistoryLookingAtNeighbours();
 				
 				
-				if ((i+1)%qRounds==0 && Qselected)
+				if ((i+1)%qRounds==0 && settings.isQselected)
 				{
 					run[x].changeStrategy();
 				}
@@ -262,7 +263,7 @@ public class Algorithm {
 				statistics[x].addRow(run[x], i+1);
 				
 				run[x].clearAllCells();
-				if ((i+1)%qRounds==0 && Qselected)
+				if ((i+1)%qRounds==0 && settings.isQselected)
 				{
 					//System.out.println("? ");
 					/*
@@ -292,7 +293,7 @@ public class Algorithm {
 			}
 			
 			
-			if (debugSelected)
+			if (settings.isDebugSelected)
 			{
 				try(PrintWriter p = new PrintWriter("test LA.txt")) 
 				{

@@ -1,12 +1,12 @@
 public class Mutation
 	{
-		public double	pMutationChangeStrategy=0.00;
-		public double	pMutationChangePc=0.00;
-		public double	pMutationHistory=0.00;
-		public double	pMutationEpsilon=0.00;
-		public double	parameterIncMutation=0.05;
-		public int		parameterHisotryMutation=00;
-		public double	parameterEpsilonMutation=0.00;
+		public double	pMutationChangeStrategy=0.00;	// prawdopodobienstwo zmiany strategii
+		public double	pMutationChangePc=0.00;			// prawdopodobienstwo zmutowania parametru p_c
+		public double	pMutationHistory=0.00;			// prawdopodobienstwo zmutowania dlugosci historii
+		public double	pMutationEpsilon=0.00;			// prawdopodobienstwo zmutowania epsilona
+		public double	parameterIncMutation=0.05;		// parametr przesuniecia parametru p_c
+		public int		parameterHisotryMutation=00;	// parametr zmiany dlugosci historii
+		public double	parameterEpsilonMutation=0.00;	// parametr zmiany dlugosci epsilona
 		
 		public Mutation(double pMutationChangeStrategy,double pMutationChangePc,double pMutationHistory
 				,double pMutationEpsilon,double parameterIncMutation,int parameterHisotryMutation
@@ -36,7 +36,7 @@ public class Mutation
 			this.pMutationChangePc=0;
 			this.pMutationHistory=0;
 			this.pMutationEpsilon=0;
-			this.parameterIncMutation=0;
+			this.parameterIncMutation=0.05;
 			this.parameterHisotryMutation=0;
 			this.parameterEpsilonMutation=0;
 		}

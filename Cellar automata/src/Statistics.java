@@ -23,19 +23,16 @@ public class Statistics {
 	double procentD[];
 	double procentK[];
 	double procentQChanges[];
-	
-	public Statistics(Run run, int r, int period, int qRounds, double p_niezam, int typ_agenta, double pTypAgentaCA
+	/*
+	 (Run run, int r, int period, int qRounds, double p_niezam, typeOfAgent typ_agenta, double pTypAgentaCA
 			,double pInitC, int kMax, boolean kConst, double []pStrategy, int lengthOfHisotry
-			,Mutation mutation, double pPayoutSharing)
+			,Mutation mutation, double pPayoutSharing, double epsilon)	 
+	 */
+	public Statistics(Run run, Settings settings)
 	{
-		int kConssss;
-		if (kConst)
-			kConssss=0;
-		else
-			kConssss=1;
-		line= new String[period+12];
+		line= new String[settings.numberOfFrames+12];
 		
-		period++; // dlatego ze trzeba zrobic stan 0 poczatkowy + zaczac normalnie iteracje do konca periodu.
+		int period= settings.numberOfFrames+1; // dlatego ze trzeba zrobic stan 0 poczatkowy + zaczac normalnie iteracje do konca periodu.
 		
 			  procentStanC= new double [period];
 			  //procentStanC= new double [2];
@@ -51,13 +48,13 @@ public class Statistics {
 		
 		for (int i=0 ; i<line.length; i++)
 			line[i]=null;
-		line[0]="# siatka wielkosci "+run.xRange+"x"+run.yRange+" r="+r + " p_niezam=" +p_niezam+ " q="+qRounds;
-		line[1]="# R()="+ run.pD.CC+" S="+run.pD.CD + " T(b)=" + run.pD.DC+" P()="+ run.pD.DD;
-		line[2]="# typ_agenta="+typ_agenta+" p_typ_ag_ca="+pTypAgentaCA+" p_init_C="+pInitC+ " k_Max="+kMax + " k_Const"+kConssss;
-		line[3]="# p_pC= "+round2(pStrategy[0])+" p_AllC="+ round2((pStrategy[1]-pStrategy[0]))+" pAllD="+round2((pStrategy[2]-pStrategy[1]))+" p_KD"+ round2(pStrategy[3]);
-		line[4]="# h="+lengthOfHisotry+ " epsilon=" +round4(mutation.parameterEpsilonMutation)+ " p_wsp_dziel="+filling2(pPayoutSharing);
-		line[5]="# p_mut_reg_1="+mutation.pMutationChangeStrategy+" p_mut_reg_2="+mutation.pMutationChangePc +" p_mut_h="+ mutation.pMutationHistory+ " p_mut_eps="+mutation.pMutationEpsilon;
-		line[6]="# c1="+mutation.parameterIncMutation+" c2="+ mutation.parameterHisotryMutation+" c3="+ mutation.parameterEpsilonMutation;
+		line[0]="# siatka wielkosci "+settings.numberOfRows+"x"+settings.numberOfColumns+" r="+settings.radiusOfNeighbor + " p_niezam=" +settings.probOfUnhabitedCell+ " q="+settings.qChanges;
+		line[1]="# R()="+ settings.pDSettings.CC+" S="+settings.pDSettings.CD + " T(b)=" + settings.pDSettings.DC+" P()="+ settings.pDSettings.DD;
+		line[2]="# typ_agenta="+settings.agentType+" p_typ_ag_ca="+settings.probOfAgentCA+" p_init_C="+settings.probOfInitCState+ " k_Max="+settings.kMax + " k_Const"+settings.isKConst;
+		line[3]="# p_pC= "+settings.probOfPcStrategy+" p_AllC="+ settings.probOfAllCStrategy+" pAllD=" + settings.probOfAllDStrategy + " p_KD"+ settings.probOfKDStrategy;
+		line[4]="# h="+settings.historyLength+ " epsilon=" + settings.epsilon + " p_wsp_dziel="+settings.probOfPayoffSharing;
+		line[5]="# p_mut_reg_1="+settings.mutation.pMutationChangeStrategy+" p_mut_reg_2="+settings.mutation.pMutationChangePc +" p_mut_h="+ settings.mutation.pMutationHistory+ " p_mut_eps="+settings.mutation.pMutationEpsilon;
+		line[6]="# c1="+settings.mutation.parameterIncMutation+" c2="+ settings.mutation.parameterHisotryMutation+" c3="+ settings.mutation.parameterEpsilonMutation;
 		line[7]="# ziarno: "+ Algorithm.randomSeed;
 		line[8]="#";
 		line[9]="#";

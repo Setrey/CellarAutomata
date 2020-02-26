@@ -34,14 +34,14 @@ public class Cell {
 	}
 	
 	public LinkedList<History> history;
-	
-	public Cell(double pInitC,double []pStrategy, double pEmpty, int lengthOfHistory, double p_typ_ag_ca,
-				double pPayoutSharing, int kMax, double pOfCoopMin, double epsilon, Mutation mutation, double deltapC)
+	/*(double pInitC,double []pStrategy, double pEmpty, int lengthOfHistory, double p_typ_ag_ca,
+				double pPayoutSharing, int kMax, double pOfCoopMin, double epsilon, Mutation mutation, double deltapC)*/
+	public Cell(Settings settings)
 	{
 		double n = Algorithm.randomValue.nextDouble();
-		this.pStrategy=pStrategy;
-		this.kMax=kMax;
-		if (n<pEmpty)
+		
+		this.kMax=settings.kMax;
+		if (n<settings.probOfUnhabitedCell)
 		{
 			this.strategy=new Strategy ('E',10);
 			this.cellEmpty=true;
@@ -50,26 +50,33 @@ public class Cell {
 		else {
 			this.pOfCoopMin=0;
 			//System.out.println(this.mutation.pMutationChangeStrategy);
-			this.lengthOfHistory=lengthOfHistory;	 
+			this.lengthOfHistory=settings.historyLength;	 
 			n=Algorithm.randomValue.nextDouble();
 			
 			this.mutation = new Mutation(mutation);
 			
-			if (n<pInitC)
+			if (n<settings.probOfInitCState)
 				state='C';
 			else
 				state='D';
 			
 			n=Algorithm.randomValue.nextDouble();
 			
-			if (n<p_typ_ag_ca)
+			if(settings.agentType==typeOfAgent.CA)
 				this.learningAutomata=false;
-			else 
+			else if (settings.agentType==typeOfAgent.LA)
 				this.learningAutomata=true;
+			else if (settings.agentType==typeOfAgent.CAnLA)
+			{
+				if (n<settings.probOfAgentCA)
+					this.learningAutomata=false;
+				else 
+					this.learningAutomata=true;
+			}
 			
 			n=Algorithm.randomValue.nextDouble();
 			
-			if (n<pPayoutSharing)
+			if (n<settings.probOfPayoffSharing)
 				this.sharingPayout=true;
 			else
 				this.sharingPayout=false;
@@ -81,14 +88,14 @@ public class Cell {
 				else
 					this.strategy=new Strategy('D',10);
 			else
-				strategy=new Strategy(pStrategy,kMax);
+				strategy=new Strategy(settings);
 			
-			this.epsilon=epsilon;
+			this.epsilon=settings.epsilon;
 			
-			
+			//TODO
 			if (strategy.buffor=='P')
 			{ //double randomValue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
-				this.pOfCoopMin=pOfCoopMin;
+				this.pOfCoopMin=settings.valueOfPc;
 				/*
 				double randomValue= (pOfCoopMin-deltapC) + (pOfCoopMin+deltapC)* Algorithm.randomValue.nextDouble();
 				if (randomValue>1)
@@ -101,10 +108,9 @@ public class Cell {
 			}
 		}
 	}
-	
-	public void newStrategy()
+	public void newStrategy(Settings settings)
 	{
-		strategy=new Strategy(pStrategy,kMax);
+		strategy=new Strategy(settings);
 	}
 	
 	public Cell(Cell cell)
@@ -196,6 +202,7 @@ public class Cell {
 			else 
 			{
 			this.previousState=this.state;
+			System.out.println(index+" " + this.history.size());
 			this.state=this.history.get(index).state;
 			this.sum=round2((this.history.get(index).result/8));
 			}

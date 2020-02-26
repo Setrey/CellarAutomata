@@ -64,24 +64,25 @@ public class Run {
 	
 	public double 		maxRangeOfPayOut=0;
 	
-	public Run (Cell[][] cell, PrisonerDilema pd, int lengthOfCycle, int kTolerance, int r, boolean isItOneDimension)
+	//public Run (Cell[][] cell, PrisonerDilema pd, int lengthOfCycle, int kTolerance, int r, boolean isItOneDimension)
+	public Run (Cell[][] cell, Settings settings)
 	{
 		xRange=cell.length;
 		yRange=cell[0].length;
-		this.r=r;
+		this.r=settings.radiusOfNeighbor;
 		//System.out.println("rangeX: " + xRange + " rangeY: " + yRange);
-		this.kTolerance=kTolerance;
-		this.oneDimension=isItOneDimension;
-		this.pD= pd;
+		this.kTolerance=settings.kMax;
+		this.oneDimension=((xRange==1 || yRange==1)?(true):(false));
+		this.pD= settings.pDSettings;
 		
-		if(pd.CC>maxRangeOfPayOut)
-			maxRangeOfPayOut=pd.CC;
-		if(pd.CD>maxRangeOfPayOut)
-			maxRangeOfPayOut=pd.CD;
-		if(pd.DD>maxRangeOfPayOut)
-			maxRangeOfPayOut=pd.DD;
-		if(pd.DC>maxRangeOfPayOut)
-			maxRangeOfPayOut=pd.DC;
+		if(pD.CC>maxRangeOfPayOut)
+			maxRangeOfPayOut=pD.CC;
+		if(pD.CD>maxRangeOfPayOut)
+			maxRangeOfPayOut=pD.CD;
+		if(pD.DD>maxRangeOfPayOut)
+			maxRangeOfPayOut=pD.DD;
+		if(pD.DC>maxRangeOfPayOut)
+			maxRangeOfPayOut=pD.DC;
 		//Matrix
 		if (xRange==1 || xRange==2)
 		{
@@ -716,7 +717,7 @@ public class Run {
 		//this.countStatistics();
 	}
 
-	public void newValueForLA(double pOfCoopMin)
+	public void newValueForLA(Settings settings)
 	{
 		if(itIsWideArray)
 		{
@@ -731,8 +732,8 @@ public class Run {
 				else
 				{
 					temporary[i][j].state=((Algorithm.randomValue.nextBoolean())? 'C' : 'D');
-					temporary[i][j].newStrategy();
-					temporary[i][j].pOfCoopMin=pOfCoopMin;
+					temporary[i][j].newStrategy(settings);
+					temporary[i][j].pOfCoopMin=settings.valueOfPc;
 				}
 		}
 		else if(oneDimension)
