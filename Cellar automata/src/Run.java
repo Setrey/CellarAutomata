@@ -220,7 +220,7 @@ public class Run {
 						{
 								double n =Algorithm.randomValue.nextDouble();
 								n=Algorithm.randomValue.nextDouble();
-								double m =temporary[i][j].pOfCoopMin;
+								double m =temporary[i][j].pParameter;
 								
 									if (n<m)
 									{
@@ -258,7 +258,7 @@ public class Run {
 					else if (temporary[i][j].strategy.buffor=='P')
 					{
 							double n =Algorithm.randomValue.nextDouble();
-							if (n<temporary[i][j].pOfCoopMin)
+							if (n<temporary[i][j].pParameter)
 								tablicaPomocnicza[i][j].state='C';
 							else
 								tablicaPomocnicza[i][j].state='D';
@@ -293,7 +293,7 @@ public class Run {
 					else if (temporary[0][j].strategy.buffor=='P')
 					{
 							double n =Algorithm.randomValue.nextDouble();
-							if (n<temporary[0][j].pOfCoopMin)
+							if (n<temporary[0][j].pParameter)
 								tablicaPomocnicza[0][j].state='C';
 							else
 								tablicaPomocnicza[0][j].state='D';
@@ -328,7 +328,7 @@ public class Run {
 						else if (temporary[i][j].strategy.buffor=='P')
 						{
 								double n =Algorithm.randomValue.nextDouble();
-								if (n<temporary[i][j].pOfCoopMin)
+								if (n<temporary[i][j].pParameter)
 									tablicaPomocnicza[i][j].state='C';
 								else
 									tablicaPomocnicza[i][j].state='D';
@@ -362,7 +362,7 @@ public class Run {
 					else if (temporary[i][0].strategy.buffor=='P')
 					{
 							double n =Algorithm.randomValue.nextDouble();
-							if (n<temporary[i][0].pOfCoopMin)
+							if (n<temporary[i][0].pParameter)
 								tablicaPomocnicza[i][0].state='C';
 							else
 								tablicaPomocnicza[i][0].state='D';
@@ -397,7 +397,7 @@ public class Run {
 						else if (temporary[i][j].strategy.buffor=='P')
 						{
 								double n =Algorithm.randomValue.nextDouble();
-								if (n<temporary[i][j].pOfCoopMin)
+								if (n<temporary[i][j].pParameter)
 									tablicaPomocnicza[i][j].state='C';
 								else
 									tablicaPomocnicza[i][j].state='D';
@@ -453,7 +453,7 @@ public class Run {
 					this.CounterOfPcCell+=1;
 					this.percentOfPcStrategy+=1;
 					//System.out.println(this.avaragePcParameter+ " <avgPc || cell.pOfCoopMin> "+ cell.pOfCoopMin);
-					this.avaragePcParameter+=cell.pOfCoopMin;
+					this.avaragePcParameter+=cell.pParameter;
 				}
 				else if (cell.strategy.buffor=='D')
 					this.percentOfallDStrategy+=1;
@@ -733,7 +733,7 @@ public class Run {
 				{
 					temporary[i][j].state=((Algorithm.randomValue.nextBoolean())? 'C' : 'D');
 					temporary[i][j].newStrategy(settings);
-					temporary[i][j].pOfCoopMin=settings.valueOfPc;
+					temporary[i][j].pParameter=settings.valueOfPc;
 				}
 		}
 		else if(oneDimension)

@@ -16,8 +16,18 @@ public class Cell {
 	public boolean learningAutomata=false;
 	public boolean sharingPayout=false;
 	public int lengthOfHistory;
-	public double pOfCoopMin;
+	public double pParameter;
+	/*
+	public class RangeOfPParameter
+	{
+		public double min;
+		public double max;
+		
+		public RangeOfPParameter(double deltaP,)
+	}
 	
+	public RangeOfPParameter rangeOfPParameter;
+	*/
 	public double epsilon;
 	public Mutation mutation=new Mutation();
 	private double []pStrategy;
@@ -48,7 +58,7 @@ public class Cell {
 			
 		}
 		else {
-			this.pOfCoopMin=0;
+			this.pParameter=0;
 			//System.out.println(this.mutation.pMutationChangeStrategy);
 			this.lengthOfHistory=settings.historyLength;	 
 			n=Algorithm.randomValue.nextDouble();
@@ -92,19 +102,23 @@ public class Cell {
 			
 			this.epsilon=settings.epsilon;
 			
-			//TODO
 			if (strategy.buffor=='P')
-			{ //double randomValue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
-				this.pOfCoopMin=settings.valueOfPc;
-				/*
-				double randomValue= (pOfCoopMin-deltapC) + (pOfCoopMin+deltapC)* Algorithm.randomValue.nextDouble();
-				if (randomValue>1)
-					randomValue=1;
-				else if (randomValue<0)
-					randomValue=0;
-				this.pOfCoopMin=randomValue;
-				*/
-				//this.pOfCoopMin=pOfCoopMin; 
+			{ 
+				if(settings.deltaPc==0)
+					this.pParameter=settings.valueOfPc;
+				else
+				{
+					double minRange = settings.valueOfPc- settings.deltaPc;
+					if (minRange<0)
+						minRange=0;
+					double maxRange = settings.valueOfPc+ settings.deltaPc;
+					if (maxRange>1)
+						maxRange=1;
+					
+					double randomValue = minRange + (maxRange - minRange) * Algorithm.randomValue.nextDouble();
+					
+					this.pParameter=randomValue;
+				}
 			}
 		}
 	}
@@ -132,7 +146,7 @@ public class Cell {
 		if (this.strategy.buffor=='P')
 		{	
 			double n =Algorithm.randomValue.nextDouble();
-			if (n<pOfCoopMin)
+			if (n<pParameter)
 				return 'C';
 			else
 				return 'D';
@@ -325,11 +339,11 @@ public class Cell {
 			{// TODO kontrola wartoœci skrajnych 
 				if (Algorithm.randomValue.nextBoolean()==true)
 				{
-					this.pOfCoopMin+=this.mutation.parameterIncMutation;
+					this.pParameter+=this.mutation.parameterIncMutation;
 				}
 				else
 				{
-					this.pOfCoopMin-=this.mutation.parameterIncMutation;
+					this.pParameter-=this.mutation.parameterIncMutation;
 				}
 			}
 				
@@ -409,7 +423,7 @@ public class Cell {
 		dest.mutation=temp.mutation;
 		dest.changedStrategy=temp.changedStrategy;
 		dest.lengthOfHistory=temp.lengthOfHistory;
-		dest.pOfCoopMin=temp.pOfCoopMin;
+		dest.pParameter=temp.pParameter;
 		dest.pStrategy=temp.pStrategy;
 		dest.cellEmpty=temp.cellEmpty;
 		dest.epsilon=temp.epsilon;

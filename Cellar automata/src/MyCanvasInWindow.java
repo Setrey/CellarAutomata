@@ -192,7 +192,7 @@ public class MyCanvasInWindow extends JFrame{
 					System.out.println("Error");
 					}
 				
-				int choosenFile=currentIndexExperiment;
+				//int choosenFile=currentIndexExperiment;
 				try(PrintWriter p = new PrintWriter("wyniki.txt")) {
 					for (int i =0; i < stats.length ; i ++)
 						stats[i].writeToFile(p, i);

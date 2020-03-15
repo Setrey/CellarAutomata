@@ -45,23 +45,13 @@ public class Algorithm {
 		int xRange=settings.numberOfRows;
 		int yRange=settings.numberOfColumns;
 		int m=settings.numberOfExperiments;
-		int r=settings.radiusOfNeighbor;
-		
 		int period=settings.numberOfFrames;
 		int qRounds=settings.qChanges;
 		
 		la1=settings.isLA1;
 		la2=settings.isLA2;
 		la3=settings.isLA3;
-		double pInitC=settings.probOfInitCState;
 		pOCp=settings.valueOfPc;
-		
-		double pEmpty=settings.probOfPayoffSharing;
-		
-		double pPC=settings.probOfPcStrategy;
-		double pAllC=settings.probOfAllCStrategy;
-		double pAllD=settings.probOfAllDStrategy;
-		double pKD=settings.probOfKDStrategy;
 		
 		//double pStrategy []= {pPC,pAllC+pPC,pAllC+pPC+pAllD,pKD};
 		/*int*/ this.lengthOfHisotry=settings.historyLength;
@@ -70,37 +60,15 @@ public class Algorithm {
 		this.pTypAgentaCA=settings.probOfAgentCA;
 		
 		
-		double pPayoutSharing=settings.probOfPayoffSharing;
 		//jesli kconst nieprawda to kMax*=-1;
 		boolean kConst=settings.isKConst;
-		int kMax=settings.kMax;
 		
-		double pC=settings.valueOfPc;
-		double deltapC=settings.deltaPc;
-		double epsilon=settings.epsilon;
-		/*
-		double	pMutationChangeStrategy=mutStrateg;
-		double	pMutationChangePc=mutParametr;
-		double	pMutationHistory=mutHistoria;
-		double	pMutationEpsilon=mutEpsilon;
-		double	parameterIncMutation=mutC1;
-		int		parameterHisotryMutation=mutC2;
-		double	parameterEpsilonMutation=mutc3;
-		*/
-
-		
-		PrisonerDilema pd= settings.pDSettings;
-		
-		if (!kConst)
-			kMax*=-1;
 		
 		//jesli typ agenta CA (0) wtedy wartoœæ prawdopodobieñstwa 1 jak LA(1) to 0, a jak i to i to, wtedy <0:1]
 		if (settings.agentType==typeOfAgent.CA)
 			pTypAgentaCA=1;
 		else if (settings.agentType==typeOfAgent.LA)
 			pTypAgentaCA=0;
-		
-		Mutation mutation= settings.mutation;
 		
 		Initialization []init = new Initialization[m];
 		Run []run = new Run[m];

@@ -2,8 +2,8 @@
 public class Initialization {
 
 	Cell[][] cell;
-	private int rangeX;
-	private int rangeY;
+	private int x;
+	private int y;
 	
 	/*(int rangeX, int rangeY, int period,double pInitC,double[] pStrategy
 	, double pEmpty, int lengthOfHistory, double p_typ_ag_ca,double pPayoutSharing,int kMax
@@ -12,14 +12,14 @@ public class Initialization {
 	public Initialization(Settings settings)
 	{
 		
-		this.rangeX=settings.numberOfRows;
-		this.rangeY=settings.numberOfColumns;
-		if( rangeX!=0 && rangeY!=0)
+		this.x=settings.numberOfRows;
+		this.y=settings.numberOfColumns;
+		if( x!=0 && y!=0)
 		{
-			cell= new Cell[rangeX][rangeY];
+			cell= new Cell[x][y];
 			
-			for (int i=0; i<rangeX; i++)
-				for(int j=0; j<rangeY; j++)
+			for (int i=0; i<x; i++)
+				for(int j=0; j<y; j++)
 				{
 					//cell[i][j]= new Cell(pInitC,pStrategy,pEmpty,lengthOfHistory,p_typ_ag_ca,pPayoutSharing,kMax, pOfCoopMin,epsilon, mutation,deltapC);
 					cell[i][j]= new Cell(settings);
@@ -28,10 +28,10 @@ public class Initialization {
 		}
 		else
 		{
-			if (rangeX==0)
-				cell= new Cell[settings.numberOfFrames][rangeY];
+			if (x==0)
+				cell= new Cell[settings.numberOfFrames][y];
 			else
-				cell= new Cell[settings.numberOfFrames][rangeX];
+				cell= new Cell[settings.numberOfFrames][x];
 			
 				for (int i=0; i<cell.length; i++)
 					for(int j=0; j<cell[i].length; j++)
@@ -49,10 +49,10 @@ public class Initialization {
 	
 	public void showMatrix()
 	{
-		if(this.rangeX!=0 && this.rangeY!=0)
-			for (int i=0; i<rangeX; i++)
+		if(this.x!=0 && this.y!=0)
+			for (int i=0; i<x; i++)
 			{
-				for(int j=0; j<rangeY; j++)
+				for(int j=0; j<y; j++)
 					cell[i][j].showStrategy();
 				System.out.println(' ');
 			}
