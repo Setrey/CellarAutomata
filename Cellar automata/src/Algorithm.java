@@ -294,7 +294,7 @@ public class Algorithm {
 				*/
 			}
 		}
-		new MyCanvasInWindow(paint,statistics,period);
+		new MyCanvasInWindow(paint,statistics,period,run,settings);
 	}
 	
 	public void LASection(Run run[], int x, List<String> testPlikLA)
