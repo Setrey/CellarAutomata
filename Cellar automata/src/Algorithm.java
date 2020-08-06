@@ -356,7 +356,7 @@ public class Algorithm {
 						{
 							string=Character.toString(run[x].temporary[i][j].strategy.buffor)+" ";
 						}
-						
+						//
 						firstLine+=string;
 					}
 					firstLine+=","+((run[x].temporary[i][j].sharingPayout==true)? 1:0);

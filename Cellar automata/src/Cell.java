@@ -444,7 +444,7 @@ public class Cell {
 		dest.history= (LinkedList<History>) cloned;
 		*/
 		
-		
+		//
 		for (int i =0; i<temp.history.size(); i++)
 		{
 			double result1=temp.history.get(i).result;

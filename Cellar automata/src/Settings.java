@@ -1,6 +1,6 @@
 
 public class Settings {
-	
+	//
 	int numberOfRows; 			// ilosc wierszy
 	int numberOfColumns; 		// ilosc kolumn
 	int radiusOfNeighbor;		// promien sasiedztwa
