@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
@@ -22,6 +23,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.ColorModel;
+
 import javax.swing.JTextArea;
 
 public class MyCanvasInWindow extends JFrame{
@@ -37,6 +40,8 @@ public class MyCanvasInWindow extends JFrame{
 	private int currentIndexExperiment=0;
 	private boolean isCellSelected=false;	// czy komórka jest zaznaczona
 	private boolean tryToSelectCell=true;	// czy zaznaczaæ komórki
+	private int clickedIndexX;
+	private int clickedIndexY;
 	private JLabel label_1;
 	private JLabel label_2;
 	private JLabel label_3;
@@ -56,6 +61,7 @@ public class MyCanvasInWindow extends JFrame{
 	Settings settings;
 	
 	private JSpinner spinnerNumerEksperymentu;
+	private JTextArea textAreaInformation;
 
 	
 	public void updateLabels()
@@ -144,10 +150,19 @@ public class MyCanvasInWindow extends JFrame{
 				
 				isItEnd=false;
 				
+				if(isCellSelected)
+				{
+					updateTextBox();
+					
+					selectCell();
+				}
+				else
+				{
 				label.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageCALA,300,300)));
 				label_1.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageStates,300,300)));
 				label_2.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageStrategies,300,300)));
 				label_3.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imagekD,300,300)));
+				}
 			}
 		});
 		spinnerNumerKrokow.setModel(new SpinnerNumberModel(0, 0, 999, 1));
@@ -162,11 +177,19 @@ public class MyCanvasInWindow extends JFrame{
 					spinnerNumerEksperymentu.setValue(currentIndexExperiment);
 				isItEnd=false;
 				
-				
+				if (isCellSelected)
+				{
+					updateTextBox();
+					
+					selectCell();
+				}
+				else
+				{
 				label.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageCALA,300,300)));
 				label_1.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageStates,300,300)));
 				label_2.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageStrategies,300,300)));
 				label_3.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imagekD,300,300)));
+				}
 			}
 		});
 		spinnerNumerEksperymentu.setModel(new SpinnerNumberModel(0, 0, 100, 1));
@@ -216,7 +239,7 @@ public class MyCanvasInWindow extends JFrame{
 			}
 		});
 		
-		JTextArea textAreaInformation = new JTextArea();
+		textAreaInformation = new JTextArea();
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -289,25 +312,13 @@ public class MyCanvasInWindow extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				isCellSelected=true;
+				//arg0.getPoint().x + " " + arg0.getPoint().y + "\n"
+				clickedIndexX=getIndexX(arg0.getPoint().x );
+				clickedIndexY=getIndexY(arg0.getPoint().y );
 				
-				textAreaInformation.setText(arg0.getPoint().x + " " + arg0.getPoint().y + "\n"
-				+"Komorka [" + getIndexX(arg0.getPoint().x )+ "]["+ getIndexY(arg0.getPoint().y )+"]");
-				label.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageCALA,300,300,getSizeOfRectangleI(getIndexX(arg0.getPoint().x )),
-						getSizeOfRectangleJ(getIndexY(arg0.getPoint().y )),
-						getSizeOfSquareSide(),
-						getSizeOfSquareSide())));
-				label_2.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageStrategies,300,300,getSizeOfRectangleI(getIndexX(arg0.getPoint().x )),
-						getSizeOfRectangleJ(getIndexY(arg0.getPoint().y )),
-						getSizeOfSquareSide(),
-						getSizeOfSquareSide())));
-				label_1.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageStates,300,300,getSizeOfRectangleI(getIndexX(arg0.getPoint().x )),
-						getSizeOfRectangleJ(getIndexY(arg0.getPoint().y )),
-						getSizeOfSquareSide(),
-						getSizeOfSquareSide())));
-				label_3.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imagekD,300,300,getSizeOfRectangleI(getIndexX(arg0.getPoint().x )),
-						getSizeOfRectangleJ(getIndexY(arg0.getPoint().y )),
-						getSizeOfSquareSide(),
-						getSizeOfSquareSide())));
+				updateTextBox();
+				
+				selectCell();
 				
 			}
 		});
@@ -319,12 +330,14 @@ public class MyCanvasInWindow extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
-				spinnerNumerKrokow.getValue();
-				spinnerNumerEksperymentu.getValue();
+				isCellSelected=true;
+				//arg0.getPoint().x + " " + arg0.getPoint().y + "\n"
+				clickedIndexX=getIndexX(arg0.getPoint().x );
+				clickedIndexY=getIndexY(arg0.getPoint().y );
 				
-				textAreaInformation.setText(arg0.getPoint().x + " " + arg0.getPoint().y + "\n"
-						+"Komorka [" + getIndexX(arg0.getPoint().x )+ "]["+ getIndexY(arg0.getPoint().y )+"]\n"
-						+"Stan: ");
+				updateTextBox();
+				
+				selectCell();
 			}
 		});
 		panel.add(label);
@@ -336,8 +349,14 @@ public class MyCanvasInWindow extends JFrame{
 		label_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				textAreaInformation.setText(arg0.getPoint().x + " " + arg0.getPoint().y + "\n"
-						+"Komorka [" + getIndexX(arg0.getPoint().x )+ "]["+ getIndexY(arg0.getPoint().y )+"]");
+				isCellSelected=true;
+				//arg0.getPoint().x + " " + arg0.getPoint().y + "\n"
+				clickedIndexX=getIndexX(arg0.getPoint().x );
+				clickedIndexY=getIndexY(arg0.getPoint().y );
+				
+				updateTextBox();
+				
+				selectCell();
 			}
 		});
 		panel_1.add(label_1);
@@ -348,9 +367,16 @@ public class MyCanvasInWindow extends JFrame{
 		label_3 = new JLabel(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imagekD,300,300)));
 		label_3.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				textAreaInformation.setText(arg0.getPoint().x + " " + arg0.getPoint().y + "\n"
-						+"Komorka [" + getIndexX(arg0.getPoint().x )+ "]["+ getIndexY(arg0.getPoint().y )+"]");
+			public void mouseClicked(MouseEvent arg0) 
+			{
+				isCellSelected=true;
+				//arg0.getPoint().x + " " + arg0.getPoint().y + "\n"
+				clickedIndexX=getIndexX(arg0.getPoint().x );
+				clickedIndexY=getIndexY(arg0.getPoint().y );
+				
+				updateTextBox();
+				
+				selectCell();
 			}
 		});
 		panel_3.add(label_3);
@@ -388,11 +414,84 @@ public class MyCanvasInWindow extends JFrame{
 		int eachCellHeight=label_2.getMaximumSize().height/settings.numberOfRows;
 		return (int)j*eachCellHeight;
 	}
-	private int getSizeOfSquareSide()
+	private int getSizeOfHeight()
 	{
 		return (int) label_2.getMaximumSize().height/settings.numberOfRows;
 	}
+	private int getSizeOfWidth()
+	{
+		return (int) label_2.getMaximumSize().width/settings.numberOfColumns;
+	}
 	
+	private void selectCell()
+	{
+		label.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageCALA,300,300,getSizeOfRectangleI(clickedIndexX ),
+				getSizeOfRectangleJ(clickedIndexY),
+				getSizeOfHeight(),
+				getSizeOfWidth())));
+		label_2.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageStrategies,300,300,getSizeOfRectangleI(clickedIndexX),
+				getSizeOfRectangleJ(clickedIndexY),
+				getSizeOfHeight(),
+				getSizeOfWidth())));
+		label_1.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageStates,300,300,getSizeOfRectangleI(clickedIndexX),
+				getSizeOfRectangleJ(clickedIndexY),
+				getSizeOfHeight(),
+				getSizeOfWidth())));
+		label_3.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imagekD,300,300,getSizeOfRectangleI(clickedIndexX ),
+				getSizeOfRectangleJ(clickedIndexY),
+				getSizeOfHeight(),
+				getSizeOfWidth())));
+	}
+	private void updateTextBox()
+	{
+		String komorka="NoN";
+		
+		if (paint[currentIndexExperiment][currentIndexLabel].imageCALA.getRGB(clickedIndexX, clickedIndexY)==Color.GREEN.getRGB())
+			komorka="LA";
+		else if (paint[currentIndexExperiment][currentIndexLabel].imageCALA.getRGB(clickedIndexX, clickedIndexY)==Color.ORANGE.getRGB())
+			komorka="CA";
+		
+		String strategia="NoN";
+		
+		if (paint[currentIndexExperiment][currentIndexLabel].imageStrategies.getRGB(clickedIndexX, clickedIndexY)==Color.RED.getRGB())
+			strategia="all-C";
+		else if(paint[currentIndexExperiment][currentIndexLabel].imageStrategies.getRGB(clickedIndexX, clickedIndexY)==Color.ORANGE.getRGB())
+			strategia="P-C";
+		else if(paint[currentIndexExperiment][currentIndexLabel].imageStrategies.getRGB(clickedIndexX, clickedIndexY)==Color.MAGENTA.getRGB())
+			strategia="LA-Cell";
+		else if(paint[currentIndexExperiment][currentIndexLabel].imageStrategies.getRGB(clickedIndexX, clickedIndexY)==Color.BLUE.getRGB())
+			strategia="all-D";
+		else if(paint[currentIndexExperiment][currentIndexLabel].imageStrategies.getRGB(clickedIndexX, clickedIndexY)==Color.GREEN.getRGB())
+			{
+				for(int c=0; c<8; c++)
+				{
+					int con =20;
+					int g = 85+(7*con);
+					int b = 40;
+					int p = (Color.ORANGE.getAlpha()<<24) | (Color.ORANGE.getRed()<<16)
+					| (g-(con*c)<<8) | b;	
+					
+					if(paint[currentIndexExperiment][currentIndexLabel].imagekD.getRGB(clickedIndexX, clickedIndexY)==p)
+						strategia=c+"-D";
+				}
+			}
+		String dzielenieDochodow="NoN";
+		if (paint[currentIndexExperiment][currentIndexLabel].imageCALA.getRGB(clickedIndexX, clickedIndexY)==Color.RED.getRGB()
+		 || paint[currentIndexExperiment][currentIndexLabel].imageCALA.getRGB(clickedIndexX, clickedIndexY)==Color.BLUE.getRGB())
+			dzielenieDochodow="Tak";
+		else if (paint[currentIndexExperiment][currentIndexLabel].imageCALA.getRGB(clickedIndexX, clickedIndexY)==Color.ORANGE.getRGB()
+			  || paint[currentIndexExperiment][currentIndexLabel].imageCALA.getRGB(clickedIndexX, clickedIndexY)==Color.GREEN.getRGB())
+			dzielenieDochodow="Nie";
+		textAreaInformation.setText(
+				//"  Komorka: [" + clickedIndexX+ "]["+ clickedIndexY+"]\n"
+				"Komorka: "+ komorka + '\n'
+			   +"        Stan: "+ ((paint[currentIndexExperiment][currentIndexLabel].imageStates.getRGB(clickedIndexX, clickedIndexY)==Color.RED.getRGB())?('C'):('D'))+'\n'
+			   +"Strategia: "+ strategia+ '\n'
+			   +"    Payout: "+paint[currentIndexExperiment][currentIndexLabel].sum[clickedIndexX][clickedIndexY]+'\n'
+			   +"Dzielenie: "+dzielenieDochodow+'\n');
+		
+		
+	}
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);

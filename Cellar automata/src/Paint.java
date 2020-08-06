@@ -16,7 +16,7 @@ public class Paint {
 	public BufferedImage imageOfKpalette;
 	public int			areaForText=0;
 	private int squareInPalette=30;
-	
+	public double sum[][];
 	public Paint(Run run, boolean kConst)
 	{
 		imageCALA = new BufferedImage(run.yRange+areaForText, run.xRange, BufferedImage.TYPE_INT_ARGB);
@@ -25,11 +25,12 @@ public class Paint {
 		imageStrategies= new BufferedImage(run.yRange+areaForText, run.xRange, BufferedImage.TYPE_INT_ARGB);
 		imagekD= new BufferedImage(run.yRange+areaForText, run.xRange, BufferedImage.TYPE_INT_ARGB);
 		imageOfKpalette= new BufferedImage(squareInPalette*8,squareInPalette , BufferedImage.TYPE_INT_ARGB);
-		
+		sum=new double[run.xRange][run.yRange];
 			int o=1;
 			for (int i=0; i<run.xRange; i++)
 				for ( int j=0 ; j<run.yRange+areaForText; j++)
 				{
+					sum[i][j]=run.temporary[i][j].sum;
 					if (run.temporary[i+o][j+o].cellEmpty)
 					{
 						imageCALA.setRGB(j, i, Color.WHITE.getRGB());

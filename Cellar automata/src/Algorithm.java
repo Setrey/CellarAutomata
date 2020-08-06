@@ -35,17 +35,23 @@ public class Algorithm {
 	 
 	 */
 	
+	Initialization []init;
+	Run []run;
+	Statistics statistics[];
+	int period;
+	Settings settings;
+	Paint paint[][];
+	
 	public Algorithm(Settings settings) throws IOException 
 	{
 		
-		
-		Paint paint[][];
+		this.settings=settings;
 		Algorithm.randomSeed= settings.seed;
 		Algorithm.randomValue= new Random(Algorithm.randomSeed);
 		int xRange=settings.numberOfRows;
 		int yRange=settings.numberOfColumns;
 		int m=settings.numberOfExperiments;
-		int period=settings.numberOfFrames;
+		period=settings.numberOfFrames;
 		int qRounds=settings.qChanges;
 		
 		la1=settings.isLA1;
@@ -87,7 +93,7 @@ public class Algorithm {
 		
 		paint= new Paint[m][period+1];
 		
-		Statistics statistics[];
+		
 		statistics=new Statistics[m];
 		for (int i=0 ; i<m;i++)
 			statistics[i]= new Statistics(run[i],settings);
@@ -143,9 +149,10 @@ public class Algorithm {
 			statistics[x].addRow(run[x], 0);
 			
 			paint[x][0]=new Paint(run[x],kConst);
-			//System.out.println(" -----");
+			
 			for (int i=0; i<period; i++)
 			{	
+				System.out.println("krok " + i);
 				testPlikLA.add("------------------");
 				testPlikCA.add("------------------");
 				testPlikMain.add("------------------");
@@ -193,10 +200,12 @@ public class Algorithm {
 
 				CAiLASection(run, x, testPlikMain);
 				
+				System.out.println("---------- updateCellHistory()");
+				
 				run[x].updateCellHistory();
 				//run[x].updateHistoryLookingAtNeighbours();
 				
-				
+				System.out.println("---------- changeStrategy()");
 				if ((i+1)%qRounds==0 && settings.isQselected)
 				{
 					run[x].changeStrategy();
@@ -214,7 +223,7 @@ public class Algorithm {
 					CASection(run, x, testPlikCA);
 
 				CAiLASection(run, x, testPlikMain);
-				
+				System.out.println("---------- checkKneighbours()");
 				run[x].checkKneighbours();
 				
 				testPlikCA.add("Zmiana stanu");
@@ -294,7 +303,6 @@ public class Algorithm {
 				*/
 			}
 		}
-		new MyCanvasInWindow(paint,statistics,period,run,settings);
 	}
 	
 	public void LASection(Run run[], int x, List<String> testPlikLA)
@@ -372,6 +380,10 @@ public class Algorithm {
 			testPlikMain.add(firstLine);
 		}
 		testPlikMain.add("");
+	}
+	public void createWindow()
+	{
+		new MyCanvasInWindow(paint,statistics,period,run,settings);
 	}
 	public String filling2(double string)
 	{

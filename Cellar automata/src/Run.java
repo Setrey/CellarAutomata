@@ -411,19 +411,27 @@ public class Run {
 		}
 		for (int i=0; i<tablicaPomocnicza.length; i++)
 			for(int j=0; j<tablicaPomocnicza[i].length; j++)
+			{
 				temporary[i][j]=tablicaPomocnicza[i][j];
+				//System.out.println(temporary[i][j].changedStrategy);
+			}
 	}
 	
 	public void updateStatistics(Cell cell)
 	{
+		
 		if (!cell.cellEmpty)
 		{
 				this.avarageIncome+=cell.sumPerRound;
 				
 				if (cell.isStrategyChanged())
+				{
+				
 					this.percentOfQChanges+=1;
+				}
 			//	//	//	// LA
 			if(cell.learningAutomata)
+			
 			{
 				this.CounterOfLACell+=1;
 				this.percentOfLACell+=1;
@@ -634,8 +642,13 @@ public class Run {
 					}
 					if(notEmptyNeighbours!=0)
 						counterSum/=notEmptyNeighbours;
-					//System.out.println(i + " " + j + " " + counterSum);
-					//System.out.println(i + " " + j + " " + (this.temporary[i][j].sum));
+					/*
+					if(i==4 && j == 4 )
+					{
+					System.out.println(i + " " + j + " " + counterSum);
+					System.out.println(i + " " + j + " " + (this.temporary[i][j].sum));
+					}
+					*/
 					this.temporary[i][j].sum=counterSum;
 					//System.out.println(i + " " + j + " " + (this.temporary[i][j].sum));
 					this.temporary[i][j].sumPerRound+=counterSum;
@@ -914,143 +927,96 @@ public class Run {
 			{
 				tempo2[i][j]=new Cell();
 				new Cell().copyCell(tempo2[i][j],temporary[i][j]);
+				System.out.println();
 			}
-		//TODO
-		if(itIsWideArray)
 		
+	if(itIsWideArray)
 		for (int i=1; i<temporary.length-1; i++)
 			for(int j=1; j<temporary[i].length-1; j++)
 				if(!temporary[i][j].cellEmpty)
 				{
-					
+					boolean hasChanged=false;
 					Cell tempo= new Cell();
+					
 					new Cell().copyCell(tempo,temporary[i][j]);
 					
 					for (int k=i-1; k<i+2; k++)  // iteracja s¹siadów
 				        for (int l=j-1; l<j+2; l++)
 				          if (!(k==i && l==j) && temporary[k][l].sum>tempo.sum)
+				          {
+				        	  hasChanged=true;
 				        	  new Cell().copyCell(tempo, temporary[k][l]);
-					
-					if(tempo.learningAutomata)
-						if(temporary[i][j].learningAutomata)
-						{
-							if (temporary[i][j].epsilon!=tempo.epsilon || temporary[i][j].lengthOfHistory!=tempo.lengthOfHistory || temporary[i][j].sharingPayout!=tempo.sharingPayout)
-								tempo2[i][j].changedStrategy=true;
-							tempo2[i][j].epsilon=tempo.epsilon;
-							tempo2[i][j].lengthOfHistory=tempo.lengthOfHistory;
-							tempo2[i][j].sharingPayout=tempo.sharingPayout;
-						}
+				          }
+					System.out.println("==== between ====");
+					if (hasChanged)
+						if(tempo.learningAutomata)
+							if(temporary[i][j].learningAutomata)
+							{
+								tempo.changedStrategy=true;
+								new Cell().copyCell(tempo2[i][j], tempo);
+								
+							}
+							else
+							{
+								tempo.changedStrategy=true;
+								new Cell().copyCell(tempo2[i][j],tempo);
+							}
 						else
-						{
-							new Cell().copyCell(tempo2[i][j],tempo);
-							tempo2[i][j].changedStrategy=true;
-						}
-					else
-						if(temporary[i][j].learningAutomata)
-						{
-							new Cell().copyCell(tempo2[i][j],tempo);
-							tempo2[i][j].changedStrategy=true;
-						}
-						else
-						{
-							if(temporary[i][j].state!=tempo.state || (temporary[i][j].state=='K' && tempo.state=='K' && temporary[i][j].kTolerance!=tempo.kTolerance) || temporary[i][j].strategy.buffor!=tempo.strategy.buffor)
-								tempo2[i][j].changedStrategy=true;
-							//tempo2[i][j].strategy=tempo.strategy; //tak by³o jak jeszcze dzia³a³o <po prostu ta linijka tylko
-							new Cell().copyCell(tempo2[i][j],tempo);
-							
-						}
+							if(temporary[i][j].learningAutomata)
+							{
+								tempo.changedStrategy=true;
+								new Cell().copyCell(tempo2[i][j],tempo);
+							}
+							else
+							{
+								tempo.changedStrategy=true;
+								new Cell().copyCell(tempo2[i][j],tempo);
+							}
+					System.out.println();
 				}
-		/*
-		else if(oneDimension)
+	/*
+	System.out.println(" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	
+	for (int a=1; a<temporary.length-1; a++)
+	{
+		for(int b=1; b<temporary[a].length-1; b++)
 		{
-			for (int i=oneDimensionIndex; i<temporary.length-1; i++)
-				for(int j=r; j<temporary[i].length-r; j++)
-					if(!temporary[i][j].cellEmpty)
-					{
-						Cell tempo= temporary[i][j];
-						for (int k=j-r; k<r+1; k++)  // iteracja s¹siadów
-							if (k!=j && temporary[i][k].sum>tempo.sum)
-				        	  tempo=temporary[i][k];
-						if(tempo.learningAutomata)
-							if(temporary[i][j].learningAutomata)
-							{
-								tempo2[i+1][j].epsilon=tempo.epsilon;
-								tempo2[i+1][j].lengthOfHistory=tempo.lengthOfHistory;
-							}
-							else
-								tempo2[i+1][j]=tempo;
-						else
-							if(temporary[i][j].learningAutomata)
-								tempo2[i+1][j]=tempo;
-							else
-								tempo2[i+1][j]=tempo;
-					}
-			oneDimensionIndex++;
+			System.out.print(tempo2[a][b].state);
+			tempo2[a][b].printHistory();
+			System.out.print(" || ");
+			
 		}
-		else
+		System.out.println();
+	}
+	*/
+	
+		// przepisanie tablicy tempo2 do glownej
+	//System.out.println("======================");
+		for (int i=1; i<temporary.length-1; i++)
+			for(int j=1; j<temporary[i].length-1; j++)
+			{
+				
+				System.out.println("  "+tempo2[i][j].history.size());
+				System.out.println(">>>>"+tempo2[i][j].changedStrategy);
+				new Cell().copyCell(temporary[i][j],tempo2[i][j]);
+				
+			}
+		//System.out.println(" = = = = = = = = =");
+		this.rewriteEdges();
+		/*
+	System.out.println("=========TEMPORARY=============");
+		for (int a=1; a<temporary.length-1; a++)
 		{
-			if ((temporary.length==1 || temporary.length==2 )&& !oneDimension)
+			for(int b=1; b<temporary[a].length-1; b++)
 			{
-				for (int i=0; i<temporary.length; i++)
-					for (int j=1; j<temporary[0].length-1; j++)
-						if(!temporary[i][j].cellEmpty)
-						{
-						Cell tempo= temporary[i][j];
-						for (int k=i-1; k<i+2; k++)  // iteracja s¹siadów
-					        for (int l=j-1; l<j+2; l++)
-					        {
-					        	if (!(k==i && l==j) && (k>=0 && k<=temporary.length-1)&& temporary[k][l].sum>tempo.sum)
-					        		tempo=temporary[k][l];
-					        }
-						if(tempo.learningAutomata)
-							if(temporary[i][j].learningAutomata)
-							{
-								tempo2[i][j].epsilon=tempo.epsilon;
-								tempo2[i][j].lengthOfHistory=tempo.lengthOfHistory;
-							}
-							else
-								tempo2[i][j]=tempo;
-						else
-							if(temporary[i][j].learningAutomata)
-								tempo2[i][j]=tempo;
-							else
-								tempo2[i][j]=tempo;
-						}
+				System.out.print(temporary[a][b].state);
+				temporary[a][b].printHistory();
+				System.out.print(" || ");
+				
 			}
-			else if ((temporary[0].length==1 || temporary[0].length==2)&& oneDimension)
-			{
-				for (int i=1; i<temporary.length-1; i++)
-					for (int j=0; j<temporary[0].length; j++)
-						if(!temporary[i][j].cellEmpty)
-						{
-						Cell tempo= temporary[i][j];
-						for (int k=i-1; k<i+2; k++)  // iteracja s¹siadów
-					        for (int l=j-1; l<j+2; l++)
-					        	if (!(k==i && l==j) && (l>=0 && l<=1)&& temporary[k][l].sum>tempo.sum)
-					        		tempo=temporary[k][l];
-						if(tempo.learningAutomata)
-							if(temporary[i][j].learningAutomata)
-							{
-								tempo2[i][j].epsilon=tempo.epsilon;
-								tempo2[i][j].lengthOfHistory=tempo.lengthOfHistory;
-							}
-							else
-								tempo2[i][j]=tempo;
-						else
-							if(temporary[i][j].learningAutomata)
-								tempo2[i][j]=tempo;
-							else
-								tempo2[i][j]=tempo;
-						}
-			}
+			System.out.println();
 		}
 		*/
-		// przepisanie tablicy tempo2 do glownej
-		for (int i=0; i<temporary.length; i++)
-			for(int j=0; j<temporary[i].length; j++)
-				new Cell().copyCell(temporary[i][j],tempo2[i][j]);
-		
-		this.rewriteEdges();
 	}
 	
 	public void clearAllCells()

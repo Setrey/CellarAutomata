@@ -138,11 +138,10 @@ public class Window {
 				else if (rdbtnTylkoKomrkiCa.isSelected())
 					settings.agentType=typeOfAgent.CA;
 				
-				if (!rdbtnGotWspDoch.isSelected())
-					settings.probOfUnhabitedCell=0;
-				else
-					settings.probOfUnhabitedCell=(double)spinnergot_wspol_doch.getValue();
-				
+				if (rdbtnGotWspDoch.isSelected())
+					settings.probOfPayoffSharing=(double)spinnergot_wspol_doch.getValue();
+				else 
+					settings.probOfPayoffSharing=0;
 				
 				if(rbtnkConst.isSelected())
 					settings.isKConst=true;
@@ -194,6 +193,7 @@ public class Window {
 					settings.isLA3=(boolean) rdbtnLa3.isSelected();
 					
 					algo= new Algorithm(settings);
+					algo.createWindow();
 				
 				} catch (IOException e) 
 				{

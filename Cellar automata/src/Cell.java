@@ -1,6 +1,8 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Cell {
 	public char previousState;
@@ -17,17 +19,6 @@ public class Cell {
 	public boolean sharingPayout=false;
 	public int lengthOfHistory;
 	public double pParameter;
-	/*
-	public class RangeOfPParameter
-	{
-		public double min;
-		public double max;
-		
-		public RangeOfPParameter(double deltaP,)
-	}
-	
-	public RangeOfPParameter rangeOfPParameter;
-	*/
 	public double epsilon;
 	public Mutation mutation=new Mutation();
 	private double []pStrategy;
@@ -41,11 +32,29 @@ public class Cell {
 			this.state=state;
 			this.result=result;
 		}
+		public History (History history)
+		{
+			this.state=history.state;
+			this.result=history.result;
+		}
+		public char getState()
+		{
+			return state;
+		}
+		public double getResult()
+		{
+			return result;
+		}
 	}
 	
 	public LinkedList<History> history;
 	/*(double pInitC,double []pStrategy, double pEmpty, int lengthOfHistory, double p_typ_ag_ca,
 				double pPayoutSharing, int kMax, double pOfCoopMin, double epsilon, Mutation mutation, double deltapC)*/
+	
+	public Cell ()
+	{
+		history= new LinkedList<History>();
+	}
 	public Cell(Settings settings)
 	{
 		double n = Algorithm.randomValue.nextDouble();
@@ -71,6 +80,8 @@ public class Cell {
 				state='D';
 			
 			n=Algorithm.randomValue.nextDouble();
+			
+			//		CA or LA
 			
 			if(settings.agentType==typeOfAgent.CA)
 				this.learningAutomata=false;
@@ -122,6 +133,11 @@ public class Cell {
 			}
 		}
 	}
+	public void printHistory()
+	{
+		for (int i=0 ; i<this.history.size(); i++)
+			System.out.print("["+ history.get(i).getState()+","+history.get(i).getResult()+"]");
+	}
 	public void newStrategy(Settings settings)
 	{
 		strategy=new Strategy(settings);
@@ -139,7 +155,7 @@ public class Cell {
 	}
 	public void showStrategy()
 	{
-		System.out.print(this.strategy.buffor+ " ");	
+		//System.out.print(this.strategy.buffor+ " ");	
 	}
 	public char getStrategy()
 	{
@@ -194,8 +210,9 @@ public class Cell {
 					sum=this.history.get(i).result;
 				}
 			}		//Jesli random mniejszy od epsilona to zmiana stanu
+			//System.out.println("index"+ index);
 			if (Algorithm.randomValue.nextDouble()<this.epsilon)
-			{ 		// IF ITS WIDE ARRAY
+			{ 		
 				if(Algorithm.la1)
 					if (this.state=='C')
 						this.state='D';
@@ -215,10 +232,10 @@ public class Cell {
 			}
 			else 
 			{
-			this.previousState=this.state;
-			System.out.println(index+" " + this.history.size());
-			this.state=this.history.get(index).state;
-			this.sum=round2((this.history.get(index).result/8));
+				this.previousState=this.state;
+				//System.out.println(index+" " + this.history.size());
+				this.state=this.history.get(index).state;
+				this.sum=round2((this.history.get(index).result/8));
 			}
 		}
 	}
@@ -407,28 +424,47 @@ public class Cell {
 		
 		return i; 
 	}
-	public Cell ()
-	{
-		
-	}
+	/*/
+	  	System.out.print("[");
+			for (int i =0 ; i<dest.history.size(); i++)
+				System.out.print("["+dest.history.get(i).state+","+dest.history.get(i).result+"]");
+		System.out.print("]");
+	 */
 	public void copyCell ( Cell dest, Cell temp)
 	{
 		dest.state=temp.state;
 		dest.strategy=temp.strategy;
 		dest.sum=temp.sum;
+		System.out.println("   dest size: "+dest.history.size() + " temp size: " +temp.history.size());
+		dest.history.clear();
+		System.out.println("   dest size: "+dest.history.size() + " temp size: " +temp.history.size());
+		/*
+		List<History> cloned = new LinkedList<>(temp.history);
 		
+		dest.history= (LinkedList<History>) cloned;
+		*/
+		
+		
+		for (int i =0; i<temp.history.size(); i++)
+		{
+			double result1=temp.history.get(i).result;
+			char state1=temp.history.get(i).state;
+			
+			dest.history.add(new History (state1,result1));
+		}
+		
+		System.out.println("|||dest size: "+dest.history.size() + " temp size: " +temp.history.size());
 		dest.previousState= temp.previousState;
 		dest.sumCounter=temp.sumCounter;
 		dest.sumPerRound=temp.sumPerRound;
 		dest.mutation=temp.mutation;
-		dest.changedStrategy=temp.changedStrategy;
 		dest.lengthOfHistory=temp.lengthOfHistory;
 		dest.pParameter=temp.pParameter;
 		dest.pStrategy=temp.pStrategy;
+		dest.changedStrategy=temp.changedStrategy;
 		dest.cellEmpty=temp.cellEmpty;
 		dest.epsilon=temp.epsilon;
 		dest.kMax=temp.kMax;
-		dest.history=temp.history;
 		dest.learningAutomata=temp.learningAutomata;
 		dest.kTolerance=temp.kTolerance;
 		dest.sharingPayout=temp.sharingPayout;
