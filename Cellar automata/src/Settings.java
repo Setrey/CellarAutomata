@@ -17,25 +17,17 @@ public class Settings {
 	int historyLength;			// d³ugoœæ historii dla Agentów LA
 	double epsilon;				// wartosc epsilon wybrania najlepszej historii
 	Mutation mutation;			// obiekt z parametrami mutacji
-	double probOfPcStrategy;				// prawdopodobieñstwo strategii Pc
-	double probOfAllCStrategy; 			// prawdopodobieñstwo strategii AllC
-	double probOfAllDStrategy;			// prawdopodobieñstwo strategii AllD
-	double probOfKDStrategy;				// prawdopodobieñstwo strategii kD
+	double probOfPcStrategy;	// prawdopodobieñstwo strategii Pc
+	double probOfAllCStrategy; 	// prawdopodobieñstwo strategii AllC
+	double probOfAllDStrategy;	// prawdopodobieñstwo strategii AllD
+	double probOfKDStrategy;	// prawdopodobieñstwo strategii kD
 	boolean isKConst;			// czy strategie kD maj¹ sta³¹ wartoœæ
 	int kMax;					// maksymalne K w strategi kD
 	double valueOfPc;			// wartosc Pc
 	double deltaPc;				// odstêp od ustaalonego P_c
-	/*
-	double mutHistoria;			
-	int mutC2; 
-	double mutEpsilon; 
-	double mutc3; 
-	double mutStrateg; 
-	double mutParametr;
-	double mutC1;
-	*/
-	boolean isQselected;			// Czy parametr Q jest zaznaczony
-	boolean isDebugSelected;		// Czy opcja debug jest zaznaczona
+	
+	boolean isQselected;		// Czy parametr Q jest zaznaczony
+	boolean isDebugSelected;	// Czy opcja debug jest zaznaczona
 
 	boolean isLA1;				// czy LA1
 	boolean isLA2;				// czy LA2
@@ -49,7 +41,7 @@ public class Settings {
 		qChanges=1;
 		probOfUnhabitedCell=0;
 		probOfInitCState=0.5;
-		probOfPayoffSharing=0.1;
+		probOfPayoffSharing=0;
 		seed=0;
 		numberOfExperiments=1;
 		numberOfFrames=100;

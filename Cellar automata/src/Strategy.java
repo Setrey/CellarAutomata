@@ -32,7 +32,11 @@ public class Strategy
 		this.buffor=buffor;
 		this.kMax=kMax;
 	}
-	
+	public Strategy()
+	{
+		this.buffor='-';
+		this.kMax=0;
+	}
 	public void display()
 	{
 		System.out.print(buffor);

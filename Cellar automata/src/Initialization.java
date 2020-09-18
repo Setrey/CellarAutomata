@@ -14,6 +14,7 @@ public class Initialization {
 		
 		this.x=settings.numberOfRows;
 		this.y=settings.numberOfColumns;
+		
 		if( x!=0 && y!=0)
 		{
 			cell= new Cell[x][y];

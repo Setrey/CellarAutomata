@@ -193,6 +193,7 @@ public class Window {
 					settings.isLA3=(boolean) rdbtnLa3.isSelected();
 					
 					algo= new Algorithm(settings);
+					algo.Calculate();
 					algo.createWindow();
 				
 				} catch (IOException e) 

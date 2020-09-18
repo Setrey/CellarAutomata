@@ -56,7 +56,6 @@ public class MyCanvasInWindow extends JFrame{
 
 	Paint paint[][];
 	Statistics stats[];
-	int period;
 	Run[] run;
 	Settings settings;
 	
@@ -67,7 +66,6 @@ public class MyCanvasInWindow extends JFrame{
 	public void updateLabels()
 	{
 		//TODO zbudowanie ramki na komórce któr¹ chcemy podœwietliæ. 
-		
 		label.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageCALA,300,300)));
 		label_1.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageStates,300,300)));
 		label_2.setIcon(new ImageIcon(new Paint().getScaledImage(paint[currentIndexExperiment][currentIndexLabel].imageStrategies,300,300)));
@@ -88,10 +86,9 @@ public class MyCanvasInWindow extends JFrame{
 			}
 		}
 	}
-	public MyCanvasInWindow(Paint[][] paint,Statistics[] stats, int period, Run[] run, Settings settings) {
+	public MyCanvasInWindow(Paint[][] paint,Statistics[] stats, Run[] run, Settings settings) {
 		
 		this.stats=stats;
-		this.period=period;
 		this.paint=paint;
 		this.settings=settings;
 		
@@ -210,7 +207,7 @@ public class MyCanvasInWindow extends JFrame{
 				
 				if(paint.length>1)
 					{
-						odchyl.standardDeviatation(stats, period);
+						odchyl.standardDeviation(stats, settings.numberOfFrames);
 						try(PrintWriter p = new PrintWriter("odchylenie_standardowe.txt")) {
 							odchyl.writeToFile(p);
 						}catch (FileNotFoundException e)

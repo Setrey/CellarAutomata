@@ -18,6 +18,7 @@ public class Run {
 	public boolean oneDimension=false;
 	public int		oneDimensionIndex=0;
 	
+	char[][][] historyStates;
 	
 	//wszystie percent parametry- najpierw sa zliczane jako counter
 	//pozniej wyliczany zostaje procent
@@ -179,6 +180,16 @@ public class Run {
 		}
 	}
 
+	public void copyTable(Cell[][] tableToCopy, Cell[][] tableFromCopy)
+	{
+		for (int i=0; i<tableFromCopy.length; i++)
+			for(int j=0; j<tableFromCopy[i].length; j++)
+			{
+				tableToCopy[i][j]=new Cell();
+				tableToCopy[i][j].copyCell(tableFromCopy[i][j]);
+			}
+	}
+	
 	public void chooseBestStrategyForLACells( Cell [][]cell)
 	{
 		for (int i =0 ; i<cell.length ;i++)
@@ -189,12 +200,8 @@ public class Run {
 	public void checkKneighbours()
 	{
 		Cell[][] tablicaPomocnicza=new Cell[temporary.length][temporary[0].length];
-		for (int i=0; i<tablicaPomocnicza.length; i++)
-			for(int j=0; j<tablicaPomocnicza[i].length; j++)
-			{
-				tablicaPomocnicza[i][j]=new Cell();
-				new Cell().copyCell(tablicaPomocnicza[i][j],temporary[i][j]);
-			}
+		
+		copyTable(tablicaPomocnicza,temporary);
 			
 		if (itIsWideArray)
 		{
@@ -211,7 +218,7 @@ public class Run {
 						        for (int l=j-1; l<j+2; l++)
 						          if (!(k==i && l==j)&&(temporary[k][l].state=='D'))
 						            counter+=1;
-							if (counter>kTolerance)
+							if (counter>temporary[i][j].strategy.kMax)
 								tablicaPomocnicza[i][j].state='D';
 							else
 								tablicaPomocnicza[i][j].state='C';
@@ -479,12 +486,42 @@ public class Run {
 			}
 		}
 	}
+	public void updateStatisticsQChanges(Cell cell)
+	{
+		if (!cell.cellEmpty)
+			if (cell.isStrategyChanged())
+				this.percentOfQChanges+=1;
+	}
+	public void updateStatisticsQChanges(Cell [][]cell)
+	{
+		for (int i =1 ; i<cell.length-1;i++)
+			for(int j=1; j<cell[i].length-1;j++)
+				updateStatisticsQChanges(cell[i][j]);
+	}
 	
 	public void updateStatistics(Cell [][]cell)
+	
 	{
 		for (int i =1 ; i<cell.length-1;i++)
 			for(int j=1; j<cell[i].length-1;j++)
 				updateStatistics(cell[i][j]);
+	}
+	
+	public void insertEmptyCells(Cell [][]cell)
+	{
+		for (int i =1 ; i<cell.length-1;i++)
+			for(int j=1; j<cell[i].length-1;j++)
+				insertEmptyCell(cell[i][j]);
+		
+		this.rewriteEdges();
+	}
+	
+	public void insertEmptyCell(Cell cell)
+	{
+		if (cell.strategy.buffor=='E' && cell.state=='E')
+		{
+			cell.cellEmpty=true;
+		}
 	}
 	
 	public void resetStatistics()
@@ -517,18 +554,7 @@ public class Run {
 		*/
 	}
 
-	public Double round2(Double val) {
-		/*NumberFormat nf= NumberFormat.getInstance();
-		nf.setMaximumFractionDigits(2);
-		System.out.println(Double.parseDouble((nf.format(val)).replace(",", ".")));
-		return Double.parseDouble((nf.format(val)).replace(",", "."));
-		*/
-	    return new BigDecimal(val.toString()).setScale(2,RoundingMode.HALF_UP).doubleValue();
-	}
 	
-	public Double round4(Double val) {
-	    return new BigDecimal(val.toString()).setScale(4,RoundingMode.HALF_UP).doubleValue();
-	}
 	
 	public void countStatistics()
 	{
@@ -551,47 +577,72 @@ public class Run {
 		this.kwadratKomorekCA=Math.pow((this.percentOfCACell/allCells),2);
 		this.kwadratKomorekCA=Math.round((this.kwadratKomorekCA)*100);
 		this.kwadratKomorekCA/=100;
-		
+//		
 		this.percentOfLACell=round2(this.CounterOfLACell/allCells);
 
 		this.kwadratKomorekLA=Math.pow((this.percentOfLACell/allCells),2);
 		this.kwadratKomorekLA=Math.round((this.kwadratKomorekLA)*100);
 		this.kwadratKomorekLA/=100;
 		
-		this.percentOfCStatesInCACell=round2(this.percentOfCStatesInCACell/allCells);
+		if(this.CounterOfCACell!=0)
+			this.percentOfCStatesInCACell=round2(this.percentOfCStatesInCACell/this.CounterOfCACell);
+		else
+			this.percentOfCStatesInCACell=0;
 		
-		this.percentOfCStatesInLACell=(Math.round((this.percentOfCStatesInLACell/allCells)*100));
+		this.percentOfCStatesInLACell=(Math.round((this.percentOfCStatesInLACell/this.CounterOfLACell)*100));
 		this.percentOfCStatesInLACell/=100;
 		
+		
+			
 		this.percentOfSharingCell=round2(this.percentOfSharingCell/allCells);
 
 		this.kwadratKomorekWspoldzielacych=Math.pow((this.percentOfSharingCell/allCells),2);
 		this.kwadratKomorekWspoldzielacych=Math.round(this.kwadratKomorekWspoldzielacych*100);
 		this.kwadratKomorekWspoldzielacych/=100;
 		
-		this.percentOfAllCStrategy=round2(this.percentOfAllCStrategy/allCells);
-	
-		this.kwadratkomorekC=Math.pow((this.percentOfAllCStrategy/allCells),2);
-		this.kwadratkomorekC=Math.round(this.kwadratkomorekC*100);
-		this.kwadratkomorekC/=100;
-		
-		this.percentOfPcStrategy=round2(this.percentOfPcStrategy/allCells);
-	
-		this.kwadratkomorekP=Math.pow((this.percentOfPcStrategy/allCells),2);
-		this.kwadratkomorekP=Math.round(this.kwadratkomorekP*100);
-		this.kwadratkomorekP/=100;
-		
-		this.percentOfallDStrategy=round2(this.percentOfallDStrategy/allCells);
-	
-		this.kwadratkomorekD=Math.pow((this.percentOfallDStrategy/allCells),2);
-		this.kwadratkomorekD=Math.round(this.kwadratkomorekD*100);
-		this.kwadratkomorekD/=100;
-		
-		this.percentOfkDStrategy=round2(this.percentOfkDStrategy/allCells);
+		int KDStrategyCounter=(int)this.percentOfkDStrategy;
 
-		this.kwadratkomorekK=Math.pow((this.percentOfkDStrategy/allCells),2);
-		this.kwadratkomorekK=Math.round(this.kwadratkomorekK*100);
-		this.kwadratkomorekK/=100;
+		if(this.CounterOfCACell!=0)
+		{
+			this.percentOfAllCStrategy=round2(this.percentOfAllCStrategy/this.CounterOfCACell);
+			
+			this.kwadratkomorekC=Math.pow((this.percentOfAllCStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekC=Math.round(this.kwadratkomorekC*100);
+			this.kwadratkomorekC/=100;
+		
+			this.percentOfPcStrategy=round2(this.percentOfPcStrategy/this.CounterOfCACell);
+		
+			this.kwadratkomorekP=Math.pow((this.percentOfPcStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekP=Math.round(this.kwadratkomorekP*100);
+			this.kwadratkomorekP/=100;
+			
+			this.percentOfallDStrategy=round2(this.percentOfallDStrategy/this.CounterOfCACell);
+		
+			this.kwadratkomorekD=Math.pow((this.percentOfallDStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekD=Math.round(this.kwadratkomorekD*100);
+			this.kwadratkomorekD/=100;
+			
+			this.percentOfkDStrategy=round2(this.percentOfkDStrategy/this.CounterOfCACell);
+
+			this.kwadratkomorekK=Math.pow((this.percentOfkDStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekK=Math.round(this.kwadratkomorekK*100);
+			this.kwadratkomorekK/=100;
+		}
+		else
+		{
+			this.percentOfAllCStrategy=0;
+			this.kwadratkomorekC=0;
+			
+			this.percentOfkDStrategy=0;
+			this.kwadratkomorekK=0;
+			
+			this.percentOfallDStrategy=0;
+			this.kwadratkomorekD=0;
+			
+			this.percentOfPcStrategy=0;
+			this.kwadratkomorekP=0;
+		}
+
 		
 		
 		this.avarageHParameter=((this.CounterOfLACell!=0)?(round2(this.avarageHParameter/this.CounterOfLACell)):0.0);
@@ -600,15 +651,22 @@ public class Run {
 		//System.out.println(this.avaragePcParameter+ " <- avaragePcParameter || counterOfPcCells ->"+ this.CounterOfPcCell);
 		this.avaragePcParameter=((this.CounterOfPcCell!=0)?(round2(this.avaragePcParameter/this.CounterOfPcCell)):0.0);
 		
+		// percentOfQChanges ¿eby zlicza³o liczbê zmian musi zostaæ przesuniête na koniec funkcji algorithm
+		//this.percentOfQChanges=round2(this.percentOfQChanges/(this.CounterOfLACell+this.CounterOfCACell));
 		
-		this.percentOfQChanges=round2(this.percentOfQChanges/(this.CounterOfLACell+this.CounterOfCACell));
 		for(int i=0; i<this.percentOfkD.length; i++)
 		{
-			this.percentOfkD[i]=((this.percentOfkD[i]==0 || this.percentOfkDStrategy==0)?(0):round2(this.percentOfkD[i]/(this.percentOfkDStrategy*allCells)));
+			this.percentOfkD[i]=((this.percentOfkD[i]==0 || this.percentOfkDStrategy==0)?(0):round2(this.percentOfkD[i]/KDStrategyCounter));
 		}
 	}
 	
-	public void countSum ()
+	public void countStatisticsQChanges()
+	{
+		int allCells=this.xRange*this.yRange;
+		this.percentOfQChanges=round2(this.percentOfQChanges/(allCells));
+	}
+	
+	public void contest ()
 	{	
 		if (itIsWideArray)
 		{
@@ -640,6 +698,7 @@ public class Run {
 				        	}
 				        }
 					}
+					counterSum=round2(counterSum);
 					if(notEmptyNeighbours!=0)
 						counterSum/=notEmptyNeighbours;
 					/*
@@ -649,9 +708,9 @@ public class Run {
 					System.out.println(i + " " + j + " " + (this.temporary[i][j].sum));
 					}
 					*/
-					this.temporary[i][j].sum=counterSum;
+					this.temporary[i][j].sum+=round3(counterSum);
 					//System.out.println(i + " " + j + " " + (this.temporary[i][j].sum));
-					this.temporary[i][j].sumPerRound+=counterSum;
+					this.temporary[i][j].sumPerRound+=round3(counterSum);
 					}
 		}
 		/*
@@ -742,12 +801,6 @@ public class Run {
 					temporary[i][j].state=((Algorithm.randomValue.nextBoolean())? 'C' : 'D');
 					temporary[i][j].sum=0;
 				}
-				else
-				{
-					temporary[i][j].state=((Algorithm.randomValue.nextBoolean())? 'C' : 'D');
-					temporary[i][j].newStrategy(settings);
-					temporary[i][j].pParameter=settings.valueOfPc;
-				}
 		}
 		else if(oneDimension)
 		{
@@ -790,6 +843,31 @@ public class Run {
 		}
 	}
 	
+	public void newValueForLA(char [][] states)
+	{
+		if(itIsWideArray)
+		{
+		for (int i=1; i<temporary.length-1; i++)
+			for(int j=1; j<temporary[i].length-1; j++)
+			{
+				if (this.temporary[i][j].strategy.buffor=='L')
+				{
+					this.temporary[i][j].learningAutomata=true;
+					
+					if (temporary[i][j].learningAutomata)
+					{
+						
+						temporary[i][j].state=states[i-1][j-1];
+						temporary[i][j].sum=0;
+					}
+				}
+				else
+					this.temporary[i][j].learningAutomata=false;
+			}
+		}
+	}
+	
+	
 	public void updateCellHistory()
 	{
 		if(itIsWideArray)
@@ -798,7 +876,7 @@ public class Run {
 			for(int j=1; j<temporary[i].length-1; j++)
 			if (temporary[i][j].learningAutomata)
 			{
-				double bestInNeighbour=(temporary[i][j].sum*8);
+				double bestInNeighbour=round3(temporary[i][j].sum);
 				temporary[i][j].addToHistory(temporary[i][j].state, bestInNeighbour);
 			}
 		}
@@ -917,19 +995,20 @@ public class Run {
 			}
 		}
 	}
-	
+
 	public void changeStrategy()
 	{
 		Cell[][] tempo2=new Cell[temporary.length][temporary[0].length];
 		//przepisywanie do nowej tablicy 
+		this.copyTable(tempo2, temporary);
+		/*
 		for (int i=0; i<temporary.length; i++)
 			for(int j=0; j<temporary[i].length; j++)
 			{
 				tempo2[i][j]=new Cell();
 				new Cell().copyCell(tempo2[i][j],temporary[i][j]);
-				System.out.println();
 			}
-		
+		*/
 	if(itIsWideArray)
 		for (int i=1; i<temporary.length-1; i++)
 			for(int j=1; j<temporary[i].length-1; j++)
@@ -944,10 +1023,11 @@ public class Run {
 				        for (int l=j-1; l<j+2; l++)
 				          if (!(k==i && l==j) && temporary[k][l].sum>tempo.sum)
 				          {
+				        	
 				        	  hasChanged=true;
 				        	  new Cell().copyCell(tempo, temporary[k][l]);
 				          }
-					System.out.println("==== between ====");
+					//System.out.println("==== between ====");
 					if (hasChanged)
 						if(tempo.learningAutomata)
 							if(temporary[i][j].learningAutomata)
@@ -972,7 +1052,7 @@ public class Run {
 								tempo.changedStrategy=true;
 								new Cell().copyCell(tempo2[i][j],tempo);
 							}
-					System.out.println();
+					//System.out.println();
 				}
 	/*
 	System.out.println(" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
@@ -995,9 +1075,8 @@ public class Run {
 		for (int i=1; i<temporary.length-1; i++)
 			for(int j=1; j<temporary[i].length-1; j++)
 			{
-				
-				System.out.println("  "+tempo2[i][j].history.size());
-				System.out.println(">>>>"+tempo2[i][j].changedStrategy);
+				//System.out.println("  "+tempo2[i][j].history.size());
+				//System.out.println(">>>>"+tempo2[i][j].changedStrategy);
 				new Cell().copyCell(temporary[i][j],tempo2[i][j]);
 				
 			}
@@ -1019,11 +1098,12 @@ public class Run {
 		*/
 	}
 	
-	public void clearAllCells()
+	public void clearPayout()
 	{
-		for (int i=0; i<temporary.length; i++)
-			for(int j=0; j<temporary[i].length; j++)
+		for (int i=1; i<temporary.length-1; i++)
+			for(int j=1; j<temporary[i].length-1; j++)
 				temporary[i][j].clearCell();
+		rewriteEdges();
 	}
 	
 	public void showMatrix()
@@ -1053,6 +1133,180 @@ public class Run {
 				temporary[i+1][j]=temporary[i][j];
 			}
 		oneDimensionIndex++;
+	}
+	
+	public boolean LACheck(Cell[][]cell)
+	{
+		for (int i=1; i<cell.length-1; i++)
+			for(int j=1; j<cell[i].length-1; j++)
+			{
+				if (cell[i][j].strategy.buffor=='L')
+					return true;
+			}
+		return false;
+	}
+	
+	public Double round2(Double val) {
+		/*NumberFormat nf= NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		System.out.println(Double.parseDouble((nf.format(val)).replace(",", ".")));
+		return Double.parseDouble((nf.format(val)).replace(",", "."));
+		*/
+	    return new BigDecimal(val.toString()).setScale(2,RoundingMode.HALF_UP).doubleValue();
+	}
+	public Double round3(Double val) {
+	    return new BigDecimal(val.toString()).setScale(3,RoundingMode.HALF_UP).doubleValue();
+	}
+	public Double round4(Double val) {
+	    return new BigDecimal(val.toString()).setScale(4,RoundingMode.HALF_UP).doubleValue();
+	}
+	
+	public String filling3(double string)
+	{
+		String doub= Double.toString(string);
+		String format= String.format("%1$-6s",doub).replace(' ', '0');
+		
+		return format;
+	}
+	
+	public String filling2(double string)
+	{
+		String doub= Double.toString(string);
+		String format= String.format("%1$-5s",doub).replace(' ', '0');
+		
+		return format;
+	}
+	
+	public void showPayoffsWithBorder()
+	{
+		for (int i=0; i<temporary.length; i++)
+		{		for(int j=0; j<temporary[i].length; j++)
+			{
+				System.out.print(this.temporary[i][j].payout+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showStatesWithBorder()
+	{
+		for (int i=0; i<temporary.length; i++)
+		{		for(int j=0; j<temporary[i].length; j++)
+			{
+				System.out.print(this.temporary[i][j].state+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showStatesWithoutBorder()
+	{
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(this.temporary[i][j].state+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showPayoffsWithoutBorder()
+	{
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(this.temporary[i][j].payout+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showSharingwithoutBorder()
+	{
+		System.out.println("--sharing--");
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(((this.temporary[i][j].sharingPayout)?(1):(0))+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showSumWithoutBorder()
+	{
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(this.temporary[i][j].sum+ " ");
+			}
+		System.out.println();
+		}
+	}
+	public void showSumWithBorder()
+	{
+		for (int i=0; i<temporary.length; i++)
+		{		for(int j=0; j<temporary[i].length; j++)
+			{
+				System.out.print(this.temporary[i][j].sum+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showHistoryWithoutBorder()
+	{
+		for (int i=1 ; i< temporary.length-1; i++)
+		{
+			for (int j=1; j<this.temporary[0].length-1;j++)
+			{	
+				String firstLine="";
+				firstLine+="[";
+				if (this.temporary[i][j].learningAutomata)
+					firstLine+=this.temporary[i][j].getHistory();
+				else
+				{	
+					for (int abc=0; abc<2; abc++)
+						firstLine+="[X,X.XXX]";
+				}
+				firstLine+="] ";
+				System.out.print(firstLine);
+			}
+			System.out.println();
+		}
+	}
+	
+	public void showChangesWithoutBorder()
+	{
+		System.out.println("--Changes--");
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print((this.temporary[i][j].changedStrategy)?("1 "):("0")+ " ");
+			}
+		System.out.println();
+		}
+	}
+	public void showStrategiesWithoutBorder()
+	{
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(((!this.temporary[i][j].learningAutomata)?(this.temporary[i][j].strategy.buffor):("L"))+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showKDValuesWithoutBorder()
+	{
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(((!this.temporary[i][j].learningAutomata)?(this.temporary[i][j].strategy.kMax):("L"))+ " ");
+			}
+		System.out.println();
+		}
 	}
 	
 }

@@ -19,21 +19,7 @@ public class Algorithm {
 	static boolean la3;
 	double pTypAgentaCA;
 	int lengthOfHisotry;
-	
-	/*
-	  		int xRange1,int yRange1, int rSasiedztwa, int Q, int iloscKrokow
-			,double prawdopodbienstwoNiezamieszk, double pInitCState
-			, double gotWspoldzieleniaDochodow
-			,int ziarno, int iloscExperymentow1, double RR,double SS,double TT,double PP
-			,int typAgentaKomorki, double prawdopAgentaCA, int historia, double epsilonn
-			,double mutHistoria
-			,int mutC2, double mutEpsilon, double mutc3, double stratPc
-			,double stratAllC, double stratAllD,double stratkD,boolean kConstt
-			,int kMaxx, double pPc, double mutStrateg, double mutParametr
-			,double mutC1, boolean Qselected, boolean debugSelected, double deltaPC
-			,boolean LA1, boolean LA2, boolean LA3
-	 
-	 */
+	OdchylenieStandardowe standardDeviation;
 	
 	Initialization []init;
 	Run []run;
@@ -42,123 +28,31 @@ public class Algorithm {
 	Settings settings;
 	Paint paint[][];
 	
+	
+	List<String> testPlikLA;
+	List<String> testPlikCA;
+	List<String> testPlikMain;
+	
 	public Algorithm(Settings settings) throws IOException 
 	{
-		
-		this.settings=settings;
-		Algorithm.randomSeed= settings.seed;
-		Algorithm.randomValue= new Random(Algorithm.randomSeed);
-		int xRange=settings.numberOfRows;
-		int yRange=settings.numberOfColumns;
-		int m=settings.numberOfExperiments;
-		period=settings.numberOfFrames;
-		int qRounds=settings.qChanges;
-		
-		la1=settings.isLA1;
-		la2=settings.isLA2;
-		la3=settings.isLA3;
-		pOCp=settings.valueOfPc;
-		
-		//double pStrategy []= {pPC,pAllC+pPC,pAllC+pPC+pAllD,pKD};
-		/*int*/ this.lengthOfHisotry=settings.historyLength;
-		// jesli typAgenta0 to prawdop = 1 jesli typagenta 1 to prawdop 0
-		
-		this.pTypAgentaCA=settings.probOfAgentCA;
-		
-		
-		//jesli kconst nieprawda to kMax*=-1;
-		boolean kConst=settings.isKConst;
-		
-		
-		//jesli typ agenta CA (0) wtedy wartoœæ prawdopodobieñstwa 1 jak LA(1) to 0, a jak i to i to, wtedy <0:1]
-		if (settings.agentType==typeOfAgent.CA)
-			pTypAgentaCA=1;
-		else if (settings.agentType==typeOfAgent.LA)
-			pTypAgentaCA=0;
-		
-		Initialization []init = new Initialization[m];
-		Run []run = new Run[m];
-		
-		for (int i=0 ; i<m;i++)
+		applySettings(settings);
+	}
+	
+	public void Calculate()
+	{
+		for (int x=0 ;x<settings.numberOfExperiments ;x++)
 		{
-		init[i]= new Initialization(settings);
-		/*(int rangeX, int rangeY, int period,double pInitC,double[] pStrategy
-		, double pEmpty, int lengthOfHistory, double p_typ_ag_ca,double pPayoutSharing,int kMax
-		, double pOfCoopMin, double epsilon, Mutation mutation, double deltapC)*/
-		//init.showMatrix();
-		//run[i]= new Run(init[i].getMatrix(),pd,qRounds,kMax,r,((xRange==0||yRange==0)?true:false));
-		run[i]= new Run(init[i].getMatrix(),settings);
-		}
-		//paint = new Paint (run,kConst);
-		
-		paint= new Paint[m][period+1];
-		
-		
-		statistics=new Statistics[m];
-		for (int i=0 ; i<m;i++)
-			statistics[i]= new Statistics(run[i],settings);
-		
-		List<String> testPlikLA = new ArrayList<>();
-		List<String> testPlikCA = new ArrayList<>();
-		List<String> testPlikMain = new ArrayList<>();
-		
-		for (int x=0 ;x<m ;x++)
-		{
-			testPlikLA.add("Eksperyment nr " + x);
-			testPlikCA.add("Eksperyment nr " + x);
-			testPlikMain.add("Eksperyment nr " + x);
-			testPlikLA.add("# StanKomórki,ŒredniDochódZRozgrywek,DzielenieDochodow(Tak(1) czy Nie(0)),[Historia]");
-			testPlikCA.add("# StanKomórki,StrategiaKomórki,DzielenieDochodow(Tak(1) czy Nie(0)),ŒredniDochódZRozgrywek");
-			testPlikMain.add("# StanKomórki,RodzajKomórki(CA (0) czy LA (1)),DzielenieDochodow(Tak(1) czy Nie(0)),ŒredniDochódZRozgrywek");
-			testPlikLA.add("------------------");
-			testPlikCA.add("------------------");
-			testPlikMain.add("------------------");
-			testPlikLA.add("t=0");
-			testPlikCA.add("t=0");
-			testPlikMain.add("t=0");
+			FrameZero(x);
 			
-			// 24-11-2019 zmiana
-			
-			//statistics[x].addRow(run[x], 0);
-			// LA
-			
-			if(pTypAgentaCA<1)
-				for (int k=0; k<lengthOfHisotry; k++)
-				{
-					run[x].newValueForLA(settings);
-					run[x].countSum();
-					run[x].updateCellHistory();
-					LASection(run,x,testPlikLA);
-					if (pTypAgentaCA!=0)
-					{
-						CASection(run, x, testPlikCA);
-						CAiLASection(run, x, testPlikMain);
-					}
-						
-				}
-			// CA
-			if (pTypAgentaCA==1)
-			{
-				CASection(run, x, testPlikCA);
-				CAiLASection(run, x, testPlikMain);
-			}
-			// zmiana 24-11-2019
-			run[x].countSum();
-			run[x].updateStatistics(run[x].temporary);
-			run[x].countStatistics();
-			statistics[x].addRow(run[x], 0);
-			
-			paint[x][0]=new Paint(run[x],kConst);
-			
-			for (int i=0; i<period; i++)
+			for (int i=0; i<settings.numberOfFrames+1; i++)
 			{	
-				System.out.println("krok " + i);
+				//System.out.println("krok " + (i));
 				testPlikLA.add("------------------");
 				testPlikCA.add("------------------");
 				testPlikMain.add("------------------");
-				testPlikLA.add("t="+(i+1));
-				testPlikCA.add("t="+(i+1));
-				testPlikMain.add("t="+(i+1));
+				testPlikLA.add("t="+(i));
+				testPlikCA.add("t="+(i));
+				testPlikMain.add("t="+(i));
 				
 				
 				run[x].resetStatistics();
@@ -169,9 +63,23 @@ public class Algorithm {
 				
 				if(pTypAgentaCA<1)
 					LASection(run,x,testPlikLA);
+				/*
+				System.out.println("============");
+				run[x].showSumWithoutBorder();
+				*/
+				//run[x].showSumWithBorder();
+				run[x].contest();
+				/*
+				System.out.println("====-Sum--=======");
+				run[x].showSumWithoutBorder();
+				System.out.println("====-States--====");
+				run[x].showStatesWithoutBorder();
+				System.out.println("====-Strat---====");
+				run[x].showStrategiesWithoutBorder();
+				System.out.println("====-kValue--====");
+				run[x].showKDValuesWithoutBorder();
+				*/
 				
-				//System.out.println(i + " " + i + " " + i);
-				run[x].countSum();
 				run[x].updateStatistics(run[x].temporary);
 				run[x].countStatistics();
 				
@@ -186,7 +94,6 @@ public class Algorithm {
 
 				CAiLASection(run, x, testPlikMain);
 				
-				
 				run[x].mutation();
 				
 				testPlikLA.add("Stan po mutacji");
@@ -199,18 +106,20 @@ public class Algorithm {
 					CASection(run, x, testPlikCA);
 
 				CAiLASection(run, x, testPlikMain);
-				
-				System.out.println("---------- updateCellHistory()");
+				//System.out.println("---------- updateCellHistory()");
 				
 				run[x].updateCellHistory();
 				//run[x].updateHistoryLookingAtNeighbours();
 				
-				System.out.println("---------- changeStrategy()");
-				if ((i+1)%qRounds==0 && settings.isQselected)
+				//System.out.println("---------- changeStrategy()");
+				if ((i+1)%settings.qChanges==0 && settings.isQselected)
 				{
 					run[x].changeStrategy();
+					//run[x].showChangesWithoutBorder();
+					run[x].updateStatisticsQChanges(run[x].temporary);
+					run[x].countStatisticsQChanges();
 				}
-				else if (xRange==0||yRange==0)
+				else if (settings.numberOfRows==0||settings.numberOfColumns==0)
 				{
 					run[x].updateOneDimension();
 				}
@@ -223,7 +132,7 @@ public class Algorithm {
 					CASection(run, x, testPlikCA);
 
 				CAiLASection(run, x, testPlikMain);
-				System.out.println("---------- checkKneighbours()");
+				//System.out.println("---------- checkKneighbours()");
 				run[x].checkKneighbours();
 				
 				testPlikCA.add("Zmiana stanu");
@@ -236,36 +145,13 @@ public class Algorithm {
 
 				CAiLASection(run, x, testPlikMain);
 				
-				paint[x][i+1]=new Paint(run[x],kConst);
-				statistics[x].addRow(run[x], i+1);
+				paint[x][i]=new Paint(run[x],settings.isKConst);
+				statistics[x].addRow(run[x], i);
 				
-				run[x].clearAllCells();
-				if ((i+1)%qRounds==0 && settings.isQselected)
+				
+				if ((i)%settings.qChanges==0 && settings.isQselected)
 				{
-					//System.out.println("? ");
-					/*
-					for (int a =0 ; a<run[x].temporary.length ;a++)
-					{
-						for (int s =0 ; s <run[x].temporary[a].length ;s++)
-						{
-							System.out.print(run[x].temporary[a][s].sum);
-							System.out.print(" ");
-						}
-						System.out.println(" ");
-					}
-					*/
-					
-					/*
-					for (int a =0 ; a<run[x].temporary.length ;a++)
-					{
-						for (int s =0 ; s <run[x].temporary[a].length ;s++)
-						{
-							System.out.print(run[x].temporary[a][s].sum);
-							System.out.print(" ");
-						}
-						System.out.println(" ");
-					}
-					*/
+					run[x].clearPayout();
 				}
 			}
 			
@@ -303,6 +189,63 @@ public class Algorithm {
 				*/
 			}
 		}
+		standardDeviation.standardDeviation(statistics,settings.numberOfFrames);
+	}
+	
+	public void FrameZero(int x)
+	{
+		run[x].insertEmptyCells(run[x].temporary);
+		boolean isThereLA=this.LACheck(run[x]);
+		
+		testPlikLA.add("Eksperyment nr " + x);
+		testPlikCA.add("Eksperyment nr " + x);
+		testPlikMain.add("Eksperyment nr " + x);
+		testPlikLA.add("# StanKomórki,ŒredniDochódZRozgrywek,DzielenieDochodow(Tak(1) czy Nie(0)),[Historia]");
+		testPlikCA.add("# StanKomórki,StrategiaKomórki,DzielenieDochodow(Tak(1) czy Nie(0)),ŒredniDochódZRozgrywek");
+		testPlikMain.add("# StanKomórki,RodzajKomórki(CA (0) czy LA (1)),DzielenieDochodow(Tak(1) czy Nie(0)),ŒredniDochódZRozgrywek");
+		testPlikLA.add("------------------");
+		testPlikCA.add("------------------");
+		testPlikMain.add("------------------");
+		testPlikLA.add("t=0");
+		testPlikCA.add("t=0");
+		testPlikMain.add("t=0");
+		
+		// LA
+		
+		if(pTypAgentaCA<1 || isThereLA)
+			for (int k=0; k<lengthOfHisotry; k++)
+			{
+				if (!isThereLA)
+					run[x].newValueForLA(settings);
+				else
+					run[x].newValueForLA(run[x].historyStates[k]);
+				run[x].contest();
+				run[x].updateCellHistory();
+				LASection(run,x,testPlikLA);
+				if (pTypAgentaCA!=0)
+				{
+					CASection(run, x, testPlikCA);
+					CAiLASection(run, x, testPlikMain);
+				}
+				run[x].clearPayout();
+			}
+		// CA
+		if (pTypAgentaCA==1)
+		{
+			CASection(run, x, testPlikCA);
+			CAiLASection(run, x, testPlikMain);
+		}
+		//run[x].showHistoryWithoutBorder();
+		/*
+		run[x].contest();
+		run[x].updateStatistics(run[x].temporary);
+		run[x].countStatistics();
+		statistics[x].addRow(run[x], 0);
+	
+		paint[x][0]=new Paint(run[x],settings.isKConst);
+		*/
+		run[x].clearPayout();
+		
 	}
 	
 	public void LASection(Run run[], int x, List<String> testPlikLA)
@@ -330,10 +273,10 @@ public class Algorithm {
 				}
 				testPlikLA.add(" ");
 	}
+	
 	public Double round2(Double val) {
 	    return new BigDecimal(val.toString()).setScale(2,RoundingMode.HALF_UP).doubleValue();
 	}
-
 
 	public void CASection(Run run[], int x, List<String> testPlikCA)
 	{
@@ -367,6 +310,7 @@ public class Algorithm {
 			}
 			testPlikCA.add("");
 	}
+	
 	public void CAiLASection(Run run[], int x, List<String> testPlikMain)
 	{
 		for (int i=1; i <run[x].temporary.length-1; i++)
@@ -381,10 +325,63 @@ public class Algorithm {
 		}
 		testPlikMain.add("");
 	}
+	
 	public void createWindow()
 	{
-		new MyCanvasInWindow(paint,statistics,period,run,settings);
+		new MyCanvasInWindow(paint,statistics,run,settings);
 	}
+	
+	public void applySettings(Settings settings)
+	{
+		this.standardDeviation = new OdchylenieStandardowe();
+		this.settings=settings;
+		Algorithm.randomSeed= settings.seed;
+		Algorithm.randomValue= new Random(Algorithm.randomSeed);
+		
+		la1=settings.isLA1;
+		la2=settings.isLA2;
+		la3=settings.isLA3;
+		pOCp=settings.valueOfPc;
+		
+		this.lengthOfHisotry=settings.historyLength;
+		// jesli typAgenta0 to prawdop = 1 jesli typagenta 1 to prawdop 0
+		this.pTypAgentaCA=settings.probOfAgentCA;
+		
+		//jesli typ agenta CA (0) wtedy wartoœæ prawdopodobieñstwa 1 jak LA(1) to 0, a jak i to i to, wtedy <0:1]
+		if (settings.agentType==typeOfAgent.CA)
+			pTypAgentaCA=1;
+		else if (settings.agentType==typeOfAgent.LA)
+			pTypAgentaCA=0;
+		
+		this.init = new Initialization[settings.numberOfExperiments];
+		this.run = new Run[settings.numberOfExperiments];
+		
+		for (int i=0 ; i<settings.numberOfExperiments;i++)
+		{
+			this.init[i]= new Initialization(settings);
+			this.run[i]= new Run(init[i].getMatrix(),settings);
+		}
+		
+		this.paint= new Paint[settings.numberOfExperiments][settings.numberOfFrames+1];
+		
+		
+		this.statistics=new Statistics[settings.numberOfExperiments];
+		for (int i=0 ; i<settings.numberOfExperiments;i++)
+			statistics[i]= new Statistics(run[i],settings);
+		
+		this.testPlikCA = new ArrayList<>();
+		this.testPlikLA = new ArrayList<>();
+		this.testPlikMain = new ArrayList<>();
+	}
+	
+	public boolean LACheck(Run run)
+	{
+		
+		if (run.LACheck(run.temporary))
+			return true;
+		return false;
+	}
+	
 	public String filling2(double string)
 	{
 		String doub= Double.toString(string);
@@ -392,6 +389,7 @@ public class Algorithm {
 		
 		return format;
 	}
+	
 	
 	
 }
