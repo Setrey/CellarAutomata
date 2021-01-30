@@ -46,13 +46,13 @@ public class Algorithm {
 			
 			for (int i=0; i<settings.numberOfFrames+1; i++)
 			{	
-				//System.out.println("krok " + (i));
+				//System.out.println("krok " + (i+1));
 				testPlikLA.add("------------------");
 				testPlikCA.add("------------------");
 				testPlikMain.add("------------------");
-				testPlikLA.add("t="+(i));
-				testPlikCA.add("t="+(i));
-				testPlikMain.add("t="+(i));
+				testPlikLA.add("t="+(i+1));
+				testPlikCA.add("t="+(i+1));
+				testPlikMain.add("t="+(i+1));
 				
 				
 				run[x].resetStatistics();
@@ -112,7 +112,7 @@ public class Algorithm {
 				//run[x].updateHistoryLookingAtNeighbours();
 				
 				//System.out.println("---------- changeStrategy()");
-				if ((i+1)%settings.qChanges==0 && settings.isQselected)
+				if ((i)%settings.qChanges==0 && settings.isQselected)
 				{
 					run[x].changeStrategy();
 					//run[x].showChangesWithoutBorder();
@@ -144,12 +144,13 @@ public class Algorithm {
 					CASection(run, x, testPlikCA);
 
 				CAiLASection(run, x, testPlikMain);
+				if (i>0)
+					paint[x][i]=new Paint(run[x],settings.isKConst);
 				
-				paint[x][i]=new Paint(run[x],settings.isKConst);
 				statistics[x].addRow(run[x], i);
 				
 				
-				if ((i)%settings.qChanges==0 && settings.isQselected)
+				if ((i+1)%settings.qChanges==0 && settings.isQselected)
 				{
 					run[x].clearPayout();
 				}
@@ -235,15 +236,12 @@ public class Algorithm {
 			CASection(run, x, testPlikCA);
 			CAiLASection(run, x, testPlikMain);
 		}
-		//run[x].showHistoryWithoutBorder();
-		/*
+		
+		run[x].chooseBestStrategyForLACells(run[x].temporary);
 		run[x].contest();
-		run[x].updateStatistics(run[x].temporary);
-		run[x].countStatistics();
-		statistics[x].addRow(run[x], 0);
-	
+		
 		paint[x][0]=new Paint(run[x],settings.isKConst);
-		*/
+		
 		run[x].clearPayout();
 		
 	}

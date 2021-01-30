@@ -10,7 +10,7 @@ class UnitTests {
 
 	 @Test
 	 	public void test01() throws IOException {
-		String testName="test1_CA";
+		String testName="test1";
 		 
 		Settings ustawienia=new Settings();
 		ustawienia.numberOfColumns=5;
@@ -29,7 +29,7 @@ class UnitTests {
 				{'C','C','C','C','C'},
 				{'C','C','C','C','C'}};
 		
-		// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+		// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 		char [][] tablicaTaktyk= {
 				{'C','C','C','C','C'},
 				{'C','C','C','C','C'},
@@ -56,21 +56,21 @@ class UnitTests {
 		
 		System.out.println(testName+" "+ustawienia.numberOfFrames);
 		
-		assertEquals(1,algorithm.run[0].percentOfCStates);
-		assertEquals(1,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(1,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(1,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+		assertEquals(1,algorithm.run[0].percentCStates);
+		assertEquals(1,algorithm.run[0].avaragePayout);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(1,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(1,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0,algorithm.run[0].percentallDStrategy);
+		assertEquals(0,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		assertEquals(0,algorithm.run[0].percentOfQChanges);
+		assertEquals(0,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(0,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -95,21 +95,21 @@ class UnitTests {
 		algorithm.Calculate();
 		
 		System.out.println(testName+" "+ustawienia.numberOfFrames);
-		assertEquals(1,algorithm.run[0].percentOfCStates);
-		assertEquals(1,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(1,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(1,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+		assertEquals(1,algorithm.run[0].percentCStates);
+		assertEquals(1,algorithm.run[0].avaragePayout);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(1,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(1,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0,algorithm.run[0].percentallDStrategy);
+		assertEquals(0,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		assertEquals(0,algorithm.run[0].percentOfQChanges);
+		assertEquals(0,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(0,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -123,7 +123,7 @@ class UnitTests {
 	 
 	 @Test
 		public void test02() throws IOException {
-		 	String testName="test2_CA";
+		 	String testName="test2";
 		 	
 			Settings ustawienia=new Settings();
 			ustawienia.numberOfColumns=5;
@@ -142,7 +142,7 @@ class UnitTests {
 					{'D','D','D','D','D'},
 					{'D','D','D','D','D'}};
 			
-			// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+			// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 			char [][] tablicaTaktyk= {
 					{'D','D','D','D','D'},
 					{'D','D','D','D','D'},
@@ -168,21 +168,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(1,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(1,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -208,21 +208,21 @@ class UnitTests {
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
 			assertEquals(0,algorithm.run[0].temporary[1][2].payout);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(1,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(1,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -235,7 +235,7 @@ class UnitTests {
 	 	
 	 @Test
 		public void test03() throws IOException {
-		 String testName="test3_CA";
+		 String testName="test3";
 		 
 			Settings ustawienia=new Settings();
 			ustawienia.numberOfColumns=5;
@@ -254,7 +254,7 @@ class UnitTests {
 					{'D','C','D','C','D'},
 					{'D','D','D','D','D'}};
 			
-			// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+			// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 			char [][] tablicaTaktyk= {
 					{'C','D','D','D','D'},
 					{'D','C','D','D','D'},
@@ -268,41 +268,6 @@ class UnitTests {
 					{0,0,0,0,0},
 					{0,0,0,0,0},
 					{0,0,0,0,0}};
-			
-			for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-				for (int j=0; j<ustawienia.numberOfColumns; j++)
-				{
-					algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-				}
-			
-			algorithm.Calculate();
-			
-			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.31,algorithm.run[0].avarageIncome);
-			assertEquals(0.24,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.24,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.24,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.76,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
-			assertEquals(0,algorithm.run[0].avarageHParameter);
-			assertEquals(0,algorithm.run[0].avarageEpsParameter);
-			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			//assertEquals(0,algorithm.run[0].percentOfQChanges);
-			assertEquals(0,algorithm.run[0].percentOfkD[0]);
-			assertEquals(0,algorithm.run[0].percentOfkD[1]);
-			assertEquals(0,algorithm.run[0].percentOfkD[2]);
-			assertEquals(0,algorithm.run[0].percentOfkD[3]);
-			assertEquals(0,algorithm.run[0].percentOfkD[4]);
-			assertEquals(0,algorithm.run[0].percentOfkD[5]);
-			assertEquals(0,algorithm.run[0].percentOfkD[6]);
-			assertEquals(0,algorithm.run[0].percentOfkD[7]);
 			
 			ustawienia.numberOfFrames=0; 
 			
@@ -319,21 +284,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.31,algorithm.run[0].avarageIncome);
-			assertEquals(0.24,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.24,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.24,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.76,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.31,algorithm.run[0].avaragePayout);
+			assertEquals(0.24,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.24,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.24,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.76,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.84,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.84,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -358,21 +323,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.11,algorithm.run[0].avarageIncome);
-			assertEquals(0.08,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.08,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.08,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.92,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.11,algorithm.run[0].avaragePayout);
+			assertEquals(0.08,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.08,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.08,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.92,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.84,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.84,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -397,21 +362,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(1,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(1,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -424,7 +389,7 @@ class UnitTests {
 	 
 	@Test
 		public void test04() throws IOException {
-			String testName="test4_CA";
+			String testName="test4";
 			Settings ustawienia=new Settings();
 			ustawienia.numberOfColumns=5;
 			ustawienia.numberOfRows=5;
@@ -442,7 +407,7 @@ class UnitTests {
 					{'D','D','D','D','C'},
 					{'C','C','C','D','D'}};
 			
-			// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+			// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 			char [][] tablicaTaktyk= {
 					{'C','D','C','D','C'},
 					{'D','D','C','C','D'},
@@ -456,43 +421,6 @@ class UnitTests {
 					{0,0,0,0,0},
 					{0,0,0,0,0},
 					{0,0,0,0,0}};
-			
-			for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-				for (int j=0; j<ustawienia.numberOfColumns; j++)
-				{
-					algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-				}
-			
-			algorithm.Calculate();
-			
-			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			algorithm.run[0].showPayoffsWithoutBorder();
-			algorithm.run[0].showStrategiesWithoutBorder();
-			assertEquals(0.48,algorithm.run[0].percentOfCStates);
-			assertEquals(0.58,algorithm.run[0].avarageIncome);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.48,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.48,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.52,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
-			assertEquals(0,algorithm.run[0].avarageHParameter);
-			assertEquals(0,algorithm.run[0].avarageEpsParameter);
-			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			//assertEquals(0,algorithm.run[0].percentOfQChanges);
-			assertEquals(0,algorithm.run[0].percentOfkD[0]);
-			assertEquals(0,algorithm.run[0].percentOfkD[1]);
-			assertEquals(0,algorithm.run[0].percentOfkD[2]);
-			assertEquals(0,algorithm.run[0].percentOfkD[3]);
-			assertEquals(0,algorithm.run[0].percentOfkD[4]);
-			assertEquals(0,algorithm.run[0].percentOfkD[5]);
-			assertEquals(0,algorithm.run[0].percentOfkD[6]);
-			assertEquals(0,algorithm.run[0].percentOfkD[7]);
 			
 			ustawienia.numberOfFrames=0; 
 			
@@ -509,24 +437,24 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.48,algorithm.run[0].percentOfCStates);
-			assertEquals(0.58,algorithm.run[0].avarageIncome);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.48,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.48,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.52,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.48,algorithm.run[0].percentCStates);
+			assertEquals(0.58,algorithm.run[0].avaragePayout);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.48,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.48,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.52,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
 			algorithm.run[0].showPayoffsWithBorder();
 			algorithm.run[0].showStrategiesWithoutBorder();
-			System.out.println(">"+algorithm.run[0].percentOfQChanges);
-			assertEquals(0.76,algorithm.run[0].percentOfQChanges);
+			System.out.println(">"+algorithm.run[0].percentQChanges);
+			assertEquals(0.76,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -551,21 +479,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(1,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(1,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -578,7 +506,7 @@ class UnitTests {
 		
 		@Test
 		public void test05() throws IOException {
-		String testName="test5_CA";
+		String testName="test5";
 		Settings ustawienia=new Settings();
 		ustawienia.numberOfColumns=5;
 		ustawienia.numberOfRows=5;
@@ -596,7 +524,7 @@ class UnitTests {
 				{'C','C','D','C','C'},
 				{'C','C','C','C','C'}};
 		
-		// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+		// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 		char [][] tablicaTaktyk= {
 				{'C','C','C','C','C'},
 				{'C','C','D','C','C'},
@@ -611,43 +539,6 @@ class UnitTests {
 				{0,0,0,0,0},
 				{0,0,0,0,0}};
 		
-		for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-			for (int j=0; j<ustawienia.numberOfColumns; j++)
-			{
-				algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-				algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-				algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-			}
-		
-		algorithm.Calculate();
-		
-		System.out.println(testName+" "+ustawienia.numberOfFrames);
-		algorithm.run[0].showPayoffsWithoutBorder();
-		algorithm.run[0].showStrategiesWithoutBorder();
-		assertEquals(0.88,algorithm.run[0].percentOfCStates);
-		assertEquals(0.92,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0.88,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0.88,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.12,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0,algorithm.run[0].percentOfkDStrategy);
-		assertEquals(0,algorithm.run[0].avarageHParameter);
-		assertEquals(0,algorithm.run[0].avarageEpsParameter);
-		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		//assertEquals(0,algorithm.run[0].percentOfQChanges);
-		assertEquals(0,algorithm.run[0].percentOfkD[0]);
-		assertEquals(0,algorithm.run[0].percentOfkD[1]);
-		assertEquals(0,algorithm.run[0].percentOfkD[2]);
-		assertEquals(0,algorithm.run[0].percentOfkD[3]);
-		assertEquals(0,algorithm.run[0].percentOfkD[4]);
-		assertEquals(0,algorithm.run[0].percentOfkD[5]);
-		assertEquals(0,algorithm.run[0].percentOfkD[6]);
-		assertEquals(0,algorithm.run[0].percentOfkD[7]);
-	
 		ustawienia.numberOfFrames=0;
 		
 		algorithm= new Algorithm(ustawienia);
@@ -665,21 +556,21 @@ class UnitTests {
 		System.out.println(testName+" "+ustawienia.numberOfFrames);
 		algorithm.run[0].showPayoffsWithoutBorder();
 		algorithm.run[0].showStrategiesWithoutBorder();
-		assertEquals(0.88,algorithm.run[0].percentOfCStates);
-		assertEquals(0.92,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0.88,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0.88,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.12,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+		assertEquals(0.88,algorithm.run[0].percentCStates);
+		assertEquals(0.92,algorithm.run[0].avaragePayout);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(0.88,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(0.88,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0.12,algorithm.run[0].percentallDStrategy);
+		assertEquals(0,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		assertEquals(0.52,algorithm.run[0].percentOfQChanges);
+		assertEquals(0.52,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(0,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -706,22 +597,22 @@ class UnitTests {
 		System.out.println(testName+" "+ustawienia.numberOfFrames);
 		algorithm.run[0].showPayoffsWithoutBorder();
 		algorithm.run[0].showStrategiesWithoutBorder();
-		assertEquals(0.4,algorithm.run[0].percentOfCStates);
-		assertEquals(0.46,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0.4,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0.4,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.6,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+		assertEquals(0.4,algorithm.run[0].percentCStates);
+		assertEquals(0.46,algorithm.run[0].avaragePayout);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(0.4,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(0.4,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0.6,algorithm.run[0].percentallDStrategy);
+		assertEquals(0,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		System.out.println(algorithm.run[0].percentOfQChanges);
-		assertEquals(0.6,algorithm.run[0].percentOfQChanges);
+		System.out.println(algorithm.run[0].percentQChanges);
+		assertEquals(0.6,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(0,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -748,21 +639,21 @@ class UnitTests {
 		System.out.println(testName+" "+ustawienia.numberOfFrames);
 		algorithm.run[0].showPayoffsWithoutBorder();
 		algorithm.run[0].showStrategiesWithoutBorder();
-		assertEquals(0.8,algorithm.run[0].percentOfCStates);
-		assertEquals(0.86,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0.8,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0.8,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.2,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+		assertEquals(0.8,algorithm.run[0].percentCStates);
+		assertEquals(0.86,algorithm.run[0].avaragePayout);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(0.8,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(0.8,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0.2,algorithm.run[0].percentallDStrategy);
+		assertEquals(0,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		assertEquals(0.4,algorithm.run[0].percentOfQChanges);
+		assertEquals(0.4,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(0,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -789,21 +680,21 @@ class UnitTests {
 		System.out.println(testName+" "+ustawienia.numberOfFrames);
 		algorithm.run[0].showPayoffsWithoutBorder();
 		algorithm.run[0].showStrategiesWithoutBorder();
-		assertEquals(0.4,algorithm.run[0].percentOfCStates);
-		assertEquals(0.46,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0.4,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0.4,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.6,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+		assertEquals(0.4,algorithm.run[0].percentCStates);
+		assertEquals(0.46,algorithm.run[0].avaragePayout);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(0.4,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(0.4,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0.6,algorithm.run[0].percentallDStrategy);
+		assertEquals(0,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		assertEquals(0.6,algorithm.run[0].percentOfQChanges);
+		assertEquals(0.6,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(0,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -817,7 +708,7 @@ class UnitTests {
 		
 		@Test
 		public void test06() throws IOException {
-		String testName="test6_CA";
+		String testName="test6";
 		Settings ustawienia=new Settings();
 		ustawienia.numberOfColumns=5;
 		ustawienia.numberOfRows=5;
@@ -835,7 +726,7 @@ class UnitTests {
 				{'C','D','C','C','C'},
 				{'C','C','C','D','C'}};
 		
-		// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+		// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 		char [][] tablicaTaktyk= {
 				{'K','C','D','D','C'},
 				{'K','C','K','D','C'},
@@ -850,44 +741,6 @@ class UnitTests {
 				{0,0,3,0,0},
 				{0,0,3,0,0}};
 		
-		for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-			for (int j=0; j<ustawienia.numberOfColumns; j++)
-			{
-				algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-				algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-				algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-			}
-		
-		algorithm.Calculate();
-		
-		System.out.println(testName+" "+ustawienia.numberOfFrames);
-		algorithm.run[0].showStatesWithoutBorder();
-		algorithm.run[0].showPayoffsWithoutBorder();
-		algorithm.run[0].showStrategiesWithoutBorder();
-		assertEquals(0.72,algorithm.run[0].percentOfCStates);
-		assertEquals(0.8,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0.72,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0.52,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.2,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0.28,algorithm.run[0].percentOfkDStrategy);
-		assertEquals(0,algorithm.run[0].avarageHParameter);
-		assertEquals(0,algorithm.run[0].avarageEpsParameter);
-		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		//assertEquals(0,algorithm.run[0].percentOfQChanges);
-		assertEquals(0,algorithm.run[0].percentOfkD[0]);
-		assertEquals(0.29,algorithm.run[0].percentOfkD[1]);
-		assertEquals(0.14,algorithm.run[0].percentOfkD[2]);
-		assertEquals(0.57,algorithm.run[0].percentOfkD[3]);
-		assertEquals(0,algorithm.run[0].percentOfkD[4]);
-		assertEquals(0,algorithm.run[0].percentOfkD[5]);
-		assertEquals(0,algorithm.run[0].percentOfkD[6]);
-		assertEquals(0,algorithm.run[0].percentOfkD[7]);
-	
 		ustawienia.numberOfFrames=0;
 		
 		algorithm= new Algorithm(ustawienia);
@@ -906,21 +759,21 @@ class UnitTests {
 		algorithm.run[0].showStatesWithoutBorder();
 		algorithm.run[0].showPayoffsWithoutBorder();
 		algorithm.run[0].showStrategiesWithoutBorder();
-		assertEquals(0.72,algorithm.run[0].percentOfCStates);
-		assertEquals(0.8,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0.72,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0.52,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.2,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0.28,algorithm.run[0].percentOfkDStrategy);
+		assertEquals(0.72,algorithm.run[0].percentCStates);
+		assertEquals(0.8,algorithm.run[0].avaragePayout);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(0.72,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(0.52,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0.2,algorithm.run[0].percentallDStrategy);
+		assertEquals(0.28,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		assertEquals(0.8,algorithm.run[0].percentOfQChanges);
+		assertEquals(0.8,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(0.29,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0.14,algorithm.run[0].percentOfkD[2]);
@@ -948,22 +801,22 @@ class UnitTests {
 		algorithm.run[0].showStatesWithoutBorder();
 		algorithm.run[0].showPayoffsWithoutBorder();
 		algorithm.run[0].showStrategiesWithoutBorder();
-		System.out.println(algorithm.run[0].percentOfCStates);
-		assertEquals(0,algorithm.run[0].percentOfCStates);
-		assertEquals(0,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.56,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0.44,algorithm.run[0].percentOfkDStrategy);
+		System.out.println(algorithm.run[0].percentCStates);
+		assertEquals(0,algorithm.run[0].percentCStates);
+		assertEquals(0,algorithm.run[0].avaragePayout);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(0,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(0,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0.56,algorithm.run[0].percentallDStrategy);
+		assertEquals(0.44,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		assertEquals(0,algorithm.run[0].percentOfQChanges);
+		assertEquals(0,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(0.82,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -990,21 +843,21 @@ class UnitTests {
 		System.out.println(testName+" "+ustawienia.numberOfFrames);
 		algorithm.run[0].showPayoffsWithoutBorder();
 		algorithm.run[0].showStrategiesWithoutBorder();
-		assertEquals(0,algorithm.run[0].percentOfCStates);
-		assertEquals(0,algorithm.run[0].avarageIncome);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.56,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0.44,algorithm.run[0].percentOfkDStrategy);
+		assertEquals(0,algorithm.run[0].percentCStates);
+		assertEquals(0,algorithm.run[0].avaragePayout);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(0,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(0,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0.56,algorithm.run[0].percentallDStrategy);
+		assertEquals(0.44,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		assertEquals(0,algorithm.run[0].percentOfQChanges);
+		assertEquals(0,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(0.82,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -1018,7 +871,7 @@ class UnitTests {
 		
 		@Test
 		public void test07() throws IOException {
-		String testName="test7_CA";
+		String testName="test7";
 		Settings ustawienia=new Settings();
 		ustawienia.numberOfColumns=5;
 		ustawienia.numberOfRows=5;
@@ -1036,7 +889,7 @@ class UnitTests {
 				{'C','D','C','C','C'},
 				{'C','C','C','D','C'}};
 		
-		// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+		// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 		char [][] tablicaTaktyk= {
 				{'K','C','D','D','C'},
 				{'K','C','K','D','C'},
@@ -1051,45 +904,6 @@ class UnitTests {
 				{0,0,3,0,0},
 				{0,0,3,0,0}};
 		
-		for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-			for (int j=0; j<ustawienia.numberOfColumns; j++)
-			{
-				algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-				algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-				algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-			}
-		
-		algorithm.Calculate();
-		
-		System.out.println(testName+" "+ustawienia.numberOfFrames);
-		algorithm.run[0].showStatesWithoutBorder();
-		algorithm.run[0].showPayoffsWithoutBorder();
-		algorithm.run[0].showStrategiesWithoutBorder();
-		System.out.println(algorithm.run[0].avarageIncome);
-		assertEquals(0.86,algorithm.run[0].avarageIncome);
-		assertEquals(0.8,algorithm.run[0].percentOfCStates);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0.8,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0.52,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.2,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0.28,algorithm.run[0].percentOfkDStrategy);
-		assertEquals(0,algorithm.run[0].avarageHParameter);
-		assertEquals(0,algorithm.run[0].avarageEpsParameter);
-		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		//assertEquals(0,algorithm.run[0].percentOfQChanges);
-		assertEquals(0,algorithm.run[0].percentOfkD[0]);
-		assertEquals(0.29,algorithm.run[0].percentOfkD[1]);
-		assertEquals(0.14,algorithm.run[0].percentOfkD[2]);
-		assertEquals(0.57,algorithm.run[0].percentOfkD[3]);
-		assertEquals(0,algorithm.run[0].percentOfkD[4]);
-		assertEquals(0,algorithm.run[0].percentOfkD[5]);
-		assertEquals(0,algorithm.run[0].percentOfkD[6]);
-		assertEquals(0,algorithm.run[0].percentOfkD[7]);
-	
 		ustawienia.numberOfFrames=0;
 		
 		algorithm= new Algorithm(ustawienia);
@@ -1108,21 +922,21 @@ class UnitTests {
 		algorithm.run[0].showStatesWithoutBorder();
 		algorithm.run[0].showPayoffsWithoutBorder();
 		algorithm.run[0].showStrategiesWithoutBorder();
-		assertEquals(0.86,algorithm.run[0].avarageIncome);
-		assertEquals(0.8,algorithm.run[0].percentOfCStates);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0.8,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0.52,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.2,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0.28,algorithm.run[0].percentOfkDStrategy);
+		assertEquals(0.86,algorithm.run[0].avaragePayout);
+		assertEquals(0.8,algorithm.run[0].percentCStates);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(0.8,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(0.52,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0.2,algorithm.run[0].percentallDStrategy);
+		assertEquals(0.28,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		assertEquals(0.8,algorithm.run[0].percentOfQChanges);
+		assertEquals(0.8,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(0.29,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0.14,algorithm.run[0].percentOfkD[2]);
@@ -1150,22 +964,22 @@ class UnitTests {
 		algorithm.run[0].showStatesWithoutBorder();
 		algorithm.run[0].showPayoffsWithoutBorder();
 		algorithm.run[0].showStrategiesWithoutBorder();
-		System.out.println(algorithm.run[0].percentOfCStates);
-		assertEquals(0,algorithm.run[0].avarageIncome);
-		assertEquals(0,algorithm.run[0].percentOfCStates);
-		assertEquals(1,algorithm.run[0].percentOfCACell);
-		assertEquals(0,algorithm.run[0].percentOfLACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-		assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-		assertEquals(0,algorithm.run[0].percentOfSharingCell);
-		assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-		assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-		assertEquals(0.84,algorithm.run[0].percentOfallDStrategy);
-		assertEquals(0.16,algorithm.run[0].percentOfkDStrategy);
+		System.out.println(algorithm.run[0].percentCStates);
+		assertEquals(0,algorithm.run[0].avaragePayout);
+		assertEquals(0,algorithm.run[0].percentCStates);
+		assertEquals(1,algorithm.run[0].percentCACell);
+		assertEquals(0,algorithm.run[0].percentLACell);
+		assertEquals(0,algorithm.run[0].percentCStatesInCA);
+		assertEquals(0,algorithm.run[0].percentCStatesInLA);
+		assertEquals(0,algorithm.run[0].percentSharingCells);
+		assertEquals(0,algorithm.run[0].percentAllCStrategy);
+		assertEquals(0,algorithm.run[0].percentPcStrategy);
+		assertEquals(0.84,algorithm.run[0].percentallDStrategy);
+		assertEquals(0.16,algorithm.run[0].percentkDStrategy);
 		assertEquals(0,algorithm.run[0].avarageHParameter);
 		assertEquals(0,algorithm.run[0].avarageEpsParameter);
 		assertEquals(0,algorithm.run[0].avaragePcParameter);
-		assertEquals(0,algorithm.run[0].percentOfQChanges);
+		assertEquals(0,algorithm.run[0].percentQChanges);
 		assertEquals(0,algorithm.run[0].percentOfkD[0]);
 		assertEquals(1,algorithm.run[0].percentOfkD[1]);
 		assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -1179,7 +993,7 @@ class UnitTests {
 	}
 		@Test
 		public void test08() throws IOException {
-			String testName="test8_CA";
+			String testName="test8";
 			Settings ustawienia=new Settings();
 			ustawienia.numberOfColumns=5;
 			ustawienia.numberOfRows=5;
@@ -1197,7 +1011,7 @@ class UnitTests {
 					{'C','D','E','D','C'},
 					{'D','D','E','D','C'}};
 			
-			// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+			// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 			char [][] tablicaTaktyk= {
 					{'C','D','D','C','C'},
 					{'C','E','K','E','C'},
@@ -1211,42 +1025,6 @@ class UnitTests {
 					{0,0,0,0,0},
 					{0,0,0,1,0},
 					{0,4,0,2,0}};
-			
-			for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-				for (int j=0; j<ustawienia.numberOfColumns; j++)
-				{
-					algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-				}
-			
-			algorithm.Calculate();
-			
-			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			
-			assertEquals(0.71,algorithm.run[0].avarageIncome);
-			assertEquals(0.48,algorithm.run[0].percentOfCStates);
-			assertEquals(0.8,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.6,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.6,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.2,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.2,algorithm.run[0].percentOfkDStrategy);
-			assertEquals(0,algorithm.run[0].avarageHParameter);
-			assertEquals(0,algorithm.run[0].avarageEpsParameter);
-			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			//assertEquals(0,algorithm.run[0].percentOfQChanges);
-			assertEquals(0,algorithm.run[0].percentOfkD[0]);
-			assertEquals(0.25,algorithm.run[0].percentOfkD[1]);
-			assertEquals(0.25,algorithm.run[0].percentOfkD[2]);
-			assertEquals(0.25,algorithm.run[0].percentOfkD[3]);
-			assertEquals(0.25,algorithm.run[0].percentOfkD[4]);
-			assertEquals(0,algorithm.run[0].percentOfkD[5]);
-			assertEquals(0,algorithm.run[0].percentOfkD[6]);
-			assertEquals(0,algorithm.run[0].percentOfkD[7]);
 		
 			ustawienia.numberOfFrames=0;
 			
@@ -1264,21 +1042,21 @@ class UnitTests {
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
 			
-			assertEquals(0.71,algorithm.run[0].avarageIncome);
-			assertEquals(0.48,algorithm.run[0].percentOfCStates);
-			assertEquals(0.8,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.6,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.6,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.2,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.2,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.71,algorithm.run[0].avaragePayout);
+			assertEquals(0.48,algorithm.run[0].percentCStates);
+			assertEquals(0.8,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.6,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.6,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.2,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.2,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.64,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.64,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0.25,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0.25,algorithm.run[0].percentOfkD[2]);
@@ -1306,21 +1084,21 @@ class UnitTests {
 			algorithm.run[0].showStatesWithoutBorder();
 			algorithm.run[0].showKDValuesWithoutBorder();
 			algorithm.run[0].showStrategiesWithoutBorder();
-			assertEquals(0.47,algorithm.run[0].avarageIncome);
-			assertEquals(0.32,algorithm.run[0].percentOfCStates);
-			assertEquals(0.8,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.4,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.35,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.25,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.4,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.47,algorithm.run[0].avaragePayout);
+			assertEquals(0.32,algorithm.run[0].percentCStates);
+			assertEquals(0.8,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.4,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.35,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.25,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.4,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.72,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.72,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0.75,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0.13,algorithm.run[0].percentOfkD[2]);
@@ -1344,21 +1122,21 @@ class UnitTests {
 			
 			algorithm.Calculate();
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.76,algorithm.run[0].avarageIncome);
-			assertEquals(0.56,algorithm.run[0].percentOfCStates);
-			assertEquals(0.8,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.7,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.65,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.2,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.15,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.76,algorithm.run[0].avaragePayout);
+			assertEquals(0.56,algorithm.run[0].percentCStates);
+			assertEquals(0.8,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.7,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.65,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.2,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.15,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.64,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.64,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(1,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -1383,21 +1161,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.26,algorithm.run[0].avarageIncome);
-			assertEquals(0.16,algorithm.run[0].percentOfCStates);
-			assertEquals(0.8,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.2,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.2,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.3,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.5,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.26,algorithm.run[0].avaragePayout);
+			assertEquals(0.16,algorithm.run[0].percentCStates);
+			assertEquals(0.8,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.2,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.2,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.3,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.5,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.72,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.72,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(1,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -1422,22 +1200,22 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			System.out.println(algorithm.run[0].avarageIncome);
-			assertEquals(0.25,algorithm.run[0].avarageIncome);
-			assertEquals(0.16,algorithm.run[0].percentOfCStates);
-			assertEquals(0.8,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.2,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.2,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.6,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.2,algorithm.run[0].percentOfkDStrategy);
+			System.out.println(algorithm.run[0].avaragePayout);
+			assertEquals(0.25,algorithm.run[0].avaragePayout);
+			assertEquals(0.16,algorithm.run[0].percentCStates);
+			assertEquals(0.8,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.2,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.2,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.6,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.2,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.6,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.6,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(1,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -1462,22 +1240,22 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			System.out.println(algorithm.run[0].avarageIncome);
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(0.8,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.6,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.4,algorithm.run[0].percentOfkDStrategy);
+			System.out.println(algorithm.run[0].avaragePayout);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(0.8,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.6,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.4,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(1,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -1490,7 +1268,7 @@ class UnitTests {
 		
 		@Test
 		public void test09() throws IOException {
-			String testName="test9_CA";
+			String testName="test9";
 			Settings ustawienia=new Settings();
 			ustawienia.numberOfColumns=5;
 			ustawienia.numberOfRows=5;
@@ -1508,7 +1286,7 @@ class UnitTests {
 					{'D','C','E','E','C'},
 					{'C','C','D','D','D'}};
 			
-			// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+			// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 			char [][] tablicaTaktyk= {
 					{'E','C','E','D','E'},
 					{'C','E','K','E','K'},
@@ -1522,43 +1300,6 @@ class UnitTests {
 					{2,0,3,4,2},
 					{2,0,0,0,0},
 					{0,0,0,5,0}};
-			
-			for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-				for (int j=0; j<ustawienia.numberOfColumns; j++)
-				{
-					algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-				}
-			
-			algorithm.Calculate();
-			
-			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			
-			assertEquals(0.64,algorithm.run[0].avarageIncome);
-			assertEquals(0.4,algorithm.run[0].percentOfCStates);
-			assertEquals(0.72,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.56,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.33,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.22,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.44,algorithm.run[0].percentOfkDStrategy);
-			assertEquals(0,algorithm.run[0].avarageHParameter);
-			assertEquals(0,algorithm.run[0].avarageEpsParameter);
-			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			//assertEquals(0,algorithm.run[0].percentOfQChanges);
-			assertEquals(0,algorithm.run[0].percentOfkD[0]);
-			assertEquals(0,algorithm.run[0].percentOfkD[1]);
-			assertEquals(0.5,algorithm.run[0].percentOfkD[2]);
-			assertEquals(0.13,algorithm.run[0].percentOfkD[3]);
-			assertEquals(0.25,algorithm.run[0].percentOfkD[4]);
-			assertEquals(0.13,algorithm.run[0].percentOfkD[5]);
-			assertEquals(0,algorithm.run[0].percentOfkD[6]);
-			assertEquals(0,algorithm.run[0].percentOfkD[7]);
-			
 			
 			ustawienia.numberOfFrames=0;
 			
@@ -1576,21 +1317,21 @@ class UnitTests {
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
 			
-			assertEquals(0.64,algorithm.run[0].avarageIncome);
-			assertEquals(0.4,algorithm.run[0].percentOfCStates);
-			assertEquals(0.72,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.56,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.33,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.22,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.44,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.64,algorithm.run[0].avaragePayout);
+			assertEquals(0.4,algorithm.run[0].percentCStates);
+			assertEquals(0.72,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.56,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.33,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.22,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.44,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.6,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.6,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0.5,algorithm.run[0].percentOfkD[2]);
@@ -1616,21 +1357,21 @@ class UnitTests {
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
 			
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(0.72,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.61,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.39,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(0.72,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.61,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.39,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(1,algorithm.run[0].percentOfkD[2]);
@@ -1646,7 +1387,7 @@ class UnitTests {
 		
 		@Test
 		public void test10() throws IOException {
-			String testName="test10_CA";
+			String testName="test10";
 			Settings ustawienia=new Settings();
 			ustawienia.numberOfColumns=5;
 			ustawienia.numberOfRows=5;
@@ -1686,46 +1427,7 @@ class UnitTests {
 					{0,0,1,1,0},
 					{0,0,1,0,1},
 					{0,1,0,1,1},
-					{0,0,1,0,0}};
-			
-			
-			for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-				for (int j=0; j<ustawienia.numberOfColumns; j++)
-				{
-					algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-					algorithm.run[0].temporary[i+1][j+1].sharingPayout=((dzielenieDochodu[i][j]==1)?(true):(false));
-				}
-			
-			algorithm.Calculate();
-			
-			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			
-			assertEquals(0.8,algorithm.run[0].avarageIncome);
-			assertEquals(0.72,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.72,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0.48,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.28,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.12,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.6,algorithm.run[0].percentOfkDStrategy);
-			assertEquals(0,algorithm.run[0].avarageHParameter);
-			assertEquals(0,algorithm.run[0].avarageEpsParameter);
-			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			//assertEquals(0,algorithm.run[0].percentOfQChanges);
-			assertEquals(0.07,algorithm.run[0].percentOfkD[0]);
-			assertEquals(0,algorithm.run[0].percentOfkD[1]);
-			assertEquals(0.53,algorithm.run[0].percentOfkD[2]);
-			assertEquals(0.4,algorithm.run[0].percentOfkD[3]);
-			assertEquals(0,algorithm.run[0].percentOfkD[4]);
-			assertEquals(0,algorithm.run[0].percentOfkD[5]);
-			assertEquals(0,algorithm.run[0].percentOfkD[6]);
-			assertEquals(0,algorithm.run[0].percentOfkD[7]);
-			
+					{0,0,1,0,0}};	
 			
 			ustawienia.numberOfFrames=0;
 			
@@ -1744,22 +1446,22 @@ class UnitTests {
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
 			
-			assertEquals(0.8,algorithm.run[0].avarageIncome);
-			assertEquals(0.72,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.72,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			System.out.println(algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.48,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.28,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.12,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.6,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.8,algorithm.run[0].avaragePayout);
+			assertEquals(0.72,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.72,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			System.out.println(algorithm.run[0].percentSharingCells);
+			assertEquals(0.48,algorithm.run[0].percentSharingCells);
+			assertEquals(0.28,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.12,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.6,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.8,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.8,algorithm.run[0].percentQChanges);
 			assertEquals(0.07,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0.53,algorithm.run[0].percentOfkD[2]);
@@ -1785,21 +1487,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.16,algorithm.run[0].avarageIncome);
-			assertEquals(0.12,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.12,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.12,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.56,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.32,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.16,algorithm.run[0].avaragePayout);
+			assertEquals(0.12,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.12,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.12,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.56,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.32,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.8,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.8,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -1826,21 +1528,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.68,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.32,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.68,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.32,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -1854,7 +1556,7 @@ class UnitTests {
 		
 		@Test
 		public void test11() throws IOException {
-			String testName="test11_CA";
+			String testName="test11";
 			Settings ustawienia=new Settings();
 			ustawienia.numberOfColumns=5;
 			ustawienia.numberOfRows=5;
@@ -1896,44 +1598,6 @@ class UnitTests {
 					{0,1,1,1,0},
 					{0,1,1,1,1}};
 			
-			
-			for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-				for (int j=0; j<ustawienia.numberOfColumns; j++)
-				{
-					algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-					algorithm.run[0].temporary[i+1][j+1].sharingPayout=((dzielenieDochodu[i][j]==1)?(true):(false));
-				}
-			
-			algorithm.Calculate();
-			
-			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			
-			assertEquals(0.7,algorithm.run[0].avarageIncome);
-			assertEquals(0.6,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.6,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0.52,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.2,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.32,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.48,algorithm.run[0].percentOfkDStrategy);
-			assertEquals(0,algorithm.run[0].avarageHParameter);
-			assertEquals(0,algorithm.run[0].avarageEpsParameter);
-			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			//assertEquals(0,algorithm.run[0].percentOfQChanges);
-			assertEquals(0,algorithm.run[0].percentOfkD[0]);
-			assertEquals(0,algorithm.run[0].percentOfkD[1]);
-			assertEquals(0.33,algorithm.run[0].percentOfkD[2]);
-			assertEquals(0.5,algorithm.run[0].percentOfkD[3]);
-			assertEquals(0.17,algorithm.run[0].percentOfkD[4]);
-			assertEquals(0,algorithm.run[0].percentOfkD[5]);
-			assertEquals(0,algorithm.run[0].percentOfkD[6]);
-			assertEquals(0,algorithm.run[0].percentOfkD[7]);
-			
 			ustawienia.numberOfFrames=0; 
 			
 			algorithm= new Algorithm(ustawienia);
@@ -1951,22 +1615,22 @@ class UnitTests {
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
 			
-			assertEquals(0.7,algorithm.run[0].avarageIncome);
-			assertEquals(0.6,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.6,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0.52,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.2,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.32,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.48,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.7,algorithm.run[0].avaragePayout);
+			assertEquals(0.6,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.6,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0.52,algorithm.run[0].percentSharingCells);
+			assertEquals(0.2,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.32,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.48,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			System.out.println(algorithm.run[0].percentOfQChanges);
-			assertEquals(0.8,algorithm.run[0].percentOfQChanges);
+			System.out.println(algorithm.run[0].percentQChanges);
+			assertEquals(0.8,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0.33,algorithm.run[0].percentOfkD[2]);
@@ -1992,22 +1656,22 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			System.out.println(algorithm.run[0].avarageIncome);
-			assertEquals(0.29,algorithm.run[0].avarageIncome);
-			assertEquals(0.24,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.24,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0.32,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.24,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.72,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0.04,algorithm.run[0].percentOfkDStrategy);
+			System.out.println(algorithm.run[0].avaragePayout);
+			assertEquals(0.29,algorithm.run[0].avaragePayout);
+			assertEquals(0.24,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.24,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0.32,algorithm.run[0].percentSharingCells);
+			assertEquals(0.24,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.72,algorithm.run[0].percentallDStrategy);
+			assertEquals(0.04,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.92,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.92,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2033,22 +1697,22 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			System.out.println(algorithm.run[0].avarageIncome);
-			assertEquals(0.86,algorithm.run[0].avarageIncome);
-			assertEquals(0.8,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.8,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0.8,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.8,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.2,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			System.out.println(algorithm.run[0].avaragePayout);
+			assertEquals(0.86,algorithm.run[0].avaragePayout);
+			assertEquals(0.8,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.8,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0.8,algorithm.run[0].percentSharingCells);
+			assertEquals(0.8,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.2,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.4,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.4,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2074,22 +1738,22 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			System.out.println(algorithm.run[0].avarageIncome);
-			assertEquals(0.46,algorithm.run[0].avarageIncome);
-			assertEquals(0.4,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.4,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0.4,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.4,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.6,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			System.out.println(algorithm.run[0].avaragePayout);
+			assertEquals(0.46,algorithm.run[0].avaragePayout);
+			assertEquals(0.4,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.4,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0.4,algorithm.run[0].percentSharingCells);
+			assertEquals(0.4,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.6,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.6,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.6,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2115,22 +1779,22 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			System.out.println(algorithm.run[0].avarageIncome);
-			assertEquals(0.86,algorithm.run[0].avarageIncome);
-			assertEquals(0.8,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0.8,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0.8,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.8,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.2,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			System.out.println(algorithm.run[0].avaragePayout);
+			assertEquals(0.86,algorithm.run[0].avaragePayout);
+			assertEquals(0.8,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0.8,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0.8,algorithm.run[0].percentSharingCells);
+			assertEquals(0.8,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.2,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.4,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.4,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2142,7 +1806,7 @@ class UnitTests {
 		}
 		@Test
 		public void test12() throws IOException {
-			String testName="test1_LA";
+			String testName="test12";
 			Settings ustawienia=new Settings();
 			ustawienia.numberOfColumns=5; 	// liczba kolumn
 			ustawienia.numberOfRows=5;		// liczba wierszy
@@ -2203,45 +1867,7 @@ class UnitTests {
 						{'D','D','D','D','D'}}
 					
 			};
-			/*
-			for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-				for (int j=0; j<ustawienia.numberOfColumns; j++)
-				{
-					algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-					algorithm.run[0].temporary[i+1][j+1].sharingPayout=((dzielenieDochodu[i][j]==1)?(true):(false));
-					
-					algorithm.run[0].historyStates=stanyPamieci;
-				}
 			
-			algorithm.Calculate();
-			
-			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.25,algorithm.run[0].avarageIncome);
-			assertEquals(0.2,algorithm.run[0].percentOfCStates);
-			assertEquals(0.52,algorithm.run[0].percentOfCACell);
-			assertEquals(0.48,algorithm.run[0].percentOfLACell);
-			assertEquals(0.38,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.38,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.62,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
-			assertEquals(2,algorithm.run[0].avarageHParameter);
-			assertEquals(0,algorithm.run[0].avarageEpsParameter);
-			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
-			assertEquals(0,algorithm.run[0].percentOfkD[0]);
-			assertEquals(0,algorithm.run[0].percentOfkD[1]);
-			assertEquals(0,algorithm.run[0].percentOfkD[2]);
-			assertEquals(0,algorithm.run[0].percentOfkD[3]);
-			assertEquals(0,algorithm.run[0].percentOfkD[4]);
-			assertEquals(0,algorithm.run[0].percentOfkD[5]);
-			assertEquals(0,algorithm.run[0].percentOfkD[6]);
-			assertEquals(0,algorithm.run[0].percentOfkD[7]);
-			*/
 			ustawienia.numberOfFrames=0;
 			
 			algorithm= new Algorithm(ustawienia);
@@ -2260,21 +1886,22 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.77,algorithm.run[0].avarageIncome);
-			assertEquals(0.68,algorithm.run[0].percentOfCStates);
-			assertEquals(0.52,algorithm.run[0].percentOfCACell);
-			assertEquals(0.48,algorithm.run[0].percentOfLACell);
-			assertEquals(0.38,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(1,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.38,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.62,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			System.out.println(algorithm.run[0].avaragePayout);
+			assertEquals(0.77,algorithm.run[0].avaragePayout);
+			assertEquals(0.68,algorithm.run[0].percentCStates);
+			assertEquals(0.52,algorithm.run[0].percentCACell);
+			assertEquals(0.48,algorithm.run[0].percentLACell);
+			assertEquals(0.38,algorithm.run[0].percentCStatesInCA);
+			assertEquals(1,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.38,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.62,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(2,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.8,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.8,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2302,21 +1929,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(1,algorithm.run[0].percentOfCACell);
-			assertEquals(0,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(1,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(1,algorithm.run[0].percentCACell);
+			assertEquals(0,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(1,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(0,algorithm.run[0].avarageHParameter);
 			assertEquals(0,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2329,7 +1956,7 @@ class UnitTests {
 		}
 		@Test
 		public void test13() throws IOException {
-			String testName="test2_CAnLA";
+			String testName="test13";
 			Settings ustawienia=new Settings();
 			ustawienia.numberOfColumns=5; 	// liczba kolumn
 			ustawienia.numberOfRows=5;		// liczba wierszy
@@ -2393,47 +2020,6 @@ class UnitTests {
 					
 			};
 			
-			for (int i=0 ; i < ustawienia.numberOfRows ; i++)
-				for (int j=0; j<ustawienia.numberOfColumns; j++)
-				{
-					algorithm.run[0].temporary[i+1][j+1].state=tablicaStanów[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.buffor=tablicaTaktyk[i][j];
-					algorithm.run[0].temporary[i+1][j+1].strategy.kMax=kTolerancji[i][j];
-					algorithm.run[0].temporary[i+1][j+1].sharingPayout=((dzielenieDochodu[i][j]==1)?(true):(false));
-					
-					algorithm.run[0].historyStates=stanyPamieci;
-				}
-			
-			algorithm.Calculate();
-			
-			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.25,algorithm.run[0].avarageIncome);
-			assertEquals(0.2,algorithm.run[0].percentOfCStates);
-			assertEquals(0.52,algorithm.run[0].percentOfCACell);
-			assertEquals(0.48,algorithm.run[0].percentOfLACell);
-			assertEquals(0.38,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.38,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.62,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
-			assertEquals(2,algorithm.run[0].avarageHParameter);
-			assertEquals(1,algorithm.run[0].avarageEpsParameter);
-			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			//assertEquals(0,algorithm.run[0].percentOfQChanges);
-			assertEquals(0,algorithm.run[0].percentOfkD[0]);
-			assertEquals(0,algorithm.run[0].percentOfkD[1]);
-			assertEquals(0,algorithm.run[0].percentOfkD[2]);
-			assertEquals(0,algorithm.run[0].percentOfkD[3]);
-			assertEquals(0,algorithm.run[0].percentOfkD[4]);
-			assertEquals(0,algorithm.run[0].percentOfkD[5]);
-			assertEquals(0,algorithm.run[0].percentOfkD[6]);
-			assertEquals(0,algorithm.run[0].percentOfkD[7]);
-			
-			ustawienia.numberOfFrames=0;
-			
-			algorithm= new Algorithm(ustawienia);
 			
 			for (int i=0 ; i < ustawienia.numberOfRows ; i++)
 				for (int j=0; j<ustawienia.numberOfColumns; j++)
@@ -2449,22 +2035,22 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			System.out.println(algorithm.run[0].avarageIncome);
-			assertEquals(0.25,algorithm.run[0].avarageIncome);
-			assertEquals(0.2,algorithm.run[0].percentOfCStates);
-			assertEquals(0.52,algorithm.run[0].percentOfCACell);
-			assertEquals(0.48,algorithm.run[0].percentOfLACell);
-			assertEquals(0.38,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.38,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.62,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			System.out.println(algorithm.run[0].avaragePayout);
+			assertEquals(0.25,algorithm.run[0].avaragePayout);
+			assertEquals(0.2,algorithm.run[0].percentCStates);
+			assertEquals(0.52,algorithm.run[0].percentCACell);
+			assertEquals(0.48,algorithm.run[0].percentLACell);
+			assertEquals(0.38,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.38,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.62,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(2,algorithm.run[0].avarageHParameter);
 			assertEquals(1,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.92,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.92,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2492,21 +2078,22 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.63,algorithm.run[0].avarageIncome);
-			assertEquals(0.56,algorithm.run[0].percentOfCStates);
-			assertEquals(0.68,algorithm.run[0].percentOfCACell);
-			assertEquals(0.32,algorithm.run[0].percentOfLACell);
-			assertEquals(0.35,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(1,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.35,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.65,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			System.out.println(algorithm.run[0].avaragePayout);
+			assertEquals(0.63,algorithm.run[0].avaragePayout);
+			assertEquals(0.56,algorithm.run[0].percentCStates);
+			assertEquals(0.68,algorithm.run[0].percentCACell);
+			assertEquals(0.32,algorithm.run[0].percentLACell);
+			assertEquals(0.35,algorithm.run[0].percentCStatesInCA);
+			assertEquals(1,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.35,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.65,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(2,algorithm.run[0].avarageHParameter);
 			assertEquals(1,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.8,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.8,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2534,21 +2121,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.26,algorithm.run[0].avarageIncome);
-			assertEquals(0.2,algorithm.run[0].percentOfCStates);
-			assertEquals(0.84,algorithm.run[0].percentOfCACell);
-			assertEquals(0.16,algorithm.run[0].percentOfLACell);
-			assertEquals(0.24,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0.24,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0.76,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.26,algorithm.run[0].avaragePayout);
+			assertEquals(0.2,algorithm.run[0].percentCStates);
+			assertEquals(0.84,algorithm.run[0].percentCACell);
+			assertEquals(0.16,algorithm.run[0].percentLACell);
+			assertEquals(0.24,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0.24,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0.76,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(2,algorithm.run[0].avarageHParameter);
 			assertEquals(1,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.88,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.88,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2576,21 +2163,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(0.64,algorithm.run[0].percentOfCACell);
-			assertEquals(0.36,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(1,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(0.64,algorithm.run[0].percentCACell);
+			assertEquals(0.36,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(1,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(2,algorithm.run[0].avarageHParameter);
 			assertEquals(1,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2618,21 +2205,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0.42,algorithm.run[0].avarageIncome);
-			assertEquals(0.36,algorithm.run[0].percentOfCStates);
-			assertEquals(0.64,algorithm.run[0].percentOfCACell);
-			assertEquals(0.36,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(1,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(1,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0.42,algorithm.run[0].avaragePayout);
+			assertEquals(0.36,algorithm.run[0].percentCStates);
+			assertEquals(0.64,algorithm.run[0].percentCACell);
+			assertEquals(0.36,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(1,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(1,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(2,algorithm.run[0].avarageHParameter);
 			assertEquals(1,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0.96,algorithm.run[0].percentOfQChanges);
+			assertEquals(0.96,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2660,21 +2247,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(0,algorithm.run[0].percentOfCACell);
-			assertEquals(1,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(0,algorithm.run[0].percentCACell);
+			assertEquals(1,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(2,algorithm.run[0].avarageHParameter);
 			assertEquals(1,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2703,21 +2290,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(0,algorithm.run[0].avarageIncome);
-			assertEquals(0,algorithm.run[0].percentOfCStates);
-			assertEquals(0,algorithm.run[0].percentOfCACell);
-			assertEquals(1,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(0,algorithm.run[0].avaragePayout);
+			assertEquals(0,algorithm.run[0].percentCStates);
+			assertEquals(0,algorithm.run[0].percentCACell);
+			assertEquals(1,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(0,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(2,algorithm.run[0].avarageHParameter);
 			assertEquals(1,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2745,21 +2332,21 @@ class UnitTests {
 			algorithm.Calculate();
 			
 			System.out.println(testName+" "+ustawienia.numberOfFrames);
-			assertEquals(1,algorithm.run[0].avarageIncome);
-			assertEquals(1,algorithm.run[0].percentOfCStates);
-			assertEquals(0,algorithm.run[0].percentOfCACell);
-			assertEquals(1,algorithm.run[0].percentOfLACell);
-			assertEquals(0,algorithm.run[0].percentOfCStatesInCACell);
-			assertEquals(1,algorithm.run[0].percentOfCStatesInLACell);
-			assertEquals(0,algorithm.run[0].percentOfSharingCell);
-			assertEquals(0,algorithm.run[0].percentOfAllCStrategy);
-			assertEquals(0,algorithm.run[0].percentOfPcStrategy);
-			assertEquals(0,algorithm.run[0].percentOfallDStrategy);
-			assertEquals(0,algorithm.run[0].percentOfkDStrategy);
+			assertEquals(1,algorithm.run[0].avaragePayout);
+			assertEquals(1,algorithm.run[0].percentCStates);
+			assertEquals(0,algorithm.run[0].percentCACell);
+			assertEquals(1,algorithm.run[0].percentLACell);
+			assertEquals(0,algorithm.run[0].percentCStatesInCA);
+			assertEquals(1,algorithm.run[0].percentCStatesInLA);
+			assertEquals(0,algorithm.run[0].percentSharingCells);
+			assertEquals(0,algorithm.run[0].percentAllCStrategy);
+			assertEquals(0,algorithm.run[0].percentPcStrategy);
+			assertEquals(0,algorithm.run[0].percentallDStrategy);
+			assertEquals(0,algorithm.run[0].percentkDStrategy);
 			assertEquals(2,algorithm.run[0].avarageHParameter);
 			assertEquals(1,algorithm.run[0].avarageEpsParameter);
 			assertEquals(0,algorithm.run[0].avaragePcParameter);
-			assertEquals(0,algorithm.run[0].percentOfQChanges);
+			assertEquals(0,algorithm.run[0].percentQChanges);
 			assertEquals(0,algorithm.run[0].percentOfkD[0]);
 			assertEquals(0,algorithm.run[0].percentOfkD[1]);
 			assertEquals(0,algorithm.run[0].percentOfkD[2]);
@@ -2790,7 +2377,7 @@ class UnitTests {
 					{'C','C','C','C','C'},
 					{'C','C','C','C','C'}};
 			
-			// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+			// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 			char [][] tablicaTaktyk0= {
 					{'C','C','C','C','C'},
 					{'C','C','C','C','C'},
@@ -2812,7 +2399,7 @@ class UnitTests {
 					{'D','D','D','D','D'},
 					{'D','D','D','D','D'}};
 			
-			// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+			// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 			char [][] tablicaTaktyk1= {
 					{'D','D','D','D','D'},
 					{'D','D','D','D','D'},
@@ -2834,7 +2421,7 @@ class UnitTests {
 					{'D','C','D','C','D'},
 					{'D','D','D','D','D'}};
 			
-			// E-Empty C- All-C, D- All-D, K- k tolerancji P- Probability of C
+			// E-Empty, L- Komórka LA, C- All-C, D- All-D, K- k tolerancji P- strategia Pc 
 			char [][] tablicaTaktyk2= {
 					{'C','D','D','D','D'},
 					{'D','C','D','D','D'},

@@ -67,42 +67,42 @@ public class Statistics {
 	{
 		line[this.index+index]=index+" ";
 		
-		line[this.index+index]+=filling2(run.percentOfCStates)+" ";
-		this.procentStanC [index]=run.percentOfCStates;
+		line[this.index+index]+=filling2(run.percentCStates)+" ";
+		this.procentStanC [index]=run.percentCStates;
 		
-		line[this.index+index]+=filling2(((run.avarageIncome>1)?(1):(run.avarageIncome)))+" ";
-		this.dochod [index]=((run.avarageIncome>1)?(1):(run.avarageIncome));
+		line[this.index+index]+=filling2(((run.avaragePayout>1)?(1):(run.avaragePayout)))+" ";
+		this.dochod [index]=((run.avaragePayout>1)?(1):(run.avaragePayout));
 		
-		line[this.index+index]+=filling2(run.percentOfCACell)+" ";
-		this.procentCA [index]=run.percentOfCACell;
+		line[this.index+index]+=filling2(run.percentCACell)+" ";
+		this.procentCA [index]=run.percentCACell;
 		
-		line[this.index+index]+=filling2(run.percentOfLACell)+" ";
-		this.procentLA [index]=run.percentOfLACell;
+		line[this.index+index]+=filling2(run.percentLACell)+" ";
+		this.procentLA [index]=run.percentLACell;
 		
-		line[this.index+index]+=filling2(run.percentOfCStatesInCACell)+" ";
-		line[this.index+index]+=filling2(run.percentOfCStatesInLACell)+" ";
-		line[this.index+index]+=filling2(run.percentOfSharingCell)+" ";
-		this.procentdzieleniaDochodow [index]=run.percentOfSharingCell;
+		line[this.index+index]+=filling2(run.percentCStatesInCA)+" ";
+		line[this.index+index]+=filling2(run.percentCStatesInLA)+" ";
+		line[this.index+index]+=filling2(run.percentSharingCells)+" ";
+		this.procentdzieleniaDochodow [index]=run.percentSharingCells;
 		
-		line[this.index+index]+=filling2(run.percentOfAllCStrategy)+" ";
-		this.procentC [index]=run.percentOfAllCStrategy;
+		line[this.index+index]+=filling2(run.percentAllCStrategy)+" ";
+		this.procentC [index]=run.percentAllCStrategy;
 		
-		line[this.index+index]+=filling2(run.percentOfPcStrategy)+" ";
-		this.procentP [index]=run.percentOfPcStrategy;
+		line[this.index+index]+=filling2(run.percentPcStrategy)+" ";
+		this.procentP [index]=run.percentPcStrategy;
 		
-		line[this.index+index]+=filling2(run.percentOfallDStrategy)+" ";
-		this.procentD [index]=run.percentOfallDStrategy;
+		line[this.index+index]+=filling2(run.percentallDStrategy)+" ";
+		this.procentD [index]=run.percentallDStrategy;
 		
-		line[this.index+index]+=filling2(run.percentOfkDStrategy)+" ";
-		this.procentK [index]=run.percentOfkDStrategy;
+		line[this.index+index]+=filling2(run.percentkDStrategy)+" ";
+		this.procentK [index]=run.percentkDStrategy;
 		
 		line[this.index+index]+=filling2(run.avarageHParameter)+" ";
 		
 		line[this.index+index]+=filling2(run.avarageEpsParameter)+" ";
 		line[this.index+index]+=filling2(run.avaragePcParameter)+" ";
 		
-		line[this.index+index]+=filling2(run.percentOfQChanges)+" ";
-		this.procentQChanges[index]=run.percentOfQChanges;
+		line[this.index+index]+=filling2(run.percentQChanges)+" ";
+		this.procentQChanges[index]=run.percentQChanges;
 		for (int i=0; i <run.percentOfkD.length-1;i++)
 			line[this.index+index]+=filling2(run.percentOfkD[i])+" ";
 		line[this.index+index]+=filling2(run.percentOfkD[7]);

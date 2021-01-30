@@ -23,28 +23,28 @@ public class Run {
 	//wszystie percent parametry- najpierw sa zliczane jako counter
 	//pozniej wyliczany zostaje procent
 	
-	public double	percentOfCStates=0;
+	public double	percentCStates=0;
 	
-	public double	avarageIncome=0;
+	public double	avaragePayout=0;
 	
 	public double		CounterOfLACell=0;
 	public double		CounterOfCACell=0;
 	public double		CounterOfPcCell=0;
 	
-	public double		percentOfCACell=0;
-	public double		percentOfLACell=0;
+	public double		percentCACell=0;
+	public double		percentLACell=0;
 	
-	public double		percentOfCStatesInCACell=0;
-	public double		percentOfCStatesInLACell=0;
+	public double		percentCStatesInCA=0;
+	public double		percentCStatesInLA=0;
 	
-	public double		percentOfSharingCell=0;
-	public double		percentOfAllCStrategy=0;
-	public double		percentOfPcStrategy=0;
-	public double		percentOfallDStrategy=0;
-	public double		percentOfkDStrategy=0;
+	public double		percentSharingCells=0;
+	public double		percentAllCStrategy=0;
+	public double		percentPcStrategy=0;
+	public double		percentallDStrategy=0;
+	public double		percentkDStrategy=0;
 	
 	//Ten Parametr nie znajduje sie w update statistics, poniewa¿ zostaje zapisany w momencie zmiany strategii...
-	public double		percentOfQChanges=0;
+	public double		percentQChanges=0;
 	
 	public double		kwadratStanówC=0;
 	public double		kwadratDochodów=0;
@@ -429,23 +429,23 @@ public class Run {
 		
 		if (!cell.cellEmpty)
 		{
-				this.avarageIncome+=cell.sumPerRound;
+				this.avaragePayout+=cell.sumPerRound;
 				
 				if (cell.isStrategyChanged())
 				{
 				
-					this.percentOfQChanges+=1;
+					this.percentQChanges+=1;
 				}
 			//	//	//	// LA
 			if(cell.learningAutomata)
 			
 			{
 				this.CounterOfLACell+=1;
-				this.percentOfLACell+=1;
+				this.percentLACell+=1;
 				if (cell.state=='C')
 				{
-					this.percentOfCStatesInLACell+=1;
-					this.percentOfCStates++;
+					this.percentCStatesInLA+=1;
+					this.percentCStates++;
 				}
 	
 				this.avarageHParameter+=cell.lengthOfHistory;
@@ -454,30 +454,30 @@ public class Run {
 			else	//	// CA
 			{
 				this.CounterOfCACell+=1;
-				this.percentOfCACell+=1;
+				this.percentCACell+=1;
 				if (cell.state=='C')
 				{
-					this.percentOfCStates++;
-					this.percentOfCStatesInCACell+=1;
+					this.percentCStates++;
+					this.percentCStatesInCA+=1;
 				}
 				
 				if (cell.strategy.buffor=='C')
-					this.percentOfAllCStrategy+=1;
+					this.percentAllCStrategy+=1;
 				else if (cell.strategy.buffor=='P')
 				{
 					this.CounterOfPcCell+=1;
-					this.percentOfPcStrategy+=1;
+					this.percentPcStrategy+=1;
 					//System.out.println(this.avaragePcParameter+ " <avgPc || cell.pOfCoopMin> "+ cell.pOfCoopMin);
 					this.avaragePcParameter+=cell.pParameter;
 				}
 				else if (cell.strategy.buffor=='D')
-					this.percentOfallDStrategy+=1;
+					this.percentallDStrategy+=1;
 				else if (cell.strategy.buffor=='K')
-					this.percentOfkDStrategy+=1;
+					this.percentkDStrategy+=1;
 			}
 			
 			if (cell.sharingPayout)
-				this.percentOfSharingCell+=1;
+				this.percentSharingCells+=1;
 			
 			for (int i=0; i<percentOfkD.length;i++)
 			{
@@ -490,7 +490,7 @@ public class Run {
 	{
 		if (!cell.cellEmpty)
 			if (cell.isStrategyChanged())
-				this.percentOfQChanges+=1;
+				this.percentQChanges+=1;
 	}
 	public void updateStatisticsQChanges(Cell [][]cell)
 	{
@@ -529,21 +529,21 @@ public class Run {
 		this.CounterOfCACell=0;
 		this.CounterOfLACell=0;
 		this.CounterOfPcCell=0;
-		this.percentOfCStates=0;
-		this.avarageIncome=0;
-		this.percentOfCACell=0;
-		this.percentOfLACell=0;
-		this.percentOfCStatesInCACell=0;
-		this.percentOfCStatesInLACell=0;
-		this.percentOfSharingCell=0;
-		this.percentOfAllCStrategy=0;
-		this.percentOfPcStrategy=0;
-		this.percentOfallDStrategy=0;
-		this.percentOfkDStrategy=0;
+		this.percentCStates=0;
+		this.avaragePayout=0;
+		this.percentCACell=0;
+		this.percentLACell=0;
+		this.percentCStatesInCA=0;
+		this.percentCStatesInLA=0;
+		this.percentSharingCells=0;
+		this.percentAllCStrategy=0;
+		this.percentPcStrategy=0;
+		this.percentallDStrategy=0;
+		this.percentkDStrategy=0;
 		this.avarageHParameter=0;
 		this.avarageEpsParameter=0;
 		this.avaragePcParameter=0;
-		this.percentOfQChanges=0;
+		this.percentQChanges=0;
 		for(int i=0; i<this.percentOfkD.length; i++)
 			this.percentOfkD[i]=0;
 		/* resetoowanie sumPerRound do statystyk jest w countSum();
@@ -561,85 +561,85 @@ public class Run {
 		
 		int allCells=this.xRange*this.yRange;
 		
-		this.percentOfCStates=round2((this.percentOfCStates/allCells));
-		this.kwadratStanówC=Math.pow((this.percentOfCStates/allCells),2);
+		this.percentCStates=round2((this.percentCStates/allCells));
+		this.kwadratStanówC=Math.pow((this.percentCStates/allCells),2);
 		this.kwadratStanówC=Math.round((this.kwadratStanówC)*100);
 		this.kwadratStanówC/=100;
 		
 		
-		this.avarageIncome=round2((((this.avarageIncome)/(this.CounterOfCACell+this.CounterOfLACell))));
-		this.kwadratDochodów=Math.pow((this.avarageIncome/(this.CounterOfCACell+this.CounterOfLACell)),2);
+		this.avaragePayout=round2((((this.avaragePayout)/(this.CounterOfCACell+this.CounterOfLACell))));
+		this.kwadratDochodów=Math.pow((this.avaragePayout/(this.CounterOfCACell+this.CounterOfLACell)),2);
 		this.kwadratDochodów=Math.round((this.kwadratDochodów)*100);
 		this.kwadratDochodów/=100;
 		
-		this.percentOfCACell=round2((this.CounterOfCACell/allCells));
+		this.percentCACell=round2((this.CounterOfCACell/allCells));
 		
-		this.kwadratKomorekCA=Math.pow((this.percentOfCACell/allCells),2);
+		this.kwadratKomorekCA=Math.pow((this.percentCACell/allCells),2);
 		this.kwadratKomorekCA=Math.round((this.kwadratKomorekCA)*100);
 		this.kwadratKomorekCA/=100;
 //		
-		this.percentOfLACell=round2(this.CounterOfLACell/allCells);
+		this.percentLACell=round2(this.CounterOfLACell/allCells);
 
-		this.kwadratKomorekLA=Math.pow((this.percentOfLACell/allCells),2);
+		this.kwadratKomorekLA=Math.pow((this.percentLACell/allCells),2);
 		this.kwadratKomorekLA=Math.round((this.kwadratKomorekLA)*100);
 		this.kwadratKomorekLA/=100;
 		
 		if(this.CounterOfCACell!=0)
-			this.percentOfCStatesInCACell=round2(this.percentOfCStatesInCACell/this.CounterOfCACell);
+			this.percentCStatesInCA=round2(this.percentCStatesInCA/this.CounterOfCACell);
 		else
-			this.percentOfCStatesInCACell=0;
+			this.percentCStatesInCA=0;
 		
-		this.percentOfCStatesInLACell=(Math.round((this.percentOfCStatesInLACell/this.CounterOfLACell)*100));
-		this.percentOfCStatesInLACell/=100;
+		this.percentCStatesInLA=(Math.round((this.percentCStatesInLA/this.CounterOfLACell)*100));
+		this.percentCStatesInLA/=100;
 		
 		
 			
-		this.percentOfSharingCell=round2(this.percentOfSharingCell/allCells);
+		this.percentSharingCells=round2(this.percentSharingCells/allCells);
 
-		this.kwadratKomorekWspoldzielacych=Math.pow((this.percentOfSharingCell/allCells),2);
+		this.kwadratKomorekWspoldzielacych=Math.pow((this.percentSharingCells/allCells),2);
 		this.kwadratKomorekWspoldzielacych=Math.round(this.kwadratKomorekWspoldzielacych*100);
 		this.kwadratKomorekWspoldzielacych/=100;
 		
-		int KDStrategyCounter=(int)this.percentOfkDStrategy;
+		int KDStrategyCounter=(int)this.percentkDStrategy;
 
 		if(this.CounterOfCACell!=0)
 		{
-			this.percentOfAllCStrategy=round2(this.percentOfAllCStrategy/this.CounterOfCACell);
+			this.percentAllCStrategy=round2(this.percentAllCStrategy/this.CounterOfCACell);
 			
-			this.kwadratkomorekC=Math.pow((this.percentOfAllCStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekC=Math.pow((this.percentAllCStrategy/this.CounterOfCACell),2);
 			this.kwadratkomorekC=Math.round(this.kwadratkomorekC*100);
 			this.kwadratkomorekC/=100;
 		
-			this.percentOfPcStrategy=round2(this.percentOfPcStrategy/this.CounterOfCACell);
+			this.percentPcStrategy=round2(this.percentPcStrategy/this.CounterOfCACell);
 		
-			this.kwadratkomorekP=Math.pow((this.percentOfPcStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekP=Math.pow((this.percentPcStrategy/this.CounterOfCACell),2);
 			this.kwadratkomorekP=Math.round(this.kwadratkomorekP*100);
 			this.kwadratkomorekP/=100;
 			
-			this.percentOfallDStrategy=round2(this.percentOfallDStrategy/this.CounterOfCACell);
+			this.percentallDStrategy=round2(this.percentallDStrategy/this.CounterOfCACell);
 		
-			this.kwadratkomorekD=Math.pow((this.percentOfallDStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekD=Math.pow((this.percentallDStrategy/this.CounterOfCACell),2);
 			this.kwadratkomorekD=Math.round(this.kwadratkomorekD*100);
 			this.kwadratkomorekD/=100;
 			
-			this.percentOfkDStrategy=round2(this.percentOfkDStrategy/this.CounterOfCACell);
+			this.percentkDStrategy=round2(this.percentkDStrategy/this.CounterOfCACell);
 
-			this.kwadratkomorekK=Math.pow((this.percentOfkDStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekK=Math.pow((this.percentkDStrategy/this.CounterOfCACell),2);
 			this.kwadratkomorekK=Math.round(this.kwadratkomorekK*100);
 			this.kwadratkomorekK/=100;
 		}
 		else
 		{
-			this.percentOfAllCStrategy=0;
+			this.percentAllCStrategy=0;
 			this.kwadratkomorekC=0;
 			
-			this.percentOfkDStrategy=0;
+			this.percentkDStrategy=0;
 			this.kwadratkomorekK=0;
 			
-			this.percentOfallDStrategy=0;
+			this.percentallDStrategy=0;
 			this.kwadratkomorekD=0;
 			
-			this.percentOfPcStrategy=0;
+			this.percentPcStrategy=0;
 			this.kwadratkomorekP=0;
 		}
 
@@ -656,14 +656,14 @@ public class Run {
 		
 		for(int i=0; i<this.percentOfkD.length; i++)
 		{
-			this.percentOfkD[i]=((this.percentOfkD[i]==0 || this.percentOfkDStrategy==0)?(0):round2(this.percentOfkD[i]/KDStrategyCounter));
+			this.percentOfkD[i]=((this.percentOfkD[i]==0 || this.percentkDStrategy==0)?(0):round2(this.percentOfkD[i]/KDStrategyCounter));
 		}
 	}
 	
 	public void countStatisticsQChanges()
 	{
 		int allCells=this.xRange*this.yRange;
-		this.percentOfQChanges=round2(this.percentOfQChanges/(allCells));
+		this.percentQChanges=round2(this.percentQChanges/(allCells));
 	}
 	
 	public void contest ()

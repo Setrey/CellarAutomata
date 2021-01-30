@@ -60,13 +60,13 @@ public class OdchylenieStandardowe {
 			double kwadratProcentDzielonyDochod=0;
 			double kwadratProcentQZmian=0;
 			*/
-			System.out.println("obliczanie sredniej z eksperymentów:");
+			//System.out.println("obliczanie sredniej z eksperymentów:");
 			for (int j=0; j<stats.length; j++)
 			{
 				sredniaProcentStanC+=round4(stats[j].procentStanC[i-2]);
-				System.out.println(stats[j].dochod[i-2]);
+				//System.out.println(stats[j].dochod[i-2]);
 				 sredniadochod+=round4(stats[j].dochod[i-2]);
-				 System.out.println("zmienna sredni dochod:" +sredniadochod);
+				 //System.out.println("zmienna sredni dochod:" +sredniadochod);
 				 sredniaProcentCA+=round4(stats[j].procentCA[i-2]);
 				 sredniaProcentLA+=round4(stats[j].procentLA[i-2]);
 				 sredniaProcentC+=round4(stats[j].procentC[i-2]);
@@ -89,10 +89,10 @@ public class OdchylenieStandardowe {
 				 */	 
 			}
 			
-			 System.out.println("podzielic na "+stats.length);
+			 //System.out.println("podzielic na "+stats.length);
 			sredniaProcentStanC=round2(sredniaProcentStanC/=stats.length);
 			sredniadochod=round2(sredniadochod/=stats.length);
-			 System.out.println(sredniadochod);
+			 //System.out.println(sredniadochod);
 			 sredniaProcentCA=round2(sredniaProcentCA/=stats.length);
 			 sredniaProcentLA=round2(sredniaProcentLA/=stats.length);
 			 sredniaProcentC=round2(sredniaProcentC/=stats.length);
