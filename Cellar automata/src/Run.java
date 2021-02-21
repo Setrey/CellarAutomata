@@ -18,32 +18,33 @@ public class Run {
 	public boolean oneDimension=false;
 	public int		oneDimensionIndex=0;
 	
+	char[][][] historyStates;
 	
 	//wszystie percent parametry- najpierw sa zliczane jako counter
 	//pozniej wyliczany zostaje procent
 	
-	public double	percentOfCStates=0;
+	public double	percentCStates=0;
 	
-	public double	avarageIncome=0;
+	public double	avaragePayout=0;
 	
 	public double		CounterOfLACell=0;
 	public double		CounterOfCACell=0;
 	public double		CounterOfPcCell=0;
 	
-	public double		percentOfCACell=0;
-	public double		percentOfLACell=0;
+	public double		percentCACell=0;
+	public double		percentLACell=0;
 	
-	public double		percentOfCStatesInCACell=0;
-	public double		percentOfCStatesInLACell=0;
+	public double		percentCStatesInCA=0;
+	public double		percentCStatesInLA=0;
 	
-	public double		percentOfSharingCell=0;
-	public double		percentOfAllCStrategy=0;
-	public double		percentOfPcStrategy=0;
-	public double		percentOfallDStrategy=0;
-	public double		percentOfkDStrategy=0;
+	public double		percentSharingCells=0;
+	public double		percentAllCStrategy=0;
+	public double		percentPcStrategy=0;
+	public double		percentallDStrategy=0;
+	public double		percentkDStrategy=0;
 	
 	//Ten Parametr nie znajduje sie w update statistics, poniewa¿ zostaje zapisany w momencie zmiany strategii...
-	public double		percentOfQChanges=0;
+	public double		percentQChanges=0;
 	
 	public double		kwadratStanówC=0;
 	public double		kwadratDochodów=0;
@@ -64,24 +65,25 @@ public class Run {
 	
 	public double 		maxRangeOfPayOut=0;
 	
-	public Run (Cell[][] cell, PrisonerDilema pd, int lengthOfCycle, int kTolerance, int r, boolean isItOneDimension)
+	//public Run (Cell[][] cell, PrisonerDilema pd, int lengthOfCycle, int kTolerance, int r, boolean isItOneDimension)
+	public Run (Cell[][] cell, Settings settings)
 	{
 		xRange=cell.length;
 		yRange=cell[0].length;
-		this.r=r;
+		this.r=settings.radiusOfNeighbor;
 		//System.out.println("rangeX: " + xRange + " rangeY: " + yRange);
-		this.kTolerance=kTolerance;
-		this.oneDimension=isItOneDimension;
-		this.pD= pd;
+		this.kTolerance=settings.kMax;
+		this.oneDimension=((xRange==1 || yRange==1)?(true):(false));
+		this.pD= settings.pDSettings;
 		
-		if(pd.CC>maxRangeOfPayOut)
-			maxRangeOfPayOut=pd.CC;
-		if(pd.CD>maxRangeOfPayOut)
-			maxRangeOfPayOut=pd.CD;
-		if(pd.DD>maxRangeOfPayOut)
-			maxRangeOfPayOut=pd.DD;
-		if(pd.DC>maxRangeOfPayOut)
-			maxRangeOfPayOut=pd.DC;
+		if(pD.CC>maxRangeOfPayOut)
+			maxRangeOfPayOut=pD.CC;
+		if(pD.CD>maxRangeOfPayOut)
+			maxRangeOfPayOut=pD.CD;
+		if(pD.DD>maxRangeOfPayOut)
+			maxRangeOfPayOut=pD.DD;
+		if(pD.DC>maxRangeOfPayOut)
+			maxRangeOfPayOut=pD.DC;
 		//Matrix
 		if (xRange==1 || xRange==2)
 		{
@@ -178,6 +180,16 @@ public class Run {
 		}
 	}
 
+	public void copyTable(Cell[][] tableToCopy, Cell[][] tableFromCopy)
+	{
+		for (int i=0; i<tableFromCopy.length; i++)
+			for(int j=0; j<tableFromCopy[i].length; j++)
+			{
+				tableToCopy[i][j]=new Cell();
+				tableToCopy[i][j].copyCell(tableFromCopy[i][j]);
+			}
+	}
+	
 	public void chooseBestStrategyForLACells( Cell [][]cell)
 	{
 		for (int i =0 ; i<cell.length ;i++)
@@ -188,12 +200,8 @@ public class Run {
 	public void checkKneighbours()
 	{
 		Cell[][] tablicaPomocnicza=new Cell[temporary.length][temporary[0].length];
-		for (int i=0; i<tablicaPomocnicza.length; i++)
-			for(int j=0; j<tablicaPomocnicza[i].length; j++)
-			{
-				tablicaPomocnicza[i][j]=new Cell();
-				new Cell().copyCell(tablicaPomocnicza[i][j],temporary[i][j]);
-			}
+		
+		copyTable(tablicaPomocnicza,temporary);
 			
 		if (itIsWideArray)
 		{
@@ -210,7 +218,7 @@ public class Run {
 						        for (int l=j-1; l<j+2; l++)
 						          if (!(k==i && l==j)&&(temporary[k][l].state=='D'))
 						            counter+=1;
-							if (counter>kTolerance)
+							if (counter>temporary[i][j].strategy.kMax)
 								tablicaPomocnicza[i][j].state='D';
 							else
 								tablicaPomocnicza[i][j].state='C';
@@ -219,7 +227,7 @@ public class Run {
 						{
 								double n =Algorithm.randomValue.nextDouble();
 								n=Algorithm.randomValue.nextDouble();
-								double m =temporary[i][j].pOfCoopMin;
+								double m =temporary[i][j].pParameter;
 								
 									if (n<m)
 									{
@@ -257,7 +265,7 @@ public class Run {
 					else if (temporary[i][j].strategy.buffor=='P')
 					{
 							double n =Algorithm.randomValue.nextDouble();
-							if (n<temporary[i][j].pOfCoopMin)
+							if (n<temporary[i][j].pParameter)
 								tablicaPomocnicza[i][j].state='C';
 							else
 								tablicaPomocnicza[i][j].state='D';
@@ -292,7 +300,7 @@ public class Run {
 					else if (temporary[0][j].strategy.buffor=='P')
 					{
 							double n =Algorithm.randomValue.nextDouble();
-							if (n<temporary[0][j].pOfCoopMin)
+							if (n<temporary[0][j].pParameter)
 								tablicaPomocnicza[0][j].state='C';
 							else
 								tablicaPomocnicza[0][j].state='D';
@@ -327,7 +335,7 @@ public class Run {
 						else if (temporary[i][j].strategy.buffor=='P')
 						{
 								double n =Algorithm.randomValue.nextDouble();
-								if (n<temporary[i][j].pOfCoopMin)
+								if (n<temporary[i][j].pParameter)
 									tablicaPomocnicza[i][j].state='C';
 								else
 									tablicaPomocnicza[i][j].state='D';
@@ -361,7 +369,7 @@ public class Run {
 					else if (temporary[i][0].strategy.buffor=='P')
 					{
 							double n =Algorithm.randomValue.nextDouble();
-							if (n<temporary[i][0].pOfCoopMin)
+							if (n<temporary[i][0].pParameter)
 								tablicaPomocnicza[i][0].state='C';
 							else
 								tablicaPomocnicza[i][0].state='D';
@@ -396,7 +404,7 @@ public class Run {
 						else if (temporary[i][j].strategy.buffor=='P')
 						{
 								double n =Algorithm.randomValue.nextDouble();
-								if (n<temporary[i][j].pOfCoopMin)
+								if (n<temporary[i][j].pParameter)
 									tablicaPomocnicza[i][j].state='C';
 								else
 									tablicaPomocnicza[i][j].state='D';
@@ -410,26 +418,34 @@ public class Run {
 		}
 		for (int i=0; i<tablicaPomocnicza.length; i++)
 			for(int j=0; j<tablicaPomocnicza[i].length; j++)
+			{
 				temporary[i][j]=tablicaPomocnicza[i][j];
+				//System.out.println(temporary[i][j].changedStrategy);
+			}
 	}
 	
 	public void updateStatistics(Cell cell)
 	{
+		
 		if (!cell.cellEmpty)
 		{
-				this.avarageIncome+=cell.sumPerRound;
+				this.avaragePayout+=cell.sumPerRound;
 				
 				if (cell.isStrategyChanged())
-					this.percentOfQChanges+=1;
+				{
+				
+					this.percentQChanges+=1;
+				}
 			//	//	//	// LA
 			if(cell.learningAutomata)
+			
 			{
 				this.CounterOfLACell+=1;
-				this.percentOfLACell+=1;
+				this.percentLACell+=1;
 				if (cell.state=='C')
 				{
-					this.percentOfCStatesInLACell+=1;
-					this.percentOfCStates++;
+					this.percentCStatesInLA+=1;
+					this.percentCStates++;
 				}
 	
 				this.avarageHParameter+=cell.lengthOfHistory;
@@ -438,30 +454,30 @@ public class Run {
 			else	//	// CA
 			{
 				this.CounterOfCACell+=1;
-				this.percentOfCACell+=1;
+				this.percentCACell+=1;
 				if (cell.state=='C')
 				{
-					this.percentOfCStates++;
-					this.percentOfCStatesInCACell+=1;
+					this.percentCStates++;
+					this.percentCStatesInCA+=1;
 				}
 				
 				if (cell.strategy.buffor=='C')
-					this.percentOfAllCStrategy+=1;
+					this.percentAllCStrategy+=1;
 				else if (cell.strategy.buffor=='P')
 				{
 					this.CounterOfPcCell+=1;
-					this.percentOfPcStrategy+=1;
+					this.percentPcStrategy+=1;
 					//System.out.println(this.avaragePcParameter+ " <avgPc || cell.pOfCoopMin> "+ cell.pOfCoopMin);
-					this.avaragePcParameter+=cell.pOfCoopMin;
+					this.avaragePcParameter+=cell.pParameter;
 				}
 				else if (cell.strategy.buffor=='D')
-					this.percentOfallDStrategy+=1;
+					this.percentallDStrategy+=1;
 				else if (cell.strategy.buffor=='K')
-					this.percentOfkDStrategy+=1;
+					this.percentkDStrategy+=1;
 			}
 			
 			if (cell.sharingPayout)
-				this.percentOfSharingCell+=1;
+				this.percentSharingCells+=1;
 			
 			for (int i=0; i<percentOfkD.length;i++)
 			{
@@ -470,12 +486,42 @@ public class Run {
 			}
 		}
 	}
+	public void updateStatisticsQChanges(Cell cell)
+	{
+		if (!cell.cellEmpty)
+			if (cell.isStrategyChanged())
+				this.percentQChanges+=1;
+	}
+	public void updateStatisticsQChanges(Cell [][]cell)
+	{
+		for (int i =1 ; i<cell.length-1;i++)
+			for(int j=1; j<cell[i].length-1;j++)
+				updateStatisticsQChanges(cell[i][j]);
+	}
 	
 	public void updateStatistics(Cell [][]cell)
+	
 	{
 		for (int i =1 ; i<cell.length-1;i++)
 			for(int j=1; j<cell[i].length-1;j++)
 				updateStatistics(cell[i][j]);
+	}
+	
+	public void insertEmptyCells(Cell [][]cell)
+	{
+		for (int i =1 ; i<cell.length-1;i++)
+			for(int j=1; j<cell[i].length-1;j++)
+				insertEmptyCell(cell[i][j]);
+		
+		this.rewriteEdges();
+	}
+	
+	public void insertEmptyCell(Cell cell)
+	{
+		if (cell.strategy.buffor=='E' && cell.state=='E')
+		{
+			cell.cellEmpty=true;
+		}
 	}
 	
 	public void resetStatistics()
@@ -483,21 +529,21 @@ public class Run {
 		this.CounterOfCACell=0;
 		this.CounterOfLACell=0;
 		this.CounterOfPcCell=0;
-		this.percentOfCStates=0;
-		this.avarageIncome=0;
-		this.percentOfCACell=0;
-		this.percentOfLACell=0;
-		this.percentOfCStatesInCACell=0;
-		this.percentOfCStatesInLACell=0;
-		this.percentOfSharingCell=0;
-		this.percentOfAllCStrategy=0;
-		this.percentOfPcStrategy=0;
-		this.percentOfallDStrategy=0;
-		this.percentOfkDStrategy=0;
+		this.percentCStates=0;
+		this.avaragePayout=0;
+		this.percentCACell=0;
+		this.percentLACell=0;
+		this.percentCStatesInCA=0;
+		this.percentCStatesInLA=0;
+		this.percentSharingCells=0;
+		this.percentAllCStrategy=0;
+		this.percentPcStrategy=0;
+		this.percentallDStrategy=0;
+		this.percentkDStrategy=0;
 		this.avarageHParameter=0;
 		this.avarageEpsParameter=0;
 		this.avaragePcParameter=0;
-		this.percentOfQChanges=0;
+		this.percentQChanges=0;
 		for(int i=0; i<this.percentOfkD.length; i++)
 			this.percentOfkD[i]=0;
 		/* resetoowanie sumPerRound do statystyk jest w countSum();
@@ -508,81 +554,95 @@ public class Run {
 		*/
 	}
 
-	public Double round2(Double val) {
-		/*NumberFormat nf= NumberFormat.getInstance();
-		nf.setMaximumFractionDigits(2);
-		System.out.println(Double.parseDouble((nf.format(val)).replace(",", ".")));
-		return Double.parseDouble((nf.format(val)).replace(",", "."));
-		*/
-	    return new BigDecimal(val.toString()).setScale(2,RoundingMode.HALF_UP).doubleValue();
-	}
 	
-	public Double round4(Double val) {
-	    return new BigDecimal(val.toString()).setScale(4,RoundingMode.HALF_UP).doubleValue();
-	}
 	
 	public void countStatistics()
 	{
 		
 		int allCells=this.xRange*this.yRange;
 		
-		this.percentOfCStates=round2((this.percentOfCStates/allCells));
-		this.kwadratStanówC=Math.pow((this.percentOfCStates/allCells),2);
+		this.percentCStates=round2((this.percentCStates/allCells));
+		this.kwadratStanówC=Math.pow((this.percentCStates/allCells),2);
 		this.kwadratStanówC=Math.round((this.kwadratStanówC)*100);
 		this.kwadratStanówC/=100;
 		
 		
-		this.avarageIncome=round2((((this.avarageIncome)/(this.CounterOfCACell+this.CounterOfLACell))));
-		this.kwadratDochodów=Math.pow((this.avarageIncome/(this.CounterOfCACell+this.CounterOfLACell)),2);
+		this.avaragePayout=round2((((this.avaragePayout)/(this.CounterOfCACell+this.CounterOfLACell))));
+		this.kwadratDochodów=Math.pow((this.avaragePayout/(this.CounterOfCACell+this.CounterOfLACell)),2);
 		this.kwadratDochodów=Math.round((this.kwadratDochodów)*100);
 		this.kwadratDochodów/=100;
 		
-		this.percentOfCACell=round2((this.CounterOfCACell/allCells));
+		this.percentCACell=round2((this.CounterOfCACell/allCells));
 		
-		this.kwadratKomorekCA=Math.pow((this.percentOfCACell/allCells),2);
+		this.kwadratKomorekCA=Math.pow((this.percentCACell/allCells),2);
 		this.kwadratKomorekCA=Math.round((this.kwadratKomorekCA)*100);
 		this.kwadratKomorekCA/=100;
-		
-		this.percentOfLACell=round2(this.CounterOfLACell/allCells);
+//		
+		this.percentLACell=round2(this.CounterOfLACell/allCells);
 
-		this.kwadratKomorekLA=Math.pow((this.percentOfLACell/allCells),2);
+		this.kwadratKomorekLA=Math.pow((this.percentLACell/allCells),2);
 		this.kwadratKomorekLA=Math.round((this.kwadratKomorekLA)*100);
 		this.kwadratKomorekLA/=100;
 		
-		this.percentOfCStatesInCACell=round2(this.percentOfCStatesInCACell/allCells);
+		if(this.CounterOfCACell!=0)
+			this.percentCStatesInCA=round2(this.percentCStatesInCA/this.CounterOfCACell);
+		else
+			this.percentCStatesInCA=0;
 		
-		this.percentOfCStatesInLACell=(Math.round((this.percentOfCStatesInLACell/allCells)*100));
-		this.percentOfCStatesInLACell/=100;
+		this.percentCStatesInLA=(Math.round((this.percentCStatesInLA/this.CounterOfLACell)*100));
+		this.percentCStatesInLA/=100;
 		
-		this.percentOfSharingCell=round2(this.percentOfSharingCell/allCells);
+		
+			
+		this.percentSharingCells=round2(this.percentSharingCells/allCells);
 
-		this.kwadratKomorekWspoldzielacych=Math.pow((this.percentOfSharingCell/allCells),2);
+		this.kwadratKomorekWspoldzielacych=Math.pow((this.percentSharingCells/allCells),2);
 		this.kwadratKomorekWspoldzielacych=Math.round(this.kwadratKomorekWspoldzielacych*100);
 		this.kwadratKomorekWspoldzielacych/=100;
 		
-		this.percentOfAllCStrategy=round2(this.percentOfAllCStrategy/allCells);
-	
-		this.kwadratkomorekC=Math.pow((this.percentOfAllCStrategy/allCells),2);
-		this.kwadratkomorekC=Math.round(this.kwadratkomorekC*100);
-		this.kwadratkomorekC/=100;
-		
-		this.percentOfPcStrategy=round2(this.percentOfPcStrategy/allCells);
-	
-		this.kwadratkomorekP=Math.pow((this.percentOfPcStrategy/allCells),2);
-		this.kwadratkomorekP=Math.round(this.kwadratkomorekP*100);
-		this.kwadratkomorekP/=100;
-		
-		this.percentOfallDStrategy=round2(this.percentOfallDStrategy/allCells);
-	
-		this.kwadratkomorekD=Math.pow((this.percentOfallDStrategy/allCells),2);
-		this.kwadratkomorekD=Math.round(this.kwadratkomorekD*100);
-		this.kwadratkomorekD/=100;
-		
-		this.percentOfkDStrategy=round2(this.percentOfkDStrategy/allCells);
+		int KDStrategyCounter=(int)this.percentkDStrategy;
 
-		this.kwadratkomorekK=Math.pow((this.percentOfkDStrategy/allCells),2);
-		this.kwadratkomorekK=Math.round(this.kwadratkomorekK*100);
-		this.kwadratkomorekK/=100;
+		if(this.CounterOfCACell!=0)
+		{
+			this.percentAllCStrategy=round2(this.percentAllCStrategy/this.CounterOfCACell);
+			
+			this.kwadratkomorekC=Math.pow((this.percentAllCStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekC=Math.round(this.kwadratkomorekC*100);
+			this.kwadratkomorekC/=100;
+		
+			this.percentPcStrategy=round2(this.percentPcStrategy/this.CounterOfCACell);
+		
+			this.kwadratkomorekP=Math.pow((this.percentPcStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekP=Math.round(this.kwadratkomorekP*100);
+			this.kwadratkomorekP/=100;
+			
+			this.percentallDStrategy=round2(this.percentallDStrategy/this.CounterOfCACell);
+		
+			this.kwadratkomorekD=Math.pow((this.percentallDStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekD=Math.round(this.kwadratkomorekD*100);
+			this.kwadratkomorekD/=100;
+			
+			this.percentkDStrategy=round2(this.percentkDStrategy/this.CounterOfCACell);
+
+			this.kwadratkomorekK=Math.pow((this.percentkDStrategy/this.CounterOfCACell),2);
+			this.kwadratkomorekK=Math.round(this.kwadratkomorekK*100);
+			this.kwadratkomorekK/=100;
+		}
+		else
+		{
+			this.percentAllCStrategy=0;
+			this.kwadratkomorekC=0;
+			
+			this.percentkDStrategy=0;
+			this.kwadratkomorekK=0;
+			
+			this.percentallDStrategy=0;
+			this.kwadratkomorekD=0;
+			
+			this.percentPcStrategy=0;
+			this.kwadratkomorekP=0;
+		}
+
 		
 		
 		this.avarageHParameter=((this.CounterOfLACell!=0)?(round2(this.avarageHParameter/this.CounterOfLACell)):0.0);
@@ -591,15 +651,22 @@ public class Run {
 		//System.out.println(this.avaragePcParameter+ " <- avaragePcParameter || counterOfPcCells ->"+ this.CounterOfPcCell);
 		this.avaragePcParameter=((this.CounterOfPcCell!=0)?(round2(this.avaragePcParameter/this.CounterOfPcCell)):0.0);
 		
+		// percentOfQChanges ¿eby zlicza³o liczbê zmian musi zostaæ przesuniête na koniec funkcji algorithm
+		//this.percentOfQChanges=round2(this.percentOfQChanges/(this.CounterOfLACell+this.CounterOfCACell));
 		
-		this.percentOfQChanges=round2(this.percentOfQChanges/(this.CounterOfLACell+this.CounterOfCACell));
 		for(int i=0; i<this.percentOfkD.length; i++)
 		{
-			this.percentOfkD[i]=((this.percentOfkD[i]==0 || this.percentOfkDStrategy==0)?(0):round2(this.percentOfkD[i]/(this.percentOfkDStrategy*allCells)));
+			this.percentOfkD[i]=((this.percentOfkD[i]==0 || this.percentkDStrategy==0)?(0):round2(this.percentOfkD[i]/KDStrategyCounter));
 		}
 	}
 	
-	public void countSum ()
+	public void countStatisticsQChanges()
+	{
+		int allCells=this.xRange*this.yRange;
+		this.percentQChanges=round2(this.percentQChanges/(allCells));
+	}
+	
+	public void contest ()
 	{	
 		if (itIsWideArray)
 		{
@@ -631,13 +698,19 @@ public class Run {
 				        	}
 				        }
 					}
+					counterSum=round2(counterSum);
 					if(notEmptyNeighbours!=0)
 						counterSum/=notEmptyNeighbours;
-					//System.out.println(i + " " + j + " " + counterSum);
+					/*
+					if(i==4 && j == 4 )
+					{
+					System.out.println(i + " " + j + " " + counterSum);
+					System.out.println(i + " " + j + " " + (this.temporary[i][j].sum));
+					}
+					*/
+					this.temporary[i][j].sum+=round3(counterSum);
 					//System.out.println(i + " " + j + " " + (this.temporary[i][j].sum));
-					this.temporary[i][j].sum=counterSum;
-					//System.out.println(i + " " + j + " " + (this.temporary[i][j].sum));
-					this.temporary[i][j].sumPerRound+=counterSum;
+					this.temporary[i][j].sumPerRound+=round3(counterSum);
 					}
 		}
 		/*
@@ -716,7 +789,7 @@ public class Run {
 		//this.countStatistics();
 	}
 
-	public void newValueForLA(double pOfCoopMin)
+	public void newValueForLA(Settings settings)
 	{
 		if(itIsWideArray)
 		{
@@ -727,12 +800,6 @@ public class Run {
 					
 					temporary[i][j].state=((Algorithm.randomValue.nextBoolean())? 'C' : 'D');
 					temporary[i][j].sum=0;
-				}
-				else
-				{
-					temporary[i][j].state=((Algorithm.randomValue.nextBoolean())? 'C' : 'D');
-					temporary[i][j].newStrategy();
-					temporary[i][j].pOfCoopMin=pOfCoopMin;
 				}
 		}
 		else if(oneDimension)
@@ -776,6 +843,31 @@ public class Run {
 		}
 	}
 	
+	public void newValueForLA(char [][] states)
+	{
+		if(itIsWideArray)
+		{
+		for (int i=1; i<temporary.length-1; i++)
+			for(int j=1; j<temporary[i].length-1; j++)
+			{
+				if (this.temporary[i][j].strategy.buffor=='L')
+				{
+					this.temporary[i][j].learningAutomata=true;
+					
+					if (temporary[i][j].learningAutomata)
+					{
+						
+						temporary[i][j].state=states[i-1][j-1];
+						temporary[i][j].sum=0;
+					}
+				}
+				else
+					this.temporary[i][j].learningAutomata=false;
+			}
+		}
+	}
+	
+	
 	public void updateCellHistory()
 	{
 		if(itIsWideArray)
@@ -784,7 +876,7 @@ public class Run {
 			for(int j=1; j<temporary[i].length-1; j++)
 			if (temporary[i][j].learningAutomata)
 			{
-				double bestInNeighbour=(temporary[i][j].sum*8);
+				double bestInNeighbour=round3(temporary[i][j].sum);
 				temporary[i][j].addToHistory(temporary[i][j].state, bestInNeighbour);
 			}
 		}
@@ -903,160 +995,115 @@ public class Run {
 			}
 		}
 	}
-	
+
 	public void changeStrategy()
 	{
 		Cell[][] tempo2=new Cell[temporary.length][temporary[0].length];
 		//przepisywanie do nowej tablicy 
+		this.copyTable(tempo2, temporary);
+		/*
 		for (int i=0; i<temporary.length; i++)
 			for(int j=0; j<temporary[i].length; j++)
 			{
 				tempo2[i][j]=new Cell();
 				new Cell().copyCell(tempo2[i][j],temporary[i][j]);
 			}
-		//TODO
-		if(itIsWideArray)
-		
+		*/
+	if(itIsWideArray)
 		for (int i=1; i<temporary.length-1; i++)
 			for(int j=1; j<temporary[i].length-1; j++)
 				if(!temporary[i][j].cellEmpty)
 				{
-					
+					boolean hasChanged=false;
 					Cell tempo= new Cell();
+					
 					new Cell().copyCell(tempo,temporary[i][j]);
 					
 					for (int k=i-1; k<i+2; k++)  // iteracja s¹siadów
 				        for (int l=j-1; l<j+2; l++)
 				          if (!(k==i && l==j) && temporary[k][l].sum>tempo.sum)
+				          {
+				        	
+				        	  hasChanged=true;
 				        	  new Cell().copyCell(tempo, temporary[k][l]);
-					
-					if(tempo.learningAutomata)
-						if(temporary[i][j].learningAutomata)
-						{
-							if (temporary[i][j].epsilon!=tempo.epsilon || temporary[i][j].lengthOfHistory!=tempo.lengthOfHistory || temporary[i][j].sharingPayout!=tempo.sharingPayout)
-								tempo2[i][j].changedStrategy=true;
-							tempo2[i][j].epsilon=tempo.epsilon;
-							tempo2[i][j].lengthOfHistory=tempo.lengthOfHistory;
-							tempo2[i][j].sharingPayout=tempo.sharingPayout;
-						}
+				          }
+					//System.out.println("==== between ====");
+					if (hasChanged)
+						if(tempo.learningAutomata)
+							if(temporary[i][j].learningAutomata)
+							{
+								tempo.changedStrategy=true;
+								new Cell().copyCell(tempo2[i][j], tempo);
+								
+							}
+							else
+							{
+								tempo.changedStrategy=true;
+								new Cell().copyCell(tempo2[i][j],tempo);
+							}
 						else
-						{
-							new Cell().copyCell(tempo2[i][j],tempo);
-							tempo2[i][j].changedStrategy=true;
-						}
-					else
-						if(temporary[i][j].learningAutomata)
-						{
-							new Cell().copyCell(tempo2[i][j],tempo);
-							tempo2[i][j].changedStrategy=true;
-						}
-						else
-						{
-							if(temporary[i][j].state!=tempo.state || (temporary[i][j].state=='K' && tempo.state=='K' && temporary[i][j].kTolerance!=tempo.kTolerance) || temporary[i][j].strategy.buffor!=tempo.strategy.buffor)
-								tempo2[i][j].changedStrategy=true;
-							//tempo2[i][j].strategy=tempo.strategy; //tak by³o jak jeszcze dzia³a³o <po prostu ta linijka tylko
-							new Cell().copyCell(tempo2[i][j],tempo);
-							
-						}
+							if(temporary[i][j].learningAutomata)
+							{
+								tempo.changedStrategy=true;
+								new Cell().copyCell(tempo2[i][j],tempo);
+							}
+							else
+							{
+								tempo.changedStrategy=true;
+								new Cell().copyCell(tempo2[i][j],tempo);
+							}
+					//System.out.println();
 				}
-		/*
-		else if(oneDimension)
+	/*
+	System.out.println(" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	
+	for (int a=1; a<temporary.length-1; a++)
+	{
+		for(int b=1; b<temporary[a].length-1; b++)
 		{
-			for (int i=oneDimensionIndex; i<temporary.length-1; i++)
-				for(int j=r; j<temporary[i].length-r; j++)
-					if(!temporary[i][j].cellEmpty)
-					{
-						Cell tempo= temporary[i][j];
-						for (int k=j-r; k<r+1; k++)  // iteracja s¹siadów
-							if (k!=j && temporary[i][k].sum>tempo.sum)
-				        	  tempo=temporary[i][k];
-						if(tempo.learningAutomata)
-							if(temporary[i][j].learningAutomata)
-							{
-								tempo2[i+1][j].epsilon=tempo.epsilon;
-								tempo2[i+1][j].lengthOfHistory=tempo.lengthOfHistory;
-							}
-							else
-								tempo2[i+1][j]=tempo;
-						else
-							if(temporary[i][j].learningAutomata)
-								tempo2[i+1][j]=tempo;
-							else
-								tempo2[i+1][j]=tempo;
-					}
-			oneDimensionIndex++;
+			System.out.print(tempo2[a][b].state);
+			tempo2[a][b].printHistory();
+			System.out.print(" || ");
+			
 		}
-		else
+		System.out.println();
+	}
+	*/
+	
+		// przepisanie tablicy tempo2 do glownej
+	//System.out.println("======================");
+		for (int i=1; i<temporary.length-1; i++)
+			for(int j=1; j<temporary[i].length-1; j++)
+			{
+				//System.out.println("  "+tempo2[i][j].history.size());
+				//System.out.println(">>>>"+tempo2[i][j].changedStrategy);
+				new Cell().copyCell(temporary[i][j],tempo2[i][j]);
+				
+			}
+		//System.out.println(" = = = = = = = = =");
+		this.rewriteEdges();
+		/*
+	System.out.println("=========TEMPORARY=============");
+		for (int a=1; a<temporary.length-1; a++)
 		{
-			if ((temporary.length==1 || temporary.length==2 )&& !oneDimension)
+			for(int b=1; b<temporary[a].length-1; b++)
 			{
-				for (int i=0; i<temporary.length; i++)
-					for (int j=1; j<temporary[0].length-1; j++)
-						if(!temporary[i][j].cellEmpty)
-						{
-						Cell tempo= temporary[i][j];
-						for (int k=i-1; k<i+2; k++)  // iteracja s¹siadów
-					        for (int l=j-1; l<j+2; l++)
-					        {
-					        	if (!(k==i && l==j) && (k>=0 && k<=temporary.length-1)&& temporary[k][l].sum>tempo.sum)
-					        		tempo=temporary[k][l];
-					        }
-						if(tempo.learningAutomata)
-							if(temporary[i][j].learningAutomata)
-							{
-								tempo2[i][j].epsilon=tempo.epsilon;
-								tempo2[i][j].lengthOfHistory=tempo.lengthOfHistory;
-							}
-							else
-								tempo2[i][j]=tempo;
-						else
-							if(temporary[i][j].learningAutomata)
-								tempo2[i][j]=tempo;
-							else
-								tempo2[i][j]=tempo;
-						}
+				System.out.print(temporary[a][b].state);
+				temporary[a][b].printHistory();
+				System.out.print(" || ");
+				
 			}
-			else if ((temporary[0].length==1 || temporary[0].length==2)&& oneDimension)
-			{
-				for (int i=1; i<temporary.length-1; i++)
-					for (int j=0; j<temporary[0].length; j++)
-						if(!temporary[i][j].cellEmpty)
-						{
-						Cell tempo= temporary[i][j];
-						for (int k=i-1; k<i+2; k++)  // iteracja s¹siadów
-					        for (int l=j-1; l<j+2; l++)
-					        	if (!(k==i && l==j) && (l>=0 && l<=1)&& temporary[k][l].sum>tempo.sum)
-					        		tempo=temporary[k][l];
-						if(tempo.learningAutomata)
-							if(temporary[i][j].learningAutomata)
-							{
-								tempo2[i][j].epsilon=tempo.epsilon;
-								tempo2[i][j].lengthOfHistory=tempo.lengthOfHistory;
-							}
-							else
-								tempo2[i][j]=tempo;
-						else
-							if(temporary[i][j].learningAutomata)
-								tempo2[i][j]=tempo;
-							else
-								tempo2[i][j]=tempo;
-						}
-			}
+			System.out.println();
 		}
 		*/
-		// przepisanie tablicy tempo2 do glownej
-		for (int i=0; i<temporary.length; i++)
-			for(int j=0; j<temporary[i].length; j++)
-				new Cell().copyCell(temporary[i][j],tempo2[i][j]);
-		
-		this.rewriteEdges();
 	}
 	
-	public void clearAllCells()
+	public void clearPayout()
 	{
-		for (int i=0; i<temporary.length; i++)
-			for(int j=0; j<temporary[i].length; j++)
+		for (int i=1; i<temporary.length-1; i++)
+			for(int j=1; j<temporary[i].length-1; j++)
 				temporary[i][j].clearCell();
+		rewriteEdges();
 	}
 	
 	public void showMatrix()
@@ -1086,6 +1133,180 @@ public class Run {
 				temporary[i+1][j]=temporary[i][j];
 			}
 		oneDimensionIndex++;
+	}
+	
+	public boolean LACheck(Cell[][]cell)
+	{
+		for (int i=1; i<cell.length-1; i++)
+			for(int j=1; j<cell[i].length-1; j++)
+			{
+				if (cell[i][j].strategy.buffor=='L')
+					return true;
+			}
+		return false;
+	}
+	
+	public Double round2(Double val) {
+		/*NumberFormat nf= NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		System.out.println(Double.parseDouble((nf.format(val)).replace(",", ".")));
+		return Double.parseDouble((nf.format(val)).replace(",", "."));
+		*/
+	    return new BigDecimal(val.toString()).setScale(2,RoundingMode.HALF_UP).doubleValue();
+	}
+	public Double round3(Double val) {
+	    return new BigDecimal(val.toString()).setScale(3,RoundingMode.HALF_UP).doubleValue();
+	}
+	public Double round4(Double val) {
+	    return new BigDecimal(val.toString()).setScale(4,RoundingMode.HALF_UP).doubleValue();
+	}
+	
+	public String filling3(double string)
+	{
+		String doub= Double.toString(string);
+		String format= String.format("%1$-6s",doub).replace(' ', '0');
+		
+		return format;
+	}
+	
+	public String filling2(double string)
+	{
+		String doub= Double.toString(string);
+		String format= String.format("%1$-5s",doub).replace(' ', '0');
+		
+		return format;
+	}
+	
+	public void showPayoffsWithBorder()
+	{
+		for (int i=0; i<temporary.length; i++)
+		{		for(int j=0; j<temporary[i].length; j++)
+			{
+				System.out.print(this.temporary[i][j].payout+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showStatesWithBorder()
+	{
+		for (int i=0; i<temporary.length; i++)
+		{		for(int j=0; j<temporary[i].length; j++)
+			{
+				System.out.print(this.temporary[i][j].state+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showStatesWithoutBorder()
+	{
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(this.temporary[i][j].state+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showPayoffsWithoutBorder()
+	{
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(this.temporary[i][j].payout+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showSharingwithoutBorder()
+	{
+		System.out.println("--sharing--");
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(((this.temporary[i][j].sharingPayout)?(1):(0))+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showSumWithoutBorder()
+	{
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(this.temporary[i][j].sum+ " ");
+			}
+		System.out.println();
+		}
+	}
+	public void showSumWithBorder()
+	{
+		for (int i=0; i<temporary.length; i++)
+		{		for(int j=0; j<temporary[i].length; j++)
+			{
+				System.out.print(this.temporary[i][j].sum+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showHistoryWithoutBorder()
+	{
+		for (int i=1 ; i< temporary.length-1; i++)
+		{
+			for (int j=1; j<this.temporary[0].length-1;j++)
+			{	
+				String firstLine="";
+				firstLine+="[";
+				if (this.temporary[i][j].learningAutomata)
+					firstLine+=this.temporary[i][j].getHistory();
+				else
+				{	
+					for (int abc=0; abc<2; abc++)
+						firstLine+="[X,X.XXX]";
+				}
+				firstLine+="] ";
+				System.out.print(firstLine);
+			}
+			System.out.println();
+		}
+	}
+	
+	public void showChangesWithoutBorder()
+	{
+		System.out.println("--Changes--");
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print((this.temporary[i][j].changedStrategy)?("1 "):("0")+ " ");
+			}
+		System.out.println();
+		}
+	}
+	public void showStrategiesWithoutBorder()
+	{
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(((!this.temporary[i][j].learningAutomata)?(this.temporary[i][j].strategy.buffor):("L"))+ " ");
+			}
+		System.out.println();
+		}
+	}
+	
+	public void showKDValuesWithoutBorder()
+	{
+		for (int i=1; i<temporary.length-1; i++)
+		{		for(int j=1; j<temporary[i].length-1; j++)
+			{
+				System.out.print(((!this.temporary[i][j].learningAutomata)?(this.temporary[i][j].strategy.kMax):("L"))+ " ");
+			}
+		System.out.println();
+		}
 	}
 	
 }

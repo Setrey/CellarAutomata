@@ -1,6 +1,8 @@
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Cell {
 	public char previousState;
@@ -9,6 +11,7 @@ public class Cell {
 	public double sum=0;
 	public double sumPerRound=0;
 	public double sumCounter=0;
+	public double payout=0;
 	public boolean cellEmpty=false;
 	public int kTolerance;
 	
@@ -16,8 +19,7 @@ public class Cell {
 	public boolean learningAutomata=false;
 	public boolean sharingPayout=false;
 	public int lengthOfHistory;
-	public double pOfCoopMin;
-	
+	public double pParameter;
 	public double epsilon;
 	public Mutation mutation=new Mutation();
 	private double []pStrategy;
@@ -31,80 +33,112 @@ public class Cell {
 			this.state=state;
 			this.result=result;
 		}
+		public History (History history)
+		{
+			this.state=history.state;
+			this.result=history.result;
+		}
+		public char getState()
+		{
+			return state;
+		}
+		public double getResult()
+		{
+			return result;
+		}
 	}
 	
 	public LinkedList<History> history;
+	/*(double pInitC,double []pStrategy, double pEmpty, int lengthOfHistory, double p_typ_ag_ca,
+				double pPayoutSharing, int kMax, double pOfCoopMin, double epsilon, Mutation mutation, double deltapC)*/
 	
-	public Cell(double pInitC,double []pStrategy, double pEmpty, int lengthOfHistory, double p_typ_ag_ca,
-				double pPayoutSharing, int kMax, double pOfCoopMin, double epsilon, Mutation mutation, double deltapC)
+	public Cell ()
+	{
+		history= new LinkedList<History>();
+	}
+	public Cell(Settings settings)
 	{
 		double n = Algorithm.randomValue.nextDouble();
-		this.pStrategy=pStrategy;
-		this.kMax=kMax;
-		if (n<pEmpty)
+		
+		this.kMax=settings.kMax;
+		if (n<settings.probOfUnhabitedCell)
 		{
 			this.strategy=new Strategy ('E',10);
 			this.cellEmpty=true;
 			
 		}
 		else {
-			this.pOfCoopMin=0;
-			//System.out.println(this.mutation.pMutationChangeStrategy);
-			this.lengthOfHistory=lengthOfHistory;	 
+			this.pParameter=0;
+			
+			this.lengthOfHistory=settings.historyLength;	 
 			n=Algorithm.randomValue.nextDouble();
 			
 			this.mutation = new Mutation(mutation);
 			
-			if (n<pInitC)
+			if (n<settings.probOfInitCState)
 				state='C';
 			else
 				state='D';
 			
 			n=Algorithm.randomValue.nextDouble();
 			
-			if (n<p_typ_ag_ca)
+			//		CA or LA
+			
+			if(settings.agentType==typeOfAgent.CA)
 				this.learningAutomata=false;
-			else 
+			else if (settings.agentType==typeOfAgent.LA)
 				this.learningAutomata=true;
+			else if (settings.agentType==typeOfAgent.CAnLA)
+			{
+				if (n<settings.probOfAgentCA)
+					this.learningAutomata=false;
+				else 
+					this.learningAutomata=true;
+			}
 			
 			n=Algorithm.randomValue.nextDouble();
 			
-			if (n<pPayoutSharing)
+			if (n<settings.probOfPayoffSharing)
 				this.sharingPayout=true;
 			else
 				this.sharingPayout=false;
 			
 			history= new LinkedList<History>();
 			if(this.learningAutomata)
-				if (this.state=='C')
-					this.strategy=new Strategy('C',10);
-				else
-					this.strategy=new Strategy('D',10);
+					this.strategy=new Strategy();
 			else
-				strategy=new Strategy(pStrategy,kMax);
+				strategy=new Strategy(settings);
 			
-			this.epsilon=epsilon;
-			
+			this.epsilon=settings.epsilon;
 			
 			if (strategy.buffor=='P')
-			{ //double randomValue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
-				this.pOfCoopMin=pOfCoopMin;
-				/*
-				double randomValue= (pOfCoopMin-deltapC) + (pOfCoopMin+deltapC)* Algorithm.randomValue.nextDouble();
-				if (randomValue>1)
-					randomValue=1;
-				else if (randomValue<0)
-					randomValue=0;
-				this.pOfCoopMin=randomValue;
-				*/
-				//this.pOfCoopMin=pOfCoopMin; 
+			{ 
+				if(settings.deltaPc==0)
+					this.pParameter=settings.valueOfPc;
+				else
+				{
+					double minRange = settings.valueOfPc- settings.deltaPc;
+					if (minRange<0)
+						minRange=0;
+					double maxRange = settings.valueOfPc+ settings.deltaPc;
+					if (maxRange>1)
+						maxRange=1;
+					
+					double randomValue = minRange + (maxRange - minRange) * Algorithm.randomValue.nextDouble();
+					
+					this.pParameter=randomValue;
+				}
 			}
 		}
 	}
-	
-	public void newStrategy()
+	public void printHistory()
 	{
-		strategy=new Strategy(pStrategy,kMax);
+		for (int i=0 ; i<this.history.size(); i++)
+			System.out.print("["+ history.get(i).getState()+","+history.get(i).getResult()+"]");
+	}
+	public void newStrategy(Settings settings)
+	{
+		strategy=new Strategy(settings);
 	}
 	
 	public Cell(Cell cell)
@@ -115,18 +149,19 @@ public class Cell {
 	}
 	public void clearCell()
 	{
+		this.payout=sum;
 		this.sum=0;
 	}
 	public void showStrategy()
 	{
-		System.out.print(this.strategy.buffor+ " ");	
+		//System.out.print(this.strategy.buffor+ " ");	
 	}
 	public char getStrategy()
 	{
 		if (this.strategy.buffor=='P')
 		{	
 			double n =Algorithm.randomValue.nextDouble();
-			if (n<pOfCoopMin)
+			if (n<pParameter)
 				return 'C';
 			else
 				return 'D';
@@ -152,7 +187,7 @@ public class Cell {
 			historia+=",";
 			
 			if(i<history.size())
-				historia+=round2(history.get(i).result/8);
+				historia+=round2(history.get(i).result);
 			else
 				historia+="-.--";
 			
@@ -160,6 +195,32 @@ public class Cell {
 		}
 		return historia;
 	}
+	
+	public String getHistory()
+	{
+		String historia="";
+		for (int i=0; i<this.history.size(); i++)
+		{
+			
+			historia+="[";
+			
+			if(i<history.size())
+				historia+=history.get(i).state;
+			else
+				historia+="-";
+			
+			historia+=",";
+			
+			if(i<history.size())
+				historia+=round3(history.get(i).result);
+			else
+				historia+="-.---";
+			
+			historia+="]";
+		}
+		return historia;
+	}
+	
 	public void chooseBestStrategyForLACell()
 	{
 		if (this.learningAutomata)
@@ -174,13 +235,15 @@ public class Cell {
 					sum=this.history.get(i).result;
 				}
 			}		//Jesli random mniejszy od epsilona to zmiana stanu
+			//System.out.println("index"+ index);
 			if (Algorithm.randomValue.nextDouble()<this.epsilon)
-			{ 		// IF ITS WIDE ARRAY
+			{ 		
 				if(Algorithm.la1)
-					if (this.state=='C')
+					if (this.history.get(index).state=='C')
 						this.state='D';
 					else
 						this.state='C';
+				
 				else if (Algorithm.la2)
 					if(this.history.getFirst().state=='C')
 						this.state='D';
@@ -195,9 +258,9 @@ public class Cell {
 			}
 			else 
 			{
-			this.previousState=this.state;
-			this.state=this.history.get(index).state;
-			this.sum=round2((this.history.get(index).result/8));
+				this.previousState=this.state;
+				this.state=this.history.get(index).state;
+				//this.sum=round3((this.history.get(index).result/8));
 			}
 		}
 	}
@@ -205,22 +268,21 @@ public class Cell {
 	public Double round2(Double val) {
 	    return new BigDecimal(val.toString()).setScale(2,RoundingMode.HALF_UP).doubleValue();
 	}
+	public Double round3(Double val) {
+	    return new BigDecimal(val.toString()).setScale(3,RoundingMode.HALF_UP).doubleValue();
+	}
 	
 	public void addToHistory(char state, double result)
 	{
-		//System.out.println("addHistory przed:"+this.lengthOfHistory+" "+this.history.size());
 		if (this.learningAutomata && this.history.size()<lengthOfHistory)
 		{
-			//System.out.println("AAA");
 			history.addFirst(new History(state,result));
 		}
 		else if (this.learningAutomata && this.history.size()>=lengthOfHistory)
 		{
-			//System.out.println("AAAAA");
 			history.addFirst(new History(state,result));
 			history.removeLast();
 		}
-		//System.out.println("addHistory po:"+this.lengthOfHistory+" "+this.history.size());
 	}
 	
 	public History getLastStrategy()
@@ -318,11 +380,11 @@ public class Cell {
 			{// TODO kontrola wartoœci skrajnych 
 				if (Algorithm.randomValue.nextBoolean()==true)
 				{
-					this.pOfCoopMin+=this.mutation.parameterIncMutation;
+					this.pParameter+=this.mutation.parameterIncMutation;
 				}
 				else
 				{
-					this.pOfCoopMin-=this.mutation.parameterIncMutation;
+					this.pParameter-=this.mutation.parameterIncMutation;
 				}
 			}
 				
@@ -386,31 +448,74 @@ public class Cell {
 		
 		return i; 
 	}
-	public Cell ()
-	{
-		
-	}
+	/*/
+	  	System.out.print("[");
+			for (int i =0 ; i<dest.history.size(); i++)
+				System.out.print("["+dest.history.get(i).state+","+dest.history.get(i).result+"]");
+		System.out.print("]");
+	 */
 	public void copyCell ( Cell dest, Cell temp)
 	{
 		dest.state=temp.state;
 		dest.strategy=temp.strategy;
 		dest.sum=temp.sum;
+		//System.out.println("   dest size: "+dest.history.size() + " temp size: " +temp.history.size());
+		dest.history.clear();
+		//System.out.println("   dest size: "+dest.history.size() + " temp size: " +temp.history.size());
 		
+		for (int i =0; i<temp.history.size(); i++)
+		{
+			double result1=temp.history.get(i).result;
+			char state1=temp.history.get(i).state;
+			
+			dest.history.add(new History (state1,result1));
+		}
+		
+		//System.out.println("|||dest size: "+dest.history.size() + " temp size: " +temp.history.size());
 		dest.previousState= temp.previousState;
 		dest.sumCounter=temp.sumCounter;
 		dest.sumPerRound=temp.sumPerRound;
 		dest.mutation=temp.mutation;
-		dest.changedStrategy=temp.changedStrategy;
 		dest.lengthOfHistory=temp.lengthOfHistory;
-		dest.pOfCoopMin=temp.pOfCoopMin;
+		dest.pParameter=temp.pParameter;
 		dest.pStrategy=temp.pStrategy;
+		dest.changedStrategy=temp.changedStrategy;
 		dest.cellEmpty=temp.cellEmpty;
 		dest.epsilon=temp.epsilon;
 		dest.kMax=temp.kMax;
-		dest.history=temp.history;
 		dest.learningAutomata=temp.learningAutomata;
 		dest.kTolerance=temp.kTolerance;
 		dest.sharingPayout=temp.sharingPayout;
+	}
+	
+	public void copyCell(Cell temp)
+	{
+		this.state=temp.state;
+		this.strategy=temp.strategy;
+		this.sum=temp.sum;
+		this.history.clear();
 		
+		for (int i =0; i<temp.history.size(); i++)
+		{
+			double result1=temp.history.get(i).result;
+			char state1=temp.history.get(i).state;
+			
+			this.history.add(new History (state1,result1));
+		}
+		
+		this.previousState= temp.previousState;
+		this.sumCounter=temp.sumCounter;
+		this.sumPerRound=temp.sumPerRound;
+		this.mutation=temp.mutation;
+		this.lengthOfHistory=temp.lengthOfHistory;
+		this.pParameter=temp.pParameter;
+		this.pStrategy=temp.pStrategy;
+		this.changedStrategy=temp.changedStrategy;
+		this.cellEmpty=temp.cellEmpty;
+		this.epsilon=temp.epsilon;
+		this.kMax=temp.kMax;
+		this.learningAutomata=temp.learningAutomata;
+		this.kTolerance=temp.kTolerance;
+		this.sharingPayout=temp.sharingPayout;
 	}
 }

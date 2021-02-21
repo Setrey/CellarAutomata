@@ -3,7 +3,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -25,7 +24,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
-import javax.swing.JCheckBox;
+
 
 public class Window {
 
@@ -130,35 +129,75 @@ public class Window {
 		btnRozpocznijSymulacje.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				Settings settings= new Settings();
 					
-				int komorki=2;
 				if(rdbtnKomrkiLaiCA.isSelected())
-					komorki=2;
+					settings.agentType=typeOfAgent.CAnLA;
 				else if (rdbtnTylkoKomrkiLa.isSelected())
-					komorki=1;
+					settings.agentType=typeOfAgent.LA;
 				else if (rdbtnTylkoKomrkiCa.isSelected())
-					komorki=0;
+					settings.agentType=typeOfAgent.CA;
 				
-				double gotwsp=0;
-				if (!rdbtnGotWspDoch.isSelected())
-					gotwsp=0;
-				else
-					gotwsp=(double)spinnergot_wspol_doch.getValue();
-				
-				boolean konst=false;
-				if(rbtnkConst.isSelected())
-					konst=true;
-				else
-					konst=false;
-					int ziarno;
-				if (!rdbtnZiarno.isSelected())
-					ziarno=new Random().nextInt();
+				if (rdbtnGotWspDoch.isSelected())
+					settings.probOfPayoffSharing=(double)spinnergot_wspol_doch.getValue();
 				else 
-					ziarno=(int)spinnerZiarno.getValue();
-				try {
-					algo= new Algorithm((int)spinnerLiczbaWireszy.getValue(), (int) spinnerLiczbaKolumn.getValue(), (int)spinnerRSasiedztwa.getValue(), (int)spinnerQ.getValue(), (int)spinnerIloscKrokow.getValue(), (double)spinnerp_niezam.getValue(), (double)spinnerp_init_C.getValue(), gotwsp, ziarno, (int)spinnerIloscExperymentow.getValue(), (double)spinnerR.getValue(), (double)spinnerS.getValue(), (double)spinnerT.getValue(), (double)spinnerP.getValue(), komorki, (double)SpinnerpTypAgCA.getValue(), (int)spinnerHistoria.getValue(), (double)spinnerEpsilon.getValue(), (double)spinnerMutationHistoria.getValue(), (int)spinnerMutationc2.getValue(), (double)SpinnerMutationEpsilon.getValue(), (double)spinnerMutationc3.getValue(), (double)spinnerStrategPc.getValue(), (double)spinnerStrategAllC.getValue(), (double)SpinnerStrategAllD.getValue(), (double)spinnerStrategkD.getValue(), konst, (int)spinnerKMAxx.getValue(), (double)spinnerPc.getValue(), (double)spinnerMutStrateg.getValue(), (double)spinnerMutPc.getValue(), (double)spinnerMutC1.getValue(), (boolean)rdbtnQ.isSelected(), (boolean) rdbtnDebug.isSelected(),(double)spinnerDeltaPC.getValue(), (boolean) rdbtnLa1.isSelected(),(boolean) rdbtnLa2.isSelected(),(boolean) rdbtnLa3.isSelected());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					settings.probOfPayoffSharing=0;
+				
+				if(rbtnkConst.isSelected())
+					settings.isKConst=true;
+				else
+					settings.isKConst=false;
+				
+				
+				if (!rdbtnZiarno.isSelected())
+					settings.seed=new Random().nextInt();
+				else 
+					settings.seed=(int)spinnerZiarno.getValue();
+				try 
+				{
+					settings.numberOfRows=(int)spinnerLiczbaWireszy.getValue();
+					settings.numberOfColumns=(int) spinnerLiczbaKolumn.getValue();
+					settings.radiusOfNeighbor=(int)spinnerRSasiedztwa.getValue();
+					settings.qChanges=(int)spinnerQ.getValue();
+					settings.numberOfFrames=(int)spinnerIloscKrokow.getValue();
+					settings.probOfUnhabitedCell=(double)spinnerp_niezam.getValue();
+					settings.probOfInitCState=(double)spinnerp_init_C.getValue();
+					settings.numberOfExperiments=(int)spinnerIloscExperymentow.getValue();
+					settings.pDSettings= 
+							new PrisonerDilema((double)spinnerR.getValue(),
+									(double)spinnerS.getValue(), 
+									(double)spinnerT.getValue(), 
+									(double)spinnerP.getValue());
+					settings.probOfAgentCA=(double)SpinnerpTypAgCA.getValue();
+					settings.historyLength=(int)spinnerHistoria.getValue();
+					settings.epsilon=(double)spinnerEpsilon.getValue();
+					settings.mutation= 
+							new Mutation((double)spinnerMutStrateg.getValue(), 
+									(double)spinnerMutPc.getValue(), 
+									(double)spinnerMutationHistoria.getValue(), 
+									(double)SpinnerMutationEpsilon.getValue(), 
+									(double)spinnerMutC1.getValue(), 
+									(int)spinnerMutationc2.getValue(), 
+									(double)spinnerMutationc3.getValue());
+					settings.probOfPcStrategy=(double)spinnerStrategPc.getValue();
+					settings.probOfAllCStrategy=(double)spinnerStrategAllC.getValue();
+					settings.probOfAllDStrategy=(double)SpinnerStrategAllD.getValue();
+					settings.probOfKDStrategy=(double)spinnerStrategkD.getValue();
+					settings.kMax=(int)spinnerKMAxx.getValue();
+					settings.valueOfPc=(double)spinnerPc.getValue();
+					settings.isQselected=(boolean)rdbtnQ.isSelected();
+					settings.isDebugSelected=(boolean) rdbtnDebug.isSelected();
+					settings.deltaPc=(double)spinnerDeltaPC.getValue();
+					settings.isLA1=(boolean) rdbtnLa1.isSelected();
+					settings.isLA2=(boolean) rdbtnLa2.isSelected();
+					settings.isLA3=(boolean) rdbtnLa3.isSelected();
+					
+					algo= new Algorithm(settings);
+					algo.Calculate();
+					algo.createWindow();
+				
+				} catch (IOException e) 
+				{
 					e.printStackTrace();
 				}
 				
